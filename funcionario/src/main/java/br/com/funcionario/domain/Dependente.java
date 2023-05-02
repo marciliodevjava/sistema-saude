@@ -3,7 +3,9 @@ package br.com.funcionario.domain;
 import br.com.funcionario.domain.enuns.GrauParentescoEnum;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.Date;
 
@@ -11,6 +13,8 @@ import java.util.Date;
 @Table(name = "depedentes")
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
+@Setter
 public class Dependente {
 
     @Id
