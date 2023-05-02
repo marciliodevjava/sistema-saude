@@ -23,9 +23,11 @@ public class Endereco {
     private String bairro;
     private String cidade;
     private String uf;
-
-    @OneToOne
+    private Boolean ative = true;
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "id_funcionario_clt")
     private FuncionarioClt funcionarioClt;
-    @OneToOne
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "id_funcionario_cnpj")
     private FuncionarioCnpj funcionarioCnpj;
 }
