@@ -34,7 +34,7 @@ public class FuncionarioClt {
     @Enumerated(EnumType.STRING)
     private EstadoCivil estadoCivil;
 
-    @OneToOne(cascade = CascadeType.PERSIST, mappedBy = "funcionario_clt")
+    @OneToOne(cascade = CascadeType.PERSIST, mappedBy = "funcionarioClt")
     private Salario salario;
 
     @Column(name = "nome", length = 150, nullable = false)
@@ -57,12 +57,12 @@ public class FuncionarioClt {
     private LocalTime horaFinal;
 
     private Boolean ativo = true;
-
-    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "funcionario_clt")
+    @Getter(onMethod = @__({@JsonIgnore}))
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "funcionarioClt")
     private List<Dependente> dependentesList = new ArrayList<>();
 
     @Getter(onMethod = @__({@JsonIgnore}))
-    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "funcionario_clt")
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "funcionarioClt")
     private List<Endereco> endereco;
 
     @Getter(onMethod = @__({@JsonIgnore}))

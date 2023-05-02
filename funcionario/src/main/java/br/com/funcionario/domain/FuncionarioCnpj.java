@@ -35,7 +35,7 @@ public class FuncionarioCnpj {
     private EstadoCivil estadoCivil;
 
     @Getter(onMethod = @__({@JsonIgnore}))
-    @OneToOne(cascade = CascadeType.PERSIST, mappedBy = "funcionario_cnpj")
+    @OneToOne(cascade = CascadeType.PERSIST, mappedBy = "funcionarioCnpj")
     private Salario salario;
 
     @Column(name = "nome", length = 150, nullable = false)
@@ -60,11 +60,11 @@ public class FuncionarioCnpj {
     private Boolean ativo = true;
 
     @Getter(onMethod = @__({@JsonIgnore}))
-    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "funcionario_cnpj")
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "funcionarioCnpj")
     private List<Dependente> dependentesList = new ArrayList<>();
 
     @Getter(onMethod = @__({@JsonIgnore}))
-    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "funcionario_cnpj")
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "funcionarioCnpj")
     private List<Endereco> endereco;
 
     @OneToOne
