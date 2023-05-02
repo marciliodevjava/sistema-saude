@@ -3,7 +3,6 @@ package br.com.funcionario.domain;
 import br.com.funcionario.domain.enuns.GrauParentescoEnum;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
@@ -12,7 +11,7 @@ import java.util.Date;
 @Table(name = "depedentes")
 @NoArgsConstructor
 @AllArgsConstructor
-public class Depedente {
+public class Dependente {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,7 +23,9 @@ public class Depedente {
     @Enumerated(EnumType.STRING)
     private GrauParentescoEnum grauParentescoEnum;
     @ManyToOne(optional = false)
+    @JoinColumn(name = "id_funcionario_clt")
     private FuncionarioClt funcionarioClt;
     @ManyToOne(optional = false)
+    @JoinColumn(name = "id_funcionario_cnpj")
     private FuncionarioCnpj funcionarioCnpj;
 }
