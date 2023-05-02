@@ -34,6 +34,7 @@ public class FuncionarioCnpj {
     @Enumerated(EnumType.STRING)
     private EstadoCivil estadoCivil;
 
+    @Getter(onMethod = @__({@JsonIgnore}))
     @OneToOne(cascade = CascadeType.PERSIST, mappedBy = "funcionario_cnpj")
     private Salario salario;
 
@@ -58,6 +59,7 @@ public class FuncionarioCnpj {
 
     private Boolean ativo = true;
 
+    @Getter(onMethod = @__({@JsonIgnore}))
     @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "funcionario_cnpj")
     private List<Dependente> dependentesList = new ArrayList<>();
 
