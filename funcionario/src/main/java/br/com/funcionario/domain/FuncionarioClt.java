@@ -65,6 +65,7 @@ public class FuncionarioClt {
     @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "funcionario_clt")
     private List<Endereco> endereco;
 
+    @Getter(onMethod = @__({@JsonIgnore}))
     @OneToOne
     @JoinColumn(name = "id_funcionario")
     private Funcionario funcionario;
