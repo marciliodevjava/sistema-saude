@@ -3,69 +3,31 @@ package br.com.funcionario.domain;
 import br.com.funcionario.domain.enuns.EstadoFuncionarioEnum;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-
-@Table(name = "funcionarios")
 @Entity
+@Table(name = "funcionarios")
 @AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 public class Funcionario {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Column(name = "numero_funcionario", length = 20)
     private Integer numeroFuncionario;
-    @Column(name = "estado_funcionario", length = 12)
+
     @Enumerated(EnumType.STRING)
+    @Column(name = "estado_funcionario", length = 12)
     private EstadoFuncionarioEnum estadoFuncionarioEnum;
-    @Column(name = "funcionario_clt")
-    @OneToOne(cascade = CascadeType.PERSIST, mappedBy = "funcionario")
+
+    @OneToOne(mappedBy = "funcionario", cascade = CascadeType.PERSIST)
     private FuncionarioClt funcionarioClt;
-    @Column(name = "funcionario_clt")
-    @OneToOne(cascade = CascadeType.PERSIST, mappedBy = "funcionario")
+
+    @OneToOne(mappedBy = "funcionario", cascade = CascadeType.PERSIST)
     private FuncionarioCnpj funcionarioCnpj;
-
-    public Funcionario(){
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setNumeroFuncionario(Integer numeroFuncionario) {
-        this.numeroFuncionario = numeroFuncionario;
-    }
-
-    public void setEstadoFuncionarioEnum(EstadoFuncionarioEnum estadoFuncionarioEnum) {
-        this.estadoFuncionarioEnum = estadoFuncionarioEnum;
-    }
-
-    public Integer getNumeroFuncionario() {
-        return numeroFuncionario;
-    }
-
-    public void setFuncionarioClt(FuncionarioClt funcionarioClt) {
-        this.funcionarioClt = funcionarioClt;
-    }
-
-    public FuncionarioClt getFuncionarioClt() {
-        return funcionarioClt;
-    }
-
-    public void setFuncionarioCnpj(FuncionarioCnpj funcionarioCnpj) {
-        this.funcionarioCnpj = funcionarioCnpj;
-    }
-
-    public FuncionarioCnpj getFuncionarioCnpj() {
-        return funcionarioCnpj;
-    }
-
-    public EstadoFuncionarioEnum getEstadoFuncionarioEnum() {
-        return estadoFuncionarioEnum;
-    }
 }
