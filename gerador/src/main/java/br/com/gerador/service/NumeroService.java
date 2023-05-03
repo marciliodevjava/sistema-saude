@@ -15,18 +15,18 @@ public class NumeroService {
     @Autowired
     private NumeroRepository numeroRepository;
 
-    public NumeroDto geraNumero(){
+    public NumeroDto geraNumero(Long id){
         Numero consulta = numeroRepository.findTopByOrderByIdDesc();
 
         Integer numero = consulta.getNumero();
-        Numero inserir = this.montarDados(numero);
+        Numero inserir = this.montarDados(numero, id);
 
         this.numeroRepository.save(inserir);
 
         return new NumeroDto(inserir.getNumero(), inserir.getData());
     }
 
-    private Numero montarDados(Integer numero) {
+    private Numero montarDados(Integer numero, Long id) {
         Numero numeroInserir = new Numero();
         LocalDateTime dateTime = LocalDateTime.now();
         Integer valor = 1;
@@ -34,6 +34,7 @@ public class NumeroService {
 
         numeroInserir.setNumero(soma);
         numeroInserir.setData(dateTime);
+        numeroInserir.setIdFuncionario(id);
 
         return numeroInserir;
     }

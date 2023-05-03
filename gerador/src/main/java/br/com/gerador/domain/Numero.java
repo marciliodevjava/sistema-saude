@@ -20,4 +20,6 @@ public class Numero {
     private Long id;
     private Integer numero;
     private LocalDateTime data;
+    @Column(name = "id_funcionario")
+    private Long idFuncionario;
 }

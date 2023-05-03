@@ -24,15 +24,15 @@ public class NumerosResourceTest {
     @Test
     @DisplayName("Teste Gerador o Funcionario")
     void geradorPrimeiroFuncionario(){
-        Numero numero = new Numero(null, 001, LocalDateTime.now());
+        Numero numero = new Numero(null, 005, LocalDateTime.now(), 2L);
         numero = numeroRepository.save(numero);
-        Assertions.assertEquals(001, numero.getNumero());
+        Assertions.assertEquals(005, numero.getNumero());
     }
 
     @Test
     @DisplayName("Teste Gerador numero Funcionario")
     void geradorNumeroFuncionario(){
-        NumeroDto resposta = numeroService.geraNumero();
+        NumeroDto resposta = numeroService.geraNumero(2L);
         Assertions.assertEquals(2, resposta.getNumero());
     }
 }
