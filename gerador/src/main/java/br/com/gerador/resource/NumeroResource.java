@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/gerador-numero")
 public class NumeroResource {
@@ -17,9 +19,23 @@ public class NumeroResource {
     @Autowired
     private NumeroService numeroService;
 
-    @GetMapping()
+    @GetMapping("/gerar/{id}")
     public ResponseEntity<NumeroDto> gerarNumero(@PathVariable Long id){
         NumeroDto numeroRetorno = numeroService.geraNumero(id);
+
+        return ResponseEntity.ok(numeroRetorno);
+    }
+
+    @GetMapping("/gerar-sem-id")
+    public ResponseEntity<NumeroDto> gerarNumero(){
+        NumeroDto numeroRetorno = numeroService.geraNumero();
+
+        return ResponseEntity.ok(numeroRetorno);
+    }
+
+    @GetMapping("/listar")
+    public ResponseEntity<List<NumeroDto>> listarNumero(){
+        List<NumeroDto> numeroRetorno = numeroService.buscarNumeros();
 
         return ResponseEntity.ok(numeroRetorno);
     }

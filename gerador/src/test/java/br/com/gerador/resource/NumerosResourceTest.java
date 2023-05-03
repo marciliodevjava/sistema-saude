@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @SpringBootTest
 public class NumerosResourceTest {
@@ -30,9 +31,18 @@ public class NumerosResourceTest {
     }
 
     @Test
+    @DisplayName("Teste Buscar todos os registros")
+    void buscarTodosOsRegistros(){
+        List<NumeroDto> numero = numeroService.buscarNumeros();
+        Integer resultado = numero.size();
+
+        Assertions.assertEquals(resultado, numero.size());
+    }
+
+    @Test
     @DisplayName("Teste Gerador numero Funcionario")
     void geradorNumeroFuncionario(){
-        NumeroDto resposta = numeroService.geraNumero(2L);
-        Assertions.assertEquals(2, resposta.getNumero());
+        NumeroDto resposta = numeroService.geraNumero(6L);
+        Assertions.assertEquals(6, resposta.getNumero());
     }
 }

@@ -15,4 +15,5 @@ public class NumeroDto {
 
     private Integer numero;
     private LocalDateTime localDateTime;
+    private Long idFuncionario;
 }
