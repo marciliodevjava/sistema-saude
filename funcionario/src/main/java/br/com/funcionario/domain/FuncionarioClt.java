@@ -25,37 +25,24 @@ public class FuncionarioClt {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @Column(name = "funcao_funcionario", length = 25)
     @Enumerated(EnumType.STRING)
     private FuncaoFuncionarioEnum funcaoFuncionarioEnum;
-
     @Column(name = "estado_civil", length = 10)
     @Enumerated(EnumType.STRING)
     private EstadoCivil estadoCivil;
-
     @OneToOne(cascade = CascadeType.PERSIST, mappedBy = "funcionarioClt")
     private Salario salario;
-
     @Column(name = "nome", length = 150, nullable = false)
     private String nome;
-
     private Date dataNascimento;
-
     private String cpf;
-
     private String rg;
-
     private String telefone;
-
     private String email;
-
     private Date dataAdmissao;
-
     private LocalTime horaInicial;
-
     private LocalTime horaFinal;
-
     private Boolean ativo = true;
     @Getter(onMethod = @__({@JsonIgnore}))
     @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "funcionarioClt")
