@@ -18,7 +18,6 @@ public class Funcionario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @Column(name = "numero_funcionario", length = 20)
     private Integer numeroFuncionario;
     @Enumerated(EnumType.STRING)
