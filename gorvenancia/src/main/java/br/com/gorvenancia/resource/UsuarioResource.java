@@ -16,7 +16,7 @@ public class UsuarioResource {
     private UsuariosService usuariosService;
 
     @PostMapping
-    public ResponseEntity<UsuarioDto> cadastrar(@RequestBody UsuarioDto usuario){
+    public ResponseEntity<UsuarioDto> cadastrar(@RequestBody UsuarioDto usuario) {
 
         UsuarioDto retorno = usuariosService.createUsuario(usuario);
         return ResponseEntity.status(HttpStatus.CREATED).body(retorno);
