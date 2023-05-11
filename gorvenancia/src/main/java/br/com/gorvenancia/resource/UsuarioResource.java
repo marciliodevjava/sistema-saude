@@ -22,6 +22,7 @@ public class UsuarioResource {
         return ResponseEntity.status(HttpStatus.CREATED).body(retorno);
     }
 
+
     @GetMapping("/port")
     public String retornaPort(@Value("${local.server.port}") String port) {
         return String.format("Requisição respondida pela instancia na porta %s", port);
