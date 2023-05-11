@@ -1,0 +1,15 @@
+package br.com.funcionario.resource;
+
+import br.com.funcionario.service.SalarioService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping("/funcionario/salario")
+public class SalarioResource {
+
+    @Autowired
+    private SalarioService salarioService;
+
+}
