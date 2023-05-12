@@ -1,4 +1,4 @@
-package br.com.funcionario.resource;
+package br.com.funcionario.resource.v0;
 
 import br.com.funcionario.repository.DependenteRepositry;
 import br.com.funcionario.service.DependenteService;

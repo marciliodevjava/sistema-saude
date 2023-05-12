@@ -1,15 +1,15 @@
-package br.com.funcionario.resource;
+package br.com.funcionario.resource.v0;
 
-import br.com.funcionario.service.FuncionarioCltService;
+import br.com.funcionario.service.FuncionarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/funcionario/clt")
-public class FuncionarioCltResource {
+@RequestMapping("/funcionario")
+public class FuncionarioResource {
 
     @Autowired
-    private FuncionarioCltService funcionarioCltService;
+    private FuncionarioService funcionarioService;
 
 }
