@@ -1,9 +1,11 @@
 package br.com.gorvenancia.resource;
 
+import br.com.gorvenancia.domain.Usuario;
 import br.com.gorvenancia.dto.DadosAutenticacaoDto;
+import br.com.gorvenancia.dto.DadosTokenJWT;
 import br.com.gorvenancia.dto.UsuarioDto;
+import br.com.gorvenancia.infra.security.TokenService;
 import br.com.gorvenancia.service.UsuariosService;
-import br.com.gorvenancia.util.HashUtil;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -12,6 +14,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 
 @RestController
 @RequestMapping("/login")
@@ -23,12 +28,19 @@ public class UsuarioResource {
     @Autowired
     private UsuariosService usuariosService;
 
+    @Autowired
+    private TokenService tokenService;
+
     @PostMapping
     public ResponseEntity efetuarLogin(@RequestBody @Valid DadosAutenticacaoDto dados){
-        var token = new UsernamePasswordAuthenticationToken(dados.login(), dados.senha());
-        var authentication = manager.authenticate(token);
+        var Autenticationtoken = new UsernamePasswordAuthenticationToken(dados.login(), dados.senha());
+        var authentication = manager.authenticate(Autenticationtoken);
 
-        return ResponseEntity.ok().build();
+        String tokenJWT = tokenService.gerarToken((Usuario) authentication.getPrincipal());
+        var dataInicial = LocalDateTime.now().toInstant(ZoneOffset.of("-03:00"));
+        var dataFinal = LocalDateTime.now().plusHours(2).toInstant(ZoneOffset.of("-03:00"));
+
+        return ResponseEntity.ok(new DadosTokenJWT(dados.login(), dataInicial, dataFinal, tokenJWT));
     }
 
     @PostMapping("/cadastrar")
