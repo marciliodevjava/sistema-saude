@@ -22,7 +22,7 @@ public class UsuariosService {
 
     private UsuarioDto montarUsuarioDto(Usuario usuario) {
         UsuarioDto usuarioDto = new UsuarioDto();
-        usuarioDto.setLogin(usuarioDto.getLogin());
+        usuarioDto.setLogin(usuario.getLogin());
         return usuarioDto;
     }
 
