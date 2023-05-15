@@ -37,8 +37,8 @@ public class UsuarioResource {
         var authentication = manager.authenticate(Autenticationtoken);
 
         String tokenJWT = tokenService.gerarToken((Usuario) authentication.getPrincipal());
-        var dataInicial = LocalDateTime.now().toInstant(ZoneOffset.of("-03:00"));
-        var dataFinal = LocalDateTime.now().plusHours(2).toInstant(ZoneOffset.of("-03:00"));
+        var dataInicial = LocalDateTime.now();
+        var dataFinal = LocalDateTime.now().plusHours(2);
 
         return ResponseEntity.ok(new DadosTokenJWT(dados.login(), dataInicial, dataFinal, tokenJWT));
     }
