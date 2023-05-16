@@ -9,32 +9,36 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.util.UriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
 @RequestMapping("/gerador-numero")
 public class NumeroResource {
 
+    private URI uri;
     @Autowired
     private NumeroService numeroService;
 
     @GetMapping("/gerar/{id}")
-    public ResponseEntity<NumeroDto> gerarNumero(@PathVariable Long id){
+    public ResponseEntity<NumeroDto> gerarNumero(@PathVariable Long id, UriComponentsBuilder uriBuild) {
         NumeroDto numeroRetorno = numeroService.geraNumero(id);
+        this.uri = uriBuild.path("/gerador-numero/{id}").buildAndExpand(numeroRetorno.getNumero()).toUri();
 
-        return ResponseEntity.ok(numeroRetorno);
+        return ResponseEntity.created(uri).body(numeroRetorno);
     }
 
     @GetMapping("/gerar-sem-id")
-    public ResponseEntity<NumeroDto> gerarNumero(){
+    public ResponseEntity<NumeroDto> gerarNumero() {
         NumeroDto numeroRetorno = numeroService.geraNumero();
 
         return ResponseEntity.ok(numeroRetorno);
     }
 
     @GetMapping("/listar")
-    public ResponseEntity<List<NumeroDto>> listarNumero(){
+    public ResponseEntity<List<NumeroDto>> listarNumero() {
         List<NumeroDto> numeroRetorno = numeroService.buscarNumeros();
 
         return ResponseEntity.ok(numeroRetorno);
