@@ -40,7 +40,7 @@ public class UsuarioResource {
         var dataInicial = LocalDateTime.now();
         var dataFinal = LocalDateTime.now().plusHours(2);
 
-        return ResponseEntity.ok(new DadosTokenJWT(dados.login(), dataInicial, dataFinal, tokenJWT));
+        return ResponseEntity.ok(new DadosTokenJWT(dados.login(), tokenJWT, dataInicial, dataFinal));
     }
 
     @PostMapping("/cadastrar")
