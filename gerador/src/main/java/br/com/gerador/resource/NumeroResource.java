@@ -22,6 +22,12 @@ public class NumeroResource {
     @Autowired
     private NumeroService numeroService;
 
+    @GetMapping("/{id}")
+    public ResponseEntity<NumeroDto> buscarNumeroId(@PathVariable Long id){
+        NumeroDto numeroRetorno = numeroService.buscarPorId(id);
+        return ResponseEntity.ok(numeroRetorno);
+    }
+
     @GetMapping("/gerar/{id}")
     public ResponseEntity<NumeroDto> gerarNumero(@PathVariable Long id, UriComponentsBuilder uriBuild) {
         NumeroDto numeroRetorno = numeroService.geraNumero(id);
