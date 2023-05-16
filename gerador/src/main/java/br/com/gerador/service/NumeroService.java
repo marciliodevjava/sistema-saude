@@ -71,4 +71,20 @@ public class NumeroService {
 
         return numeroInserir;
     }
+
+    public NumeroDto buscarPorId(Long id) {
+        Optional<Numero> numero = numeroRepository.findById(id);
+        if(numero.isEmpty() || numero == null) return null;
+        NumeroDto numeroRetorno = this.montarDadosRetorno(numero);
+
+        return numeroRetorno;
+    }
+
+    private NumeroDto montarDadosRetorno(Optional<Numero> numero) {
+        NumeroDto numeroDto = new NumeroDto();
+        numeroDto.setNumero(numero.get().getNumero());
+        numeroDto.setIdFuncionario(numeroDto.getIdFuncionario());
+        numeroDto.setLocalDateTime(numero.get().getData());
+        return numeroDto;
+    }
 }
