@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDateTime;
+
 @RestController
 @RequestMapping("/login")
 public class AutenticacaoResource {
@@ -24,6 +26,9 @@ public class AutenticacaoResource {
         UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(dto.login(), dto.senha());
         Authentication authentication = authenticationManager.authenticate(token);
 
-        return ResponseEntity.ok().build();
+        LocalDateTime dataInicial = LocalDateTime.now();
+        LocalDateTime dataFinal = LocalDateTime.now().plusHours(2);
+
+        return ResponseEntity.ok(new TokenJWT(dto.login(),token, dataInicial, dataFinal));
     }
 }
