@@ -2,6 +2,7 @@ package br.com.gerador.resource;
 
 import br.com.gerador.dto.NumeroDto;
 import br.com.gerador.service.NumeroService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +24,7 @@ public class NumeroResource {
     private NumeroService numeroService;
 
     @GetMapping("/{id}")
-    public ResponseEntity<NumeroDto> buscarNumeroId(@PathVariable Long id){
+    public ResponseEntity<NumeroDto> buscarNumeroId(@PathVariable @Valid Long id){
         NumeroDto numeroRetorno = numeroService.buscarPorId(id);
         return ResponseEntity.ok(numeroRetorno);
     }
