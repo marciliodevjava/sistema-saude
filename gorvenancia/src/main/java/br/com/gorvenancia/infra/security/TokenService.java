@@ -40,15 +40,15 @@ public class TokenService {
         }
     }
 
-    public String getSubject(String tokenJWT){
+    public String getSubject(String tokenJWT) {
         try {
             Algorithm algorithm = Algorithm.HMAC256(secret);
-           return JWT.require(algorithm)
+            return JWT.require(algorithm)
                     .withIssuer("API Governancia")
                     .build()
-                   .verify(tokenJWT)
-                   .getSubject();
-        } catch (JWTVerificationException exception){
+                    .verify(tokenJWT)
+                    .getSubject();
+        } catch (JWTVerificationException exception) {
             throw new RuntimeException("Token JWT inválido ou expirado.");
         }
     }
