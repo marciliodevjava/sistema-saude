@@ -4,6 +4,5 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 
 import java.time.LocalDateTime;
 
-public record TokenJWT(String login, UsernamePasswordAuthenticationToken token, LocalDateTime dataInicial,
-                       LocalDateTime dataFinal) {
+public record TokenJWT(String login, String token, LocalDateTime dataInicial, LocalDateTime dataFinal) {
 }
