@@ -35,6 +35,6 @@ public class AutenticacaoResource {
         LocalDateTime dataInicial = LocalDateTime.now();
         LocalDateTime dataFinal = LocalDateTime.now().plusHours(2);
 
-        return ResponseEntity.ok(new TokenJWT(dto.login(),token, dataInicial, dataFinal));
+        return ResponseEntity.ok(new TokenJWT(dto.login(), tokenRetorno, dataInicial, dataFinal));
     }
 }
