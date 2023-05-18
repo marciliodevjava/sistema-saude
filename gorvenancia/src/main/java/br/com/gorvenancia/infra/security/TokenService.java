@@ -29,10 +29,6 @@ public class TokenService {
             return JWT.create()
                     .withIssuer("API Governancia")
                     .withSubject(usuario.getLogin())
-                    .withClaim("Login:", usuario.getLogin())
-                    .withClaim("Id:", usuario.getId())
-                    .withClaim("Authorites:", usuario.getAuthorities().toString())
-                    .withClaim("Data Expiração:", dataExpiracao())
                     .withExpiresAt(dataExpiracao())
                     .sign(algorithm);
         } catch (JWTCreationException exception) {
