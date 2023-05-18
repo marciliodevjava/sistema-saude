@@ -13,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -33,8 +34,8 @@ public class UsuarioResource {
 
     @PostMapping
     public ResponseEntity efetuarLogin(@RequestBody @Valid DadosAutenticacaoDto dados){
-        var Autenticationtoken = new UsernamePasswordAuthenticationToken(dados.login(), dados.senha());
-        var authentication = manager.authenticate(Autenticationtoken);
+        UsernamePasswordAuthenticationToken Autenticationtoken = new UsernamePasswordAuthenticationToken(dados.login(), dados.senha());
+        Authentication authentication = manager.authenticate(Autenticationtoken);
 
         String tokenJWT = tokenService.gerarToken((Usuario) authentication.getPrincipal());
         var dataInicial = LocalDateTime.now();
