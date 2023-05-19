@@ -22,6 +22,6 @@ public class HealthResource {
 
     @Transient
     private Health gerarHealt() {
-        return new Health("API_FUNCIONARIO", LocalDateTime.now(), HttpStatus.SC_OK);
+        return new Health("API_Governancia", LocalDateTime.now(), HttpStatus.SC_OK);
     }
 }
