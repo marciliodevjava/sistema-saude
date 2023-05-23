@@ -27,7 +27,7 @@ public class AutenticacaoResource {
     private AuthenticationManager authenticationManager;
 
     @PostMapping
-    public ResponseEntity efetuarLogin(@RequestBody @Valid LoginDto dto){
+    public ResponseEntity efetuarLogin(@RequestBody @Valid LoginDto dto) {
         UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(dto.login(), dto.senha());
         Authentication authentication = authenticationManager.authenticate(token);
 
