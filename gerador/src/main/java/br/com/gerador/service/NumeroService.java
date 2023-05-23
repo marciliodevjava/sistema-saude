@@ -17,7 +17,7 @@ public class NumeroService {
     @Autowired
     private NumeroRepository numeroRepository;
 
-    public NumeroDto geraNumero(Long id){
+    public NumeroDto geraNumero(Long id) {
         Numero consulta = numeroRepository.findTopByOrderByIdDesc();
 
         Integer numero = consulta.getNumero();
@@ -28,7 +28,7 @@ public class NumeroService {
         return new NumeroDto(inserir.getNumero(), inserir.getData(), inserir.getIdFuncionario());
     }
 
-    public NumeroDto geraNumero(){
+    public NumeroDto geraNumero() {
         Numero consulta = numeroRepository.findTopByOrderByIdDesc();
 
         Integer numero = consulta.getNumero();
@@ -74,7 +74,7 @@ public class NumeroService {
 
     public NumeroDto buscarPorId(Long id) {
         Optional<Numero> numero = numeroRepository.findById(id);
-        if(numero.isEmpty() || numero == null) return null;
+        if (numero.isEmpty() || numero == null) return null;
         NumeroDto numeroRetorno = this.montarDadosRetorno(numero);
 
         return numeroRetorno;
