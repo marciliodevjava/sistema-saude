@@ -17,7 +17,7 @@ public class TokenService {
     @Value("${api.security.token.secret}")
     private String secret;
 
-    public String gerarToken(Usuario usuario){
+    public String gerarToken(Usuario usuario) {
         try {
             Algorithm algorithm = Algorithm.HMAC256(secret);
             return JWT.create()
@@ -25,7 +25,7 @@ public class TokenService {
                     .withSubject(usuario.getLogin())
                     .withExpiresAt(dataExpiracao())
                     .sign(algorithm);
-        } catch (JWTCreationException exception){
+        } catch (JWTCreationException exception) {
             throw new RuntimeException("Erro ao gerar token JWT ", exception);
         }
     }
