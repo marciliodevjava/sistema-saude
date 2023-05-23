@@ -24,7 +24,7 @@ public class NumeroResource {
     private NumeroService numeroService;
 
     @GetMapping("/{id}")
-    public ResponseEntity<NumeroDto> buscarNumeroId(@PathVariable @Valid Long id){
+    public ResponseEntity<NumeroDto> buscarNumeroId(@PathVariable @Valid Long id) {
         NumeroDto numeroRetorno = numeroService.buscarPorId(id);
         return ResponseEntity.ok(numeroRetorno);
     }
