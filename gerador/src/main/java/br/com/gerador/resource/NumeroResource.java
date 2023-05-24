@@ -5,6 +5,9 @@ import br.com.gerador.service.NumeroService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -45,8 +48,8 @@ public class NumeroResource {
     }
 
     @GetMapping("/listar")
-    public ResponseEntity<List<NumeroDto>> listarNumero() {
-        List<NumeroDto> numeroRetorno = numeroService.buscarNumeros();
+    public ResponseEntity<Page<NumeroDto>> listarNumero(@PageableDefault(size = 10, sort = "id", page = 0) Pageable paginacao) {
+        Page<NumeroDto> numeroRetorno = numeroService.buscarNumeros(paginacao);
 
         return ResponseEntity.ok(numeroRetorno);
     }

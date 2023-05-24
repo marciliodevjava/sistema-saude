@@ -4,6 +4,8 @@ import br.com.gerador.domain.Numero;
 import br.com.gerador.dto.NumeroDto;
 import br.com.gerador.repository.NumeroRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -39,11 +41,9 @@ public class NumeroService {
         return new NumeroDto(inserir.getNumero(), inserir.getData(), inserir.getIdFuncionario());
     }
 
-    public List<NumeroDto> buscarNumeros() {
-        List<Numero> resultado = numeroRepository.findAll();
-        List<NumeroDto> retorno = resultado.stream()
-                .map(e -> new NumeroDto(e.getNumero(), e.getData(), e.getIdFuncionario()))
-                .collect(Collectors.toList());
+    public Page<NumeroDto> buscarNumeros(Pageable pageable) {
+        Page<Numero> resultado = numeroRepository.findAll(pageable);
+        Page<NumeroDto> retorno = resultado.map(e -> new NumeroDto(e.getNumero(), e.getData(), e.getIdFuncionario()));
         return retorno;
     }
 
