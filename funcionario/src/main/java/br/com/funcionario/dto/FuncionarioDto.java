@@ -9,7 +9,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class FuncionarioDto {
-
     private EstadoFuncionarioEnum estadoFuncionarioEnum;
     private FuncionarioClt funcionarioClt;
     private FuncionarioCnpj funcionarioCnpj;
