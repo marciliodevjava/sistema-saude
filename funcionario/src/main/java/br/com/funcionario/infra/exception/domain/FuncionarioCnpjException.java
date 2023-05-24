@@ -1,4 +1,4 @@
-package br.com.funcionario.infra.exception;
+package br.com.funcionario.infra.exception.domain;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
