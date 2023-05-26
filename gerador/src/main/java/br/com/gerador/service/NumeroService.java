@@ -74,7 +74,7 @@ public class NumeroService {
 
     public NumeroDto buscarPorId(Long id) {
         Optional<Numero> numero = numeroRepository.findById(id);
-        if (numero.isEmpty() || numero == null) return null;
+
         NumeroDto numeroRetorno = this.montarDadosRetorno(numero);
 
         return numeroRetorno;
