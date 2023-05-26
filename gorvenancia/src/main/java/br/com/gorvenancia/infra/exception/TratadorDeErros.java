@@ -3,6 +3,7 @@ package br.com.gorvenancia.infra.exception;
 import br.com.gorvenancia.infra.exception.enuns.MessagemEnum;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.ws.rs.ForbiddenException;
 import org.apache.http.auth.AuthenticationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -149,5 +150,18 @@ public class TratadorDeErros {
         errorResponse.setProjeto(projetoNome);
 
         return new ResponseEntity<>(errorResponse, HttpStatus.SERVICE_UNAVAILABLE);
+    }
+
+    @ExceptionHandler(ForbiddenException.class)
+    public ResponseEntity<ErroResponse> tratarErroRuntime(ForbiddenException ex) {
+        ErroResponse errorResponse = new ErroResponse();
+
+        errorResponse.setStatus(HttpStatus.FORBIDDEN.value());
+        errorResponse.setMensagem(Collections.singletonList("Erro: " + ex.getLocalizedMessage()));
+        errorResponse.setTimestamp(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+        errorResponse.setEndpoint(request.getRequestURI());
+        errorResponse.setProjeto(projetoNome);
+
+        return new ResponseEntity<>(errorResponse, HttpStatus.FORBIDDEN);
     }
 }
