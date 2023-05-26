@@ -24,7 +24,7 @@ import java.util.NoSuchElementException;
 @RestControllerAdvice
 public class TratadorDeErros {
 
-    private final String projetoNome = "Api Gerador";
+    private final String projetoNome = "Api Funcionario";
     @Value("${spring.application.name}")
     private String projeto;
     @Autowired
