@@ -22,16 +22,14 @@ public class SecurityFilter extends OncePerRequestFilter {
 
     @Autowired
     private TokenService tokenService;
-
     @Autowired
     private UsuarioRepository usuarioRepository;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 
-        String tokenJWT = recurarToken(request);
-
-        if (tokenJWT != null){
+        String tokenJWT = recuperarToken(request);
+        if(tokenJWT != null){
             String subject = tokenService.getSubject(tokenJWT);
             UserDetails usuario = usuarioRepository.findByLogin(subject);
 
@@ -42,13 +40,11 @@ public class SecurityFilter extends OncePerRequestFilter {
         filterChain.doFilter(request, response);
     }
 
-    private String recurarToken(HttpServletRequest request) {
-        var authorizationHeader = request.getHeader("Authorization");
-
-        if (authorizationHeader != null) {
-            return authorizationHeader.replace("Bearer", "");
+    private String recuperarToken(HttpServletRequest request) {
+        String authorizationHeader = request.getHeader("Authorization");
+        if(authorizationHeader != null){
+            return authorizationHeader.replace("Bearer ", "");
         }
-
         return null;
     }
 }
