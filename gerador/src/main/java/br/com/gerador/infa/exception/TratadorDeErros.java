@@ -1,6 +1,8 @@
 package br.com.gerador.infa.exception;
 
 import br.com.gerador.infa.exception.enuns.MessagemEnum;
+import com.auth0.jwt.exceptions.JWTVerificationException;
+import com.auth0.jwt.exceptions.TokenExpiredException;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.apache.http.auth.AuthenticationException;
@@ -139,6 +141,32 @@ public class TratadorDeErros {
 
     @ExceptionHandler(RuntimeException.class)
     public ResponseEntity<ErroResponse> tratarErroRuntime(RuntimeException ex) {
+        ErroResponse errorResponse = new ErroResponse();
+
+        errorResponse.setStatus(HttpStatus.SERVICE_UNAVAILABLE.value());
+        errorResponse.setMensagem(Collections.singletonList("Erro: " + ex.getLocalizedMessage()));
+        errorResponse.setTimestamp(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+        errorResponse.setEndpoint(request.getRequestURI());
+        errorResponse.setProjeto(projetoNome);
+
+        return new ResponseEntity<>(errorResponse, HttpStatus.SERVICE_UNAVAILABLE);
+    }
+
+    @ExceptionHandler(JWTVerificationException.class)
+    public ResponseEntity<ErroResponse> tratarErroJWTVerification(JWTVerificationException ex) {
+        ErroResponse errorResponse = new ErroResponse();
+
+        errorResponse.setStatus(HttpStatus.SERVICE_UNAVAILABLE.value());
+        errorResponse.setMensagem(Collections.singletonList("Erro: " + ex.getLocalizedMessage()));
+        errorResponse.setTimestamp(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+        errorResponse.setEndpoint(request.getRequestURI());
+        errorResponse.setProjeto(projetoNome);
+
+        return new ResponseEntity<>(errorResponse, HttpStatus.SERVICE_UNAVAILABLE);
+    }
+
+    @ExceptionHandler(TokenExpiredException.class)
+    public ResponseEntity<ErroResponse> tratarErroTokenExpired(TokenExpiredException ex) {
         ErroResponse errorResponse = new ErroResponse();
 
         errorResponse.setStatus(HttpStatus.SERVICE_UNAVAILABLE.value());
