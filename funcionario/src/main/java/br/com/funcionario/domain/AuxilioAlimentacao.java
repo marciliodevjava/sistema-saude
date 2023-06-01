@@ -17,7 +17,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @Getter
 @Setter
-public class AuxilioAlimentação implements Serializable {
+public class AuxilioAlimentacao implements Serializable {
     @Serial
     private static final long serialVersionUID = 8L;
     @Id
@@ -27,4 +27,8 @@ public class AuxilioAlimentação implements Serializable {
     private UUID identificadorAuxilioTransporte;
     private int dias;
     private BigDecimal valor;
+    @OneToOne
+    @JoinColumn(name = "id_salario")
+    private Salario salario;
+
 }
