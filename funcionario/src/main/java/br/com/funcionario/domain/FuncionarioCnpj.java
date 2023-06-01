@@ -1,6 +1,6 @@
 package br.com.funcionario.domain;
 
-import br.com.funcionario.domain.enuns.EstadoCivil;
+import br.com.funcionario.domain.enuns.EstadoCivilEnum;
 import br.com.funcionario.domain.enuns.FuncaoFuncionarioEnum;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -9,10 +9,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 @Entity
 @Table(name = "funcionaris_cnpj")
@@ -20,17 +23,20 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Setter
-public class FuncionarioCnpj {
-
+public class FuncionarioCnpj implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID identificadorFuncionarioCnpj;
     @Column(name = "funcao_funcionario", length = 25)
     @Enumerated(EnumType.STRING)
     private FuncaoFuncionarioEnum funcaoFuncionarioEnum;
     @Column(name = "estado_civil", length = 10)
     @Enumerated(EnumType.STRING)
-    private EstadoCivil estadoCivil;
+    private EstadoCivilEnum estadoCivil;
     @Getter(onMethod = @__({@JsonIgnore}))
     @OneToOne(cascade = CascadeType.PERSIST, mappedBy = "funcionarioCnpj")
     private Salario salario;
@@ -38,7 +44,9 @@ public class FuncionarioCnpj {
     private String nome;
     private Date dataNascimento;
     private String cpf;
+    private String cnpj;
     private String rg;
+    private String ddd;
     private String telefone;
     private String email;
     private Date dataAdmissao;
