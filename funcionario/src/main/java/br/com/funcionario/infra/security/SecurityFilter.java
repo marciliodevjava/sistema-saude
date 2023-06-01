@@ -1,8 +1,7 @@
 package br.com.funcionario.infra.security;
 
 import br.com.funcionario.repository.config.UsuarioRepository;
-import jakarta.servlet.FilterChain;
-import jakarta.servlet.ServletException;
+import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +20,10 @@ public class SecurityFilter extends OncePerRequestFilter {
     private TokenService tokenService;
     @Autowired
     private UsuarioRepository usuarioRepository;
+
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+
         String tokenJWT = recuperarToken(request);
         if(tokenJWT != null){
             String subject = tokenService.getSubject(tokenJWT);
