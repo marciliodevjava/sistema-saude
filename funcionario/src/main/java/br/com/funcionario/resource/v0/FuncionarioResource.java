@@ -3,7 +3,6 @@ package br.com.funcionario.resource.v0;
 import br.com.funcionario.dto.FuncionarioDto;
 import br.com.funcionario.resource.imp.FuncionarioImp;
 import br.com.funcionario.service.FuncionarioService;
-import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
