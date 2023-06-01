@@ -6,17 +6,25 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.io.Serial;
+import java.io.Serializable;
+import java.util.UUID;
+
 @Entity
 @Table(name = "enderecos")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Endereco {
+public class Endereco implements Serializable {
 
+    @Serial
+    private static final long serialVersionUID = 5L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID identificadorEndereco;
     private String cep;
     private String logradouro;
     private String numero;
