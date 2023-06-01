@@ -7,7 +7,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.Date;
+import java.util.UUID;
 
 @Entity
 @Table(name = "depedentes")
@@ -15,11 +18,14 @@ import java.util.Date;
 @AllArgsConstructor
 @Getter
 @Setter
-public class Dependente {
-
+public class Dependente implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 6L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID identificadorEndereco;
     private String nome;
     private String cpf;
     private String rg;
