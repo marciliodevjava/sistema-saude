@@ -28,7 +28,7 @@ public class AuxilioTransporte implements Serializable {
     private int dias;
     private BigDecimal valorPassagem;
     @OneToOne
-    @JoinColumn(name = "id_salarios")
-    private Salario salarioCnpj;
+    @JoinColumn(name = "id_salario")
+    private Salario salario;
 
 }
