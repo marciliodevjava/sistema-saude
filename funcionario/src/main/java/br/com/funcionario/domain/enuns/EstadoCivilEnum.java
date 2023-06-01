@@ -1,6 +1,6 @@
 package br.com.funcionario.domain.enuns;
 
-public enum EstadoCivil {
+public enum EstadoCivilEnum {
     SOTEIRO,
     CASADO,
     DIVORCIADO,
