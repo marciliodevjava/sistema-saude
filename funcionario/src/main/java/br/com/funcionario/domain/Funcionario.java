@@ -37,4 +37,14 @@ public class Funcionario implements Serializable {
     @Getter(onMethod = @__({@JsonIgnore}))
     @OneToOne(mappedBy = "funcionario", cascade = CascadeType.PERSIST)
     private FuncionarioCnpj funcionarioCnpj;
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj);
+    }
 }
