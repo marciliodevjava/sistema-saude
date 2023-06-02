@@ -25,17 +25,29 @@ public class Dependente implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID identificadorEndereco;
+    private UUID identificadorDependente;
     private String nome;
     private String cpf;
     private String rg;
+    @Column(name = "data_nascimento")
     private Date dataNascimento;
     @Enumerated(EnumType.STRING)
+    @Column(name = "grau_parentesco")
     private GrauParentescoEnum grauParentescoEnum;
     @ManyToOne(optional = false)
-    @JoinColumn(name = "id_funcionario_clt")
+    @JoinColumn(name = "id_funcionarioClt")
     private FuncionarioClt funcionarioClt;
     @ManyToOne(optional = false)
-    @JoinColumn(name = "id_funcionario_cnpj")
+    @JoinColumn(name = "id_funcionarioCnpj")
     private FuncionarioCnpj funcionarioCnpj;
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj);
+    }
 }
