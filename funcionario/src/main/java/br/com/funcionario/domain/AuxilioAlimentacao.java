@@ -24,11 +24,20 @@ public class AuxilioAlimentacao implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID identificadorAuxilioTransporte;
+    private UUID identificadorAuxilioAlimentacao;
     private int dias;
     private BigDecimal valor;
     @OneToOne
     @JoinColumn(name = "id_salario")
     private Salario salario;
 
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj);
+    }
 }
