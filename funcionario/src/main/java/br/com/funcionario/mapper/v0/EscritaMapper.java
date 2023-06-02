@@ -7,7 +7,6 @@ import br.com.funcionario.domain.utils.ConverteHora;
 import br.com.funcionario.dto.FuncionarioDto;
 import br.com.funcionario.dto.request.*;
 import br.com.funcionario.dto.response.*;
-import br.com.funcionario.repository.FuncionarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -30,7 +29,7 @@ public class EscritaMapper {
         funcionario.setEstadoFuncionarioEnum(funcionarioDto.getEstadoFuncionarioEnum());
         funcionario.setNumeroFuncionario(numeroFuncionario);
         funcionario.setEstadoFuncionarioEnum(EstadoFuncionarioEnum.ATIVO);
-        funcionario.setFuncionarioClt(this.mapearEntradaFuncionaClt(funcionarioDto.getFuncionarioClt()));
+        funcionario.setFuncionarioClt((this.mapearEntradaFuncionaClt(funcionarioDto.getFuncionarioClt())));
         funcionario.setFuncionarioCnpj(this.mapearEntradaFuncionaCnpj(funcionarioDto.getFuncionarioCnpj()));
 
         return funcionario;
@@ -89,7 +88,7 @@ public class EscritaMapper {
             funcionarioCltDto.setRg(funcionarioClt.getRg());
             funcionarioCltDto.setTelefone(funcionarioClt.getTelefone());
             funcionarioCltDto.setEmail(funcionarioClt.getEmail());
-            funcionarioCltDto.setDataAdmissao(funcionarioClt.getDataAdmissao());
+            funcionarioCltDto.setDataAdmissao(new Date());
             funcionarioCltDto.setHoraInicial(funcionarioClt.getHoraInicial());
             funcionarioCltDto.setHoraFinal(funcionarioClt.getHoraFinal());
             funcionarioCltDto.setAtivo(funcionarioClt.getAtivo());
@@ -145,7 +144,7 @@ public class EscritaMapper {
             funcionarioCnpjDto.setDdd(funcionarioCnpj.getDdd());
             funcionarioCnpjDto.setTelefone(funcionarioCnpj.getTelefone());
             funcionarioCnpjDto.setEmail(funcionarioCnpj.getEmail());
-            funcionarioCnpjDto.setDataAdmissao(funcionarioCnpj.getDataAdmissao());
+            funcionarioCnpjDto.setDataAdmissao(new Date());
             funcionarioCnpjDto.setHorarioInicial(funcionarioCnpj.getHoraInicial());
             funcionarioCnpjDto.setHorarioFinal(funcionarioCnpj.getHoraFinal());
             funcionarioCnpjDto.setAtivo(funcionarioCnpj.getAtivo());
@@ -233,7 +232,7 @@ public class EscritaMapper {
             DependenteRetornoDto dependenteRetornoDto = new DependenteRetornoDto();
 
             dependente.forEach(d -> {
-                dependenteRetornoDto.setIdentificadorEndereco(d.getIdentificadorEndereco());
+                dependenteRetornoDto.setIdentificadorEndereco(d.getIdentificadorDependente());
                 dependenteRetornoDto.setNome(d.getNome());
                 dependenteRetornoDto.setCpf(d.getCpf());
                 dependenteRetornoDto.setRg(d.getRg());
@@ -312,7 +311,7 @@ public class EscritaMapper {
 
         if (Objects.nonNull(auxilioAlimentacao)) {
 
-            auxilioAlimentacao.setIdentificadorAuxilioTransporte(auxilioAlimentacao.getIdentificadorAuxilioTransporte());
+            auxilioAlimentacao.setIdentificadorAuxilioAlimentacao(auxilioAlimentacao.getIdentificadorAuxilioAlimentacao());
             auxilioAlimentacao.setDias(auxilioAlimentacao.getDias());
             auxilioAlimentacao.setValor(auxilioAlimentacao.getValor());
 
@@ -326,7 +325,7 @@ public class EscritaMapper {
 
         if (Objects.nonNull(auxilioAlimentacao)) {
 
-            auxilioAlimentacaoRetornoDto.setIdentificadorAuxilioTransporte(auxilioAlimentacao.getIdentificadorAuxilioTransporte());
+            auxilioAlimentacaoRetornoDto.setIdentificadorAuxilioTransporte(auxilioAlimentacao.getIdentificadorAuxilioAlimentacao());
             auxilioAlimentacaoRetornoDto.setDias(auxilioAlimentacao.getDias());
             auxilioAlimentacaoRetornoDto.setValor(auxilioAlimentacao.getValor());
 
