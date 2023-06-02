@@ -5,6 +5,7 @@ import br.com.funcionario.dto.request.FuncionarioCompleDto;
 import br.com.funcionario.dto.response.FuncionarioCompleRetornoDto;
 import br.com.funcionario.resource.imp.EscritaImp;
 import br.com.funcionario.service.EscritaService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,7 +22,7 @@ public class EscritaResource implements EscritaImp {
 
     @PostMapping("/salvar")
     @Override
-    public ResponseEntity<FuncionarioCompleDto> salvaFuncionarioCompleto(FuncionarioCompleDto funcionarioCompletoDto) {
+    public ResponseEntity<FuncionarioCompleDto> salvaFuncionarioCompleto(@RequestBody @Valid FuncionarioCompleDto funcionarioCompletoDto) {
         FuncionarioCompleRetornoDto funcionario = escritaService.salvaFuncionario(funcionarioCompletoDto);
         return null;
     }
