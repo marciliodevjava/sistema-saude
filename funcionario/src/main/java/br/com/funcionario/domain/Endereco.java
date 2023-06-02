@@ -33,9 +33,19 @@ public class Endereco implements Serializable {
     private String uf;
     private Boolean ative = true;
     @ManyToOne(optional = false)
-    @JoinColumn(name = "id_funcionario_clt")
+    @JoinColumn(name = "id_funcionarioClt")
     private FuncionarioClt funcionarioClt;
     @ManyToOne(optional = false)
-    @JoinColumn(name = "id_funcionario_cnpj")
+    @JoinColumn(name = "id_funcionarioCnpj")
     private FuncionarioCnpj funcionarioCnpj;
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj);
+    }
 }
