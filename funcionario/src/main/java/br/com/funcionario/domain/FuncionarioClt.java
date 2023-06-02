@@ -45,6 +45,7 @@ public class FuncionarioClt implements Serializable {
     private Date dataNascimento;
     private String cpf;
     private String rg;
+    private String ddd;
     private String telefone;
     private String email;
     private Date dataAdmissao;
@@ -57,10 +58,20 @@ public class FuncionarioClt implements Serializable {
 
     @Getter(onMethod = @__({@JsonIgnore}))
     @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "funcionarioClt")
-    private List<Endereco> endereco;
+    private List<Endereco> endereco = new ArrayList<>();
 
     @Getter(onMethod = @__({@JsonIgnore}))
     @OneToOne
     @JoinColumn(name = "id_funcionario")
     private Funcionario funcionario;
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj);
+    }
 }
