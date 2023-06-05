@@ -8,7 +8,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class FuncionarioCompleDto {
-    @NotBlank
+    @NotBlank(message = "Estado Fúncionário obrigatório.")
     private EstadoFuncionarioEnum estadoFuncionarioEnum;
     private FuncionarioCltDto funcionarioClt;
     private FuncionarioCnpjDto funcionarioCnpj;
