@@ -2,6 +2,7 @@ package br.com.funcionario.domain;
 
 import br.com.funcionario.domain.enuns.EstadoFuncionarioEnum;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -10,7 +11,6 @@ import lombok.Setter;
 
 import java.io.Serial;
 import java.io.Serializable;
-import java.util.UUID;
 
 @Entity
 @Table(name = "funcionarios")
@@ -24,18 +24,20 @@ public class Funcionario implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID identificadorFuncionario;
+    @Column(name = "identificador_funcionario", length = 36)
+    private String identificadorFuncionario;
     @Column(name = "numero_funcionario", length = 20)
     private Integer numeroFuncionario;
     @Enumerated(EnumType.STRING)
-    @Column(name = "estado_funcionario", length = 12)
+    @Column(name = "estado_funcionario", length = 15)
     private EstadoFuncionarioEnum estadoFuncionarioEnum;
+    @Setter(onMethod = @__({@JsonProperty}))
     @Getter(onMethod = @__({@JsonIgnore}))
-    @OneToOne(mappedBy = "funcionario", cascade = CascadeType.PERSIST)
+    @OneToOne(mappedBy = "funcionario", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     private FuncionarioClt funcionarioClt;
+    @Setter(onMethod = @__({@JsonProperty}))
     @Getter(onMethod = @__({@JsonIgnore}))
-    @OneToOne(mappedBy = "funcionario", cascade = CascadeType.PERSIST)
+    @OneToOne(mappedBy = "funcionario", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     private FuncionarioCnpj funcionarioCnpj;
 
     @Override
