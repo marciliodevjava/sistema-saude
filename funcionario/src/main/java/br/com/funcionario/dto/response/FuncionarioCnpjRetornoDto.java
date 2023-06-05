@@ -13,7 +13,7 @@ import java.util.UUID;
 @Getter
 @Setter
 public class FuncionarioCnpjRetornoDto {
-    private UUID identificadorFuncionarioCnpj;
+    private String identificadorFuncionarioCnpj;
     private FuncaoFuncionarioEnum funcaoFuncionarioEnum;
     private EstadoCivilEnum estadoCivil;
     private SalarioRetornoDto salario;
