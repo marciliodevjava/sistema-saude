@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Entity
-@Table(name = "funcionaris_cnpj")
+@Table(name = "funcionarios_cnpj")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -29,8 +29,8 @@ public class FuncionarioCnpj implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID identificadorFuncionarioCnpj;
+    @Column(name = "identificador_funcionario_cnpj", length = 36)
+    private String identificadorFuncionarioCnpj;
     @Column(name = "funcao_funcionario", length = 25)
     @Enumerated(EnumType.STRING)
     private FuncaoFuncionarioEnum funcaoFuncionarioEnum;
@@ -38,10 +38,11 @@ public class FuncionarioCnpj implements Serializable {
     @Enumerated(EnumType.STRING)
     private EstadoCivilEnum estadoCivil;
     @Getter(onMethod = @__({@JsonIgnore}))
-    @OneToOne(cascade = CascadeType.PERSIST, mappedBy = "funcionarioCnpj")
+    @OneToOne(cascade = CascadeType.PERSIST, mappedBy = "funcionarioCnpj", fetch = FetchType.LAZY)
     private Salario salario;
     @Column(name = "nome", length = 150, nullable = false)
     private String nome;
+    @Column(name = "data_nascimento")
     private Date dataNascimento;
     private String cpf;
     private String cnpj;
@@ -49,17 +50,30 @@ public class FuncionarioCnpj implements Serializable {
     private String ddd;
     private String telefone;
     private String email;
+    @Column(name = "data_admissao")
     private Date dataAdmissao;
+    @Column(name = "hora_inicial")
     private LocalTime horaInicial;
+    @Column(name = "hora_final")
     private LocalTime horaFinal;
     private Boolean ativo = true;
     @Getter(onMethod = @__({@JsonIgnore}))
-    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "funcionarioCnpj")
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "funcionarioCnpj", fetch = FetchType.LAZY)
     private List<Dependente> dependentesList = new ArrayList<>();
     @Getter(onMethod = @__({@JsonIgnore}))
-    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "funcionarioCnpj")
-    private List<Endereco> endereco;
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "funcionarioCnpj", fetch = FetchType.LAZY)
+    private List<Endereco> endereco = new ArrayList<>();
     @OneToOne
     @JoinColumn(name = "id_funcionario")
     private Funcionario funcionario;
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj);
+    }
 }
