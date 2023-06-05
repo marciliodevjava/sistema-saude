@@ -29,8 +29,8 @@ public class FuncionarioClt implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID identificadorFuncionarioClt;
+    @Column(name = "identificador_funcionario_clt", length = 36)
+    private String identificadorFuncionarioClt;
     @Column(name = "funcao_funcionario", length = 25)
     @Enumerated(EnumType.STRING)
     private FuncaoFuncionarioEnum funcaoFuncionarioEnum;
@@ -38,29 +38,32 @@ public class FuncionarioClt implements Serializable {
     @Enumerated(EnumType.STRING)
     private EstadoCivilEnum estadoCivil;
     @Getter(onMethod = @__({@JsonIgnore}))
-    @OneToOne(mappedBy = "funcionarioClt", cascade = CascadeType.PERSIST)
+    @OneToOne(mappedBy = "funcionarioClt", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     private Salario salario;
     @Column(name = "nome", length = 150, nullable = false)
     private String nome;
+    @Column(name = "data_nascimento")
     private Date dataNascimento;
     private String cpf;
     private String rg;
     private String ddd;
     private String telefone;
     private String email;
+    @Column(name = "data_admissao")
     private Date dataAdmissao;
+    @Column(name = "hora_inicial")
     private LocalTime horaInicial;
+    @Column(name = "hora_final")
     private LocalTime horaFinal;
     private Boolean ativo = true;
     @Getter(onMethod = @__({@JsonIgnore}))
-    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "funcionarioClt")
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "funcionarioClt", fetch = FetchType.LAZY)
     private List<Dependente> dependentesList = new ArrayList<>();
 
     @Getter(onMethod = @__({@JsonIgnore}))
-    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "funcionarioClt")
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "funcionarioClt", fetch = FetchType.LAZY)
     private List<Endereco> endereco = new ArrayList<>();
 
-    @Getter(onMethod = @__({@JsonIgnore}))
     @OneToOne
     @JoinColumn(name = "id_funcionario")
     private Funcionario funcionario;
