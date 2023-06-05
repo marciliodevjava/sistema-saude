@@ -24,22 +24,32 @@ public class Salario implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID identificadorSalario;
+    @Column(name = "identificador_salario", length = 36)
+    private String identificadorSalario;
     private BigDecimal salario;
-    @Column(name = "auxilio_alimentacao")
+    @Column(name = "valor_alimentacao")
     private BigDecimal valorAlimentacao;
     private BigDecimal transporte;
+    @Getter(onMethod = @__({@JsonIgnore}))
+    @OneToOne(cascade = CascadeType.PERSIST, mappedBy = "salario", fetch = FetchType.LAZY)
+    private AuxilioAlimentacao auxilioAlimentacao;
+    @Getter(onMethod = @__({@JsonIgnore}))
+    @OneToOne(cascade = CascadeType.PERSIST, mappedBy = "salario", fetch = FetchType.LAZY)
+    private AuxilioTransporte auxilioTransporte;
     @OneToOne
     @JoinColumn(name = "id_funcionarioClt")
     private FuncionarioClt funcionarioClt;
     @OneToOne
     @JoinColumn(name = "id_funcionarioCnpj")
     private FuncionarioCnpj funcionarioCnpj;
-    @Getter(onMethod = @__({@JsonIgnore}))
-    @OneToOne(cascade = CascadeType.PERSIST, mappedBy = "salario")
-    private AuxilioAlimentacao auxilioAlimentacao;
-    @Getter(onMethod = @__({@JsonIgnore}))
-    @OneToOne(cascade = CascadeType.PERSIST, mappedBy = "salario")
-    private AuxilioTransporte auxilioTransporte;
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj);
+    }
 }
