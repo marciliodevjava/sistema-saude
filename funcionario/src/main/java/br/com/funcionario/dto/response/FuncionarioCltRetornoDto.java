@@ -9,12 +9,11 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
 @Getter
 @Setter
 public class FuncionarioCltRetornoDto {
-    private UUID identificadorFuncionarioClt;
+    private String identificadorFuncionarioClt;
     private FuncaoFuncionarioEnum funcaoFuncionarioEnum;
     private EstadoCivilEnum estadoCivil;
     private SalarioRetornoDto salario;
@@ -22,6 +21,7 @@ public class FuncionarioCltRetornoDto {
     private String dataNascimento;
     private String cpf;
     private String rg;
+    private String ddd;
     private String telefone;
     private String email;
     private Date dataAdmissao;
