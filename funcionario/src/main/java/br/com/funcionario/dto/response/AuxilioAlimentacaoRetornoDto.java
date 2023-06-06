@@ -9,7 +9,7 @@ import java.util.UUID;
 @Getter
 @Setter
 public class AuxilioAlimentacaoRetornoDto {
-    private UUID identificadorAuxilioTransporte;
+    private String identificadorAuxilioTransporte;
     private int dias;
     private BigDecimal valor;
 }
