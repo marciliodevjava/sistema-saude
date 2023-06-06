@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.persistence.Transient;
 import java.text.ParseException;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -50,7 +51,14 @@ public class FuncionarioService implements FuncionarioServiceImp {
     public FuncionarioRetornoDto salvarFuncionario(@RequestBody @Valid FuncionarioDto funcionarioDto) throws ParseException {
 
         Funcionario funcionarioEscrita = escritaMapper.mapearFuncionario(funcionarioDto);
+
         FuncionarioClt funcionarioCltEscrita = escritaMapper.mapearEntradaFuncionaClt(funcionarioDto.getFuncionarioClt());
+        Salario salarioCltEscrita = escritaMapper.montarEntradaSalario(funcionarioDto.getFuncionarioClt().getSalario());
+        AuxilioAlimentacao auxilioAlimentacaoCltEscrita = escritaMapper.montarEntradaAuxilioAlimentacao(funcionarioDto.getFuncionarioClt().getSalario().getAuxilioAlimentacao());
+        AuxilioTransporte auxilioTransporteCltEscrita = escritaMapper.montarEntradaAuxilioTransporte(funcionarioDto.getFuncionarioClt().getSalario().getAuxilioTransporte());
+        List<Dependente> dependenteCltEscrita = escritaMapper.montarEntradaListaDependente(funcionarioDto.getFuncionarioCnpj().getDependentesList());
+        List<Endereco> enderecosCltEscrita = escritaMapper.montarEntradaEndereco(funcionarioDto.getFuncionarioClt().getEndereco());
+
         FuncionarioCnpj funcionarioCnpjEscrita = escritaMapper.mapearEntradaFuncionaCnpj(funcionarioDto.getFuncionarioCnpj());
 
         if (Objects.nonNull(funcionarioEscrita)) {
@@ -63,33 +71,26 @@ public class FuncionarioService implements FuncionarioServiceImp {
 
         if (Objects.nonNull(funcionarioCltEscrita)) {
             FuncionarioClt funcionarioClt = funcionarioCltRepository.save(funcionarioCltEscrita);
-            if (Objects.nonNull(funcionarioEscrita.getFuncionarioClt().getSalario()))
-                funcionarioEscrita.getFuncionarioClt().getSalario().setFuncionarioClt(funcionarioClt);
-            if (Objects.nonNull(funcionarioEscrita.getFuncionarioClt().getDependentesList()))
-                funcionarioEscrita.getFuncionarioClt().getDependentesList().forEach(adicionaFuncionario -> adicionaFuncionario.setFuncionarioClt(funcionarioClt));
-            if (Objects.nonNull(funcionarioEscrita.getFuncionarioClt().getEndereco()))
-                funcionarioEscrita.getFuncionarioClt().getEndereco().forEach(adicionaEndereco -> adicionaEndereco.setFuncionarioClt(funcionarioClt));
+            if (Objects.nonNull(salarioCltEscrita))
+                salarioCltEscrita.setFuncionarioClt(funcionarioClt);
+            if (Objects.nonNull(dependenteCltEscrita))
+                dependenteCltEscrita.forEach(adicionaFuncionario -> adicionaFuncionario.setFuncionarioClt(funcionarioClt));
+            if (Objects.nonNull(enderecosCltEscrita))
+                enderecosCltEscrita.forEach(adicionaEndereco -> adicionaEndereco.setFuncionarioClt(funcionarioClt));
         }
 
-        if (Objects.nonNull(funcionarioEscrita.getFuncionarioClt().getSalario())) {
-            Salario salario = salarioRepository.save(funcionarioEscrita.getFuncionarioClt().getSalario());
-            if (Objects.nonNull(funcionarioEscrita.getFuncionarioClt().getSalario().getAuxilioTransporte()))
-                funcionarioEscrita.getFuncionarioClt().getSalario().getAuxilioTransporte().setSalario(salario);
-            if (Objects.nonNull(funcionarioEscrita.getFuncionarioClt().getSalario().getAuxilioTransporte()))
-                funcionarioEscrita.getFuncionarioClt().getSalario().getAuxilioTransporte().setSalario(salario);
+        if (Objects.nonNull(salarioCltEscrita)) {
+            Salario salario = salarioRepository.save(salarioCltEscrita);
+            if (Objects.nonNull(auxilioAlimentacaoCltEscrita))
+                auxilioAlimentacaoCltEscrita.setSalario(salario);
+            if (Objects.nonNull(auxilioTransporteCltEscrita))
+                auxilioTransporteCltEscrita.setSalario(salario);
         }
 
-        if (Objects.nonNull(funcionarioEscrita.getFuncionarioClt().getSalario().getAuxilioAlimentacao()))
-            auxilioAlimentacaoRepository.save(funcionarioEscrita.getFuncionarioClt().getSalario().getAuxilioAlimentacao());
-
-        if (Objects.nonNull(funcionarioEscrita.getFuncionarioClt().getSalario().getAuxilioTransporte()))
-            auxilioTransporteRepository.save(funcionarioEscrita.getFuncionarioClt().getSalario().getAuxilioTransporte());
-
-        if (Objects.nonNull(funcionarioEscrita.getFuncionarioClt().getDependentesList()))
-            dependenteRepositry.saveAll(funcionarioEscrita.getFuncionarioClt().getDependentesList());
-
-        if (Objects.nonNull(funcionarioEscrita.getFuncionarioClt().getEndereco()))
-            enderecoRepository.saveAll(funcionarioEscrita.getFuncionarioClt().getEndereco());
+        if (Objects.nonNull(auxilioAlimentacaoCltEscrita)) auxilioAlimentacaoRepository.save(auxilioAlimentacaoCltEscrita);
+        if (Objects.nonNull(auxilioTransporteCltEscrita)) auxilioTransporteRepository.save(auxilioTransporteCltEscrita);
+        if (Objects.nonNull(dependenteCltEscrita)) dependenteRepositry.saveAll(dependenteCltEscrita);
+        if (Objects.nonNull(enderecosCltEscrita)) enderecoRepository.saveAll(enderecosCltEscrita);
 
         if (Objects.nonNull(funcionarioEscrita.getFuncionarioCnpj())) {
             FuncionarioCnpj funcionarioCnpj = funcionarioCnpjRepository.save(funcionarioEscrita.getFuncionarioCnpj());
