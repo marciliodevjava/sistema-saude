@@ -113,7 +113,6 @@ public class EscritaMapper {
             funcionario.setIdentificadorFuncionarioCnpj(String.valueOf(geradorUUID.getIdentificador()));
             funcionario.setFuncaoFuncionarioEnum(funcionarioCnpj.getFuncaoFuncionarioEnum());
             funcionario.setEstadoCivil(funcionarioCnpj.getEstadoCivil());
-            funcionario.setSalario(this.montarEntradaSalario(funcionarioCnpj.getSalario()));
             funcionario.setNome(funcionarioCnpj.getNome().trim());
             funcionario.setDataNascimento(converteData.converterStringParaData(funcionarioCnpj.getDataNascimento()));
             funcionario.setCpf(this.formataCpf.formataCpf(funcionarioCnpj.getCpf()));
@@ -126,8 +125,6 @@ public class EscritaMapper {
             funcionario.setHoraInicial(converteHora.converterStringParaHora(funcionarioCnpj.getHorarioInicial()));
             funcionario.setHoraFinal(converteHora.converterStringParaHora(funcionarioCnpj.getHorarioFinal()));
             funcionario.setAtivo(true);
-            funcionario.setDependentesList(this.montarEntradaListaDependente(funcionarioCnpj.getDependentesList()));
-            funcionario.setEndereco(this.montarEntradaEndereco(funcionarioCnpj.getEndereco()));
 
             return funcionario;
         }
@@ -264,7 +261,6 @@ public class EscritaMapper {
             salarioRetornoDto.setSalario(salario.getSalario());
             salarioRetornoDto.setValorAlimentacao(salario.getValorAlimentacao());
             salarioRetornoDto.setTransporte(salario.getTransporte());
-            salarioRetornoDto.setAuxilioTransporte(this.montarEntradaAuxilioTransporte(salario.getAuxilioTransporte()));
 
         }
 
