@@ -10,7 +10,6 @@ import lombok.Setter;
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.Date;
-import java.util.UUID;
 
 @Entity
 @Table(name = "depedentes")
@@ -24,8 +23,8 @@ public class Dependente implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID identificadorDependente;
+    @Column(name = "identificador_dependente", length = 36)
+    private String identificadorDependente;
     private String nome;
     private String cpf;
     private String rg;
