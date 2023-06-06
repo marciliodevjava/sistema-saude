@@ -8,7 +8,7 @@ import java.util.UUID;
 @Getter
 @Setter
 public class EnderecoRetornoDto {
-    private UUID identificadorEndereco;
+    private String identificadorEndereco;
     private String cep;
     private String logradouro;
     private String numero;
