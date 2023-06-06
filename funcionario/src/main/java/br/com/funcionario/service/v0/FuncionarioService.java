@@ -85,6 +85,9 @@ public class FuncionarioService implements FuncionarioServiceImp {
             if (Objects.nonNull(auxilioTransporteCltEscrita)) auxilioTransporteCltEscrita.setSalario(salarioClt);
         }
 
+        if (Objects.nonNull(dependenteCnpjEscrita)) dependenteRepositry.saveAll(dependenteCnpjEscrita);
+        if (Objects.nonNull(enderecosCnpjEscrita)) enderecoRepository.saveAll(enderecosCnpjEscrita);
+
         if (Objects.nonNull(auxilioAlimentacaoCltEscrita)) auxilioAlimentacaoRepository.save(auxilioAlimentacaoCltEscrita);
         if (Objects.nonNull(auxilioTransporteCltEscrita)) auxilioTransporteRepository.save(auxilioTransporteCltEscrita);
         if (Objects.nonNull(dependenteCltEscrita)) dependenteRepositry.saveAll(dependenteCltEscrita);
@@ -105,8 +108,6 @@ public class FuncionarioService implements FuncionarioServiceImp {
 
         if (Objects.nonNull(auxilioAlimentacaoCnpjEscrita)) auxilioAlimentacaoRepository.save(auxilioAlimentacaoCnpjEscrita);
         if (Objects.nonNull(auxilioTransporteCnpjEscrita)) auxilioTransporteRepository.save(auxilioTransporteCnpjEscrita);
-        if (Objects.nonNull(dependenteCnpjEscrita)) dependenteRepositry.saveAll(dependenteCnpjEscrita);
-        if (Objects.nonNull(enderecosCnpjEscrita)) enderecoRepository.saveAll(enderecosCnpjEscrita);
 
         FuncionarioRetornoDto funcionarioRetornoDto = escritaMapper.mapearFuncionarioDto(funcionarioEscrita);
 
