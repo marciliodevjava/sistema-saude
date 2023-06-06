@@ -61,7 +61,6 @@ public class EscritaMapper {
             funcionario.setIdentificadorFuncionarioClt(String.valueOf(geradorUUID.getIdentificador()));
             funcionario.setFuncaoFuncionarioEnum(funcionarioClt.getFuncaoFuncionarioEnum());
             funcionario.setEstadoCivil(funcionarioClt.getEstadoCivil());
-            funcionario.setSalario(this.montarEntradaSalario(funcionarioClt.getSalario()));
             funcionario.setNome(funcionarioClt.getNome().trim());
             funcionario.setDataNascimento(converteData.converterStringParaData(funcionarioClt.getDataNascimento()));
             funcionario.setCpf(this.formataCpf.formataCpf(funcionarioClt.getCpf()));
@@ -73,8 +72,6 @@ public class EscritaMapper {
             funcionario.setHoraInicial(converteHora.converterStringParaHora(funcionarioClt.getHorarioInicial()));
             funcionario.setHoraFinal(converteHora.converterStringParaHora(funcionarioClt.getHorarioFinal()));
             funcionario.setAtivo(true);
-            funcionario.setDependentesList(this.montarEntradaListaDependente(funcionarioClt.getDependentesList()));
-            funcionario.setEndereco(this.montarEntradaEndereco(funcionarioClt.getEndereco()));
 
         }
 
@@ -167,7 +164,7 @@ public class EscritaMapper {
         return funcionarioCnpjDto;
     }
 
-    private List<Endereco> montarEntradaEndereco(List<EnderecoDto> enderecoDto) {
+    public List<Endereco> montarEntradaEndereco(List<EnderecoDto> enderecoDto) {
         List<Endereco> endereco = new ArrayList<>();
 
         if (Objects.nonNull(enderecoDto)) {
@@ -211,7 +208,7 @@ public class EscritaMapper {
         return enderecoDto;
     }
 
-    private List<Dependente> montarEntradaListaDependente(List<DependenteDto> dependentesList) throws ParseException {
+    public List<Dependente> montarEntradaListaDependente(List<DependenteDto> dependentesList) throws ParseException {
         List<Dependente> dependete = new ArrayList<>();
 
         if (Objects.nonNull(dependentesList)) {
@@ -258,7 +255,7 @@ public class EscritaMapper {
     }
 
 
-    private Salario montarEntradaSalario(SalarioDto salario) {
+    public Salario montarEntradaSalario(SalarioDto salario) {
         Salario salarioRetornoDto = new Salario();
 
         if (Objects.nonNull(salario)) {
@@ -267,7 +264,6 @@ public class EscritaMapper {
             salarioRetornoDto.setSalario(salario.getSalario());
             salarioRetornoDto.setValorAlimentacao(salario.getValorAlimentacao());
             salarioRetornoDto.setTransporte(salario.getTransporte());
-            salarioRetornoDto.setAuxilioAlimentacao(this.montarEntradaAuxilioAlimentacao(salario.getAuxilioAlimentacao()));
             salarioRetornoDto.setAuxilioTransporte(this.montarEntradaAuxilioTransporte(salario.getAuxilioTransporte()));
 
         }
@@ -292,7 +288,7 @@ public class EscritaMapper {
         return salarioRetornoDto;
     }
 
-    private AuxilioTransporte montarEntradaAuxilioTransporte(AuxilioTransporteDto auxilioTransporteDto) {
+    public AuxilioTransporte montarEntradaAuxilioTransporte(AuxilioTransporteDto auxilioTransporteDto) {
         AuxilioTransporte auxilioTransporte = new AuxilioTransporte();
 
         if (Objects.nonNull(auxilioTransporteDto)) {
@@ -320,7 +316,7 @@ public class EscritaMapper {
         return auxilioTransporteRetornoDto;
     }
 
-    private AuxilioAlimentacao montarEntradaAuxilioAlimentacao(AuxilioAlimentacaoDto auxilioAlimentacaoDto) {
+    public AuxilioAlimentacao montarEntradaAuxilioAlimentacao(AuxilioAlimentacaoDto auxilioAlimentacaoDto) {
         AuxilioAlimentacao auxilioAlimentacao = new AuxilioAlimentacao();
 
         if (Objects.nonNull(auxilioAlimentacao)) {
