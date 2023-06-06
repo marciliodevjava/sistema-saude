@@ -49,80 +49,80 @@ public class FuncionarioService implements FuncionarioServiceImp {
     @Transient
     public FuncionarioRetornoDto salvarFuncionario(@RequestBody @Valid FuncionarioDto funcionarioDto) throws ParseException {
 
-        Funcionario mapeamento = escritaMapper.mapearFuncionario(funcionarioDto);
+        Funcionario funcionarioEscrita = escritaMapper.mapearFuncionario(funcionarioDto);
+        FuncionarioClt funcionarioCltEscrita = escritaMapper.mapearEntradaFuncionaClt(funcionarioDto.getFuncionarioClt());
+        FuncionarioCnpj funcionarioCnpjEscrita = escritaMapper.mapearEntradaFuncionaCnpj(funcionarioDto.getFuncionarioCnpj());
 
-        if (Objects.nonNull(mapeamento)) {
-            Funcionario funcionarioTest = this.mapearFuncionarioTesT(mapeamento);
-            Funcionario funcionarioTes = funcionarioRepository.save(funcionarioTest);
-            Funcionario funcionario = funcionarioRepository.save(mapeamento);
-            if (Objects.nonNull(mapeamento.getFuncionarioClt()))
-                mapeamento.getFuncionarioClt().setFuncionario(funcionario);
-            if (Objects.nonNull(mapeamento.getFuncionarioCnpj()))
-                mapeamento.getFuncionarioCnpj().setFuncionario(funcionario);
+        if (Objects.nonNull(funcionarioEscrita)) {
+            Funcionario funcionario = funcionarioRepository.save(funcionarioEscrita);
+            if (Objects.nonNull(funcionarioCltEscrita))
+                funcionarioCltEscrita.setFuncionario(funcionario);
+            if (Objects.nonNull(funcionarioCnpjEscrita))
+                funcionarioCnpjEscrita.setFuncionario(funcionario);
         }
 
-        if (Objects.nonNull(mapeamento.getFuncionarioClt())) {
-            FuncionarioClt funcionarioClt = funcionarioCltRepository.save(mapeamento.getFuncionarioClt());
-            if (Objects.nonNull(mapeamento.getFuncionarioClt().getSalario()))
-                mapeamento.getFuncionarioClt().getSalario().setFuncionarioClt(funcionarioClt);
-            if (Objects.nonNull(mapeamento.getFuncionarioClt().getDependentesList()))
-                mapeamento.getFuncionarioClt().getDependentesList().forEach(adicionaFuncionario -> adicionaFuncionario.setFuncionarioClt(funcionarioClt));
-            if (Objects.nonNull(mapeamento.getFuncionarioClt().getEndereco()))
-                mapeamento.getFuncionarioClt().getEndereco().forEach(adicionaEndereco -> adicionaEndereco.setFuncionarioClt(funcionarioClt));
+        if (Objects.nonNull(funcionarioCltEscrita)) {
+            FuncionarioClt funcionarioClt = funcionarioCltRepository.save(funcionarioCltEscrita);
+            if (Objects.nonNull(funcionarioEscrita.getFuncionarioClt().getSalario()))
+                funcionarioEscrita.getFuncionarioClt().getSalario().setFuncionarioClt(funcionarioClt);
+            if (Objects.nonNull(funcionarioEscrita.getFuncionarioClt().getDependentesList()))
+                funcionarioEscrita.getFuncionarioClt().getDependentesList().forEach(adicionaFuncionario -> adicionaFuncionario.setFuncionarioClt(funcionarioClt));
+            if (Objects.nonNull(funcionarioEscrita.getFuncionarioClt().getEndereco()))
+                funcionarioEscrita.getFuncionarioClt().getEndereco().forEach(adicionaEndereco -> adicionaEndereco.setFuncionarioClt(funcionarioClt));
         }
 
-        if (Objects.nonNull(mapeamento.getFuncionarioClt().getSalario())) {
-            Salario salario = salarioRepository.save(mapeamento.getFuncionarioClt().getSalario());
-            if (Objects.nonNull(mapeamento.getFuncionarioClt().getSalario().getAuxilioTransporte()))
-                mapeamento.getFuncionarioClt().getSalario().getAuxilioTransporte().setSalario(salario);
-            if (Objects.nonNull(mapeamento.getFuncionarioClt().getSalario().getAuxilioTransporte()))
-                mapeamento.getFuncionarioClt().getSalario().getAuxilioTransporte().setSalario(salario);
+        if (Objects.nonNull(funcionarioEscrita.getFuncionarioClt().getSalario())) {
+            Salario salario = salarioRepository.save(funcionarioEscrita.getFuncionarioClt().getSalario());
+            if (Objects.nonNull(funcionarioEscrita.getFuncionarioClt().getSalario().getAuxilioTransporte()))
+                funcionarioEscrita.getFuncionarioClt().getSalario().getAuxilioTransporte().setSalario(salario);
+            if (Objects.nonNull(funcionarioEscrita.getFuncionarioClt().getSalario().getAuxilioTransporte()))
+                funcionarioEscrita.getFuncionarioClt().getSalario().getAuxilioTransporte().setSalario(salario);
         }
 
-        if (Objects.nonNull(mapeamento.getFuncionarioClt().getSalario().getAuxilioAlimentacao()))
-            auxilioAlimentacaoRepository.save(mapeamento.getFuncionarioClt().getSalario().getAuxilioAlimentacao());
+        if (Objects.nonNull(funcionarioEscrita.getFuncionarioClt().getSalario().getAuxilioAlimentacao()))
+            auxilioAlimentacaoRepository.save(funcionarioEscrita.getFuncionarioClt().getSalario().getAuxilioAlimentacao());
 
-        if (Objects.nonNull(mapeamento.getFuncionarioClt().getSalario().getAuxilioTransporte()))
-            auxilioTransporteRepository.save(mapeamento.getFuncionarioClt().getSalario().getAuxilioTransporte());
+        if (Objects.nonNull(funcionarioEscrita.getFuncionarioClt().getSalario().getAuxilioTransporte()))
+            auxilioTransporteRepository.save(funcionarioEscrita.getFuncionarioClt().getSalario().getAuxilioTransporte());
 
-        if (Objects.nonNull(mapeamento.getFuncionarioClt().getDependentesList()))
-            dependenteRepositry.saveAll(mapeamento.getFuncionarioClt().getDependentesList());
+        if (Objects.nonNull(funcionarioEscrita.getFuncionarioClt().getDependentesList()))
+            dependenteRepositry.saveAll(funcionarioEscrita.getFuncionarioClt().getDependentesList());
 
-        if (Objects.nonNull(mapeamento.getFuncionarioClt().getEndereco()))
-            enderecoRepository.saveAll(mapeamento.getFuncionarioClt().getEndereco());
+        if (Objects.nonNull(funcionarioEscrita.getFuncionarioClt().getEndereco()))
+            enderecoRepository.saveAll(funcionarioEscrita.getFuncionarioClt().getEndereco());
 
-        if (Objects.nonNull(mapeamento.getFuncionarioCnpj())) {
-            FuncionarioCnpj funcionarioCnpj = funcionarioCnpjRepository.save(mapeamento.getFuncionarioCnpj());
-            if (Objects.nonNull(mapeamento.getFuncionarioCnpj().getSalario()))
-                mapeamento.getFuncionarioCnpj().getSalario().setFuncionarioCnpj(funcionarioCnpj);
-            if (Objects.nonNull(mapeamento.getFuncionarioCnpj().getDependentesList()))
-                mapeamento.getFuncionarioCnpj().getDependentesList().forEach(adicionaFuncionario -> adicionaFuncionario.setFuncionarioCnpj(funcionarioCnpj));
-            if (Objects.nonNull(mapeamento.getFuncionarioCnpj().getEndereco()))
-                mapeamento.getFuncionarioCnpj().getEndereco().forEach(adicionaEndereco -> adicionaEndereco.setFuncionarioCnpj(funcionarioCnpj));
+        if (Objects.nonNull(funcionarioEscrita.getFuncionarioCnpj())) {
+            FuncionarioCnpj funcionarioCnpj = funcionarioCnpjRepository.save(funcionarioEscrita.getFuncionarioCnpj());
+            if (Objects.nonNull(funcionarioEscrita.getFuncionarioCnpj().getSalario()))
+                funcionarioEscrita.getFuncionarioCnpj().getSalario().setFuncionarioCnpj(funcionarioCnpj);
+            if (Objects.nonNull(funcionarioEscrita.getFuncionarioCnpj().getDependentesList()))
+                funcionarioEscrita.getFuncionarioCnpj().getDependentesList().forEach(adicionaFuncionario -> adicionaFuncionario.setFuncionarioCnpj(funcionarioCnpj));
+            if (Objects.nonNull(funcionarioEscrita.getFuncionarioCnpj().getEndereco()))
+                funcionarioEscrita.getFuncionarioCnpj().getEndereco().forEach(adicionaEndereco -> adicionaEndereco.setFuncionarioCnpj(funcionarioCnpj));
         }
 
 
-        if (Objects.nonNull(mapeamento.getFuncionarioCnpj().getSalario())) {
-            Salario salario = salarioRepository.save(mapeamento.getFuncionarioCnpj().getSalario());
-            if (Objects.nonNull(mapeamento.getFuncionarioCnpj().getSalario().getAuxilioTransporte()))
-                mapeamento.getFuncionarioCnpj().getSalario().getAuxilioTransporte().setSalario(salario);
-            if (Objects.nonNull(mapeamento.getFuncionarioClt().getSalario().getAuxilioTransporte()))
-                mapeamento.getFuncionarioCnpj().getSalario().getAuxilioTransporte().setSalario(salario);
+        if (Objects.nonNull(funcionarioEscrita.getFuncionarioCnpj().getSalario())) {
+            Salario salario = salarioRepository.save(funcionarioEscrita.getFuncionarioCnpj().getSalario());
+            if (Objects.nonNull(funcionarioEscrita.getFuncionarioCnpj().getSalario().getAuxilioTransporte()))
+                funcionarioEscrita.getFuncionarioCnpj().getSalario().getAuxilioTransporte().setSalario(salario);
+            if (Objects.nonNull(funcionarioEscrita.getFuncionarioClt().getSalario().getAuxilioTransporte()))
+                funcionarioEscrita.getFuncionarioCnpj().getSalario().getAuxilioTransporte().setSalario(salario);
         }
 
-        if (Objects.nonNull(mapeamento.getFuncionarioCnpj().getSalario().getAuxilioAlimentacao()))
-            auxilioAlimentacaoRepository.save(mapeamento.getFuncionarioCnpj().getSalario().getAuxilioAlimentacao());
+        if (Objects.nonNull(funcionarioEscrita.getFuncionarioCnpj().getSalario().getAuxilioAlimentacao()))
+            auxilioAlimentacaoRepository.save(funcionarioEscrita.getFuncionarioCnpj().getSalario().getAuxilioAlimentacao());
 
-        if (Objects.nonNull(mapeamento.getFuncionarioCnpj().getSalario().getAuxilioAlimentacao()))
-            auxilioTransporteRepository.save(mapeamento.getFuncionarioCnpj().getSalario().getAuxilioTransporte());
+        if (Objects.nonNull(funcionarioEscrita.getFuncionarioCnpj().getSalario().getAuxilioAlimentacao()))
+            auxilioTransporteRepository.save(funcionarioEscrita.getFuncionarioCnpj().getSalario().getAuxilioTransporte());
 
-        if (Objects.nonNull(mapeamento.getFuncionarioCnpj().getDependentesList()))
-            dependenteRepositry.saveAll(mapeamento.getFuncionarioCnpj().getDependentesList());
+        if (Objects.nonNull(funcionarioEscrita.getFuncionarioCnpj().getDependentesList()))
+            dependenteRepositry.saveAll(funcionarioEscrita.getFuncionarioCnpj().getDependentesList());
 
-        if (Objects.nonNull(mapeamento.getFuncionarioCnpj().getEndereco()))
-            enderecoRepository.saveAll(mapeamento.getFuncionarioCnpj().getEndereco());
+        if (Objects.nonNull(funcionarioEscrita.getFuncionarioCnpj().getEndereco()))
+            enderecoRepository.saveAll(funcionarioEscrita.getFuncionarioCnpj().getEndereco());
 
-        FuncionarioRetornoDto funcionarioRetornoDto = escritaMapper.mapearFuncionarioDto(mapeamento);
+        FuncionarioRetornoDto funcionarioRetornoDto = escritaMapper.mapearFuncionarioDto(funcionarioEscrita);
 
         return funcionarioRetornoDto;
     }
