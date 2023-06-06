@@ -66,7 +66,7 @@ public class FuncionarioServiceTest {
 
     @Test
     @DisplayName("Teste de salvar somente um funcionario.")
-    void salvarSomenteFuncionario(){
+    void salvarSomenteFuncionario() {
         FuncionarioDto funcionario = new FuncionarioDto();
 
         FuncionarioRetornoDto funcionarioRetornoDto = funcionarioService.salvarSomenteFuncionario(funcionario);
