@@ -9,7 +9,6 @@ import lombok.Setter;
 import java.io.Serial;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.UUID;
 
 @Entity
 @Table(name = "auxilio_transporte")
@@ -23,8 +22,8 @@ public class AuxilioTransporte implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID identificadorAuxilioTransporte;
+    @Column(name = "identificador_auxilio_transporte", length = 36)
+    private String identificadorAuxilioTransporte;
     private int dias;
     @Column(name = "valor_passagem")
     private BigDecimal valorPassagem;
