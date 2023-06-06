@@ -38,12 +38,6 @@ public class EscritaMapper {
         funcionario.setEstadoFuncionarioEnum(funcionarioDto.getEstadoFuncionarioEnum() == null ? EstadoFuncionarioEnum.ATIVO : funcionarioDto.getEstadoFuncionarioEnum());
         funcionario.setNumeroFuncionario(numeroFuncionario);
         funcionario.setEstadoFuncionarioEnum(EstadoFuncionarioEnum.ATIVO);
-        if (Objects.nonNull(funcionarioDto.getFuncionarioClt())){
-            funcionario.setFuncionarioClt((this.mapearEntradaFuncionaClt(funcionarioDto.getFuncionarioClt())));
-        }
-        if(Objects.nonNull(funcionarioDto.getFuncionarioCnpj())){
-            funcionario.setFuncionarioCnpj(this.mapearEntradaFuncionaCnpj(funcionarioDto.getFuncionarioCnpj()));
-        }
 
         return funcionario;
     }
@@ -54,13 +48,12 @@ public class EscritaMapper {
         funcionarioRetornoDto.setIdentificadorFuncionario(funcionario.getIdentificadorFuncionario());
         funcionarioRetornoDto.setNumeroFuncionario(this.geraNumero());
         funcionarioRetornoDto.setEstadoFuncionarioEnum(funcionario.getEstadoFuncionarioEnum());
-        funcionarioRetornoDto.setFuncionarioClt(this.mapearRetornoFuncionarioClt(funcionario.getFuncionarioClt()));
         funcionarioRetornoDto.setFuncionarioCnpj(this.mapearRetornoFuncionarioCnpj(funcionario.getFuncionarioCnpj()));
 
         return funcionarioRetornoDto;
     }
 
-    private FuncionarioClt mapearEntradaFuncionaClt(FuncionarioCltDto funcionarioClt) throws ParseException {
+    public FuncionarioClt mapearEntradaFuncionaClt(FuncionarioCltDto funcionarioClt) throws ParseException {
         FuncionarioClt funcionario = new FuncionarioClt();
 
         if (Objects.nonNull(funcionarioClt)) {
@@ -116,7 +109,7 @@ public class EscritaMapper {
         return funcionarioCltDto;
     }
 
-    private FuncionarioCnpj mapearEntradaFuncionaCnpj(FuncionarioCnpjDto funcionarioCnpj) throws ParseException {
+    public FuncionarioCnpj mapearEntradaFuncionaCnpj(FuncionarioCnpjDto funcionarioCnpj) throws ParseException {
         FuncionarioCnpj funcionario = new FuncionarioCnpj();
 
         if (Objects.nonNull(funcionarioCnpj)) {
