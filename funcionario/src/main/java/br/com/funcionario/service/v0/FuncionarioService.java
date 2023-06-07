@@ -3,7 +3,9 @@ package br.com.funcionario.service.v0;
 import br.com.funcionario.domain.*;
 import br.com.funcionario.domain.enuns.EstadoFuncionarioEnum;
 import br.com.funcionario.dto.FuncionarioDto;
+import br.com.funcionario.dto.NumeroDto;
 import br.com.funcionario.dto.response.*;
+import br.com.funcionario.http.GeradorClients;
 import br.com.funcionario.mapper.EscritaMapper;
 import br.com.funcionario.repository.*;
 import br.com.funcionario.service.imp.FuncionarioServiceImp;
@@ -17,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import javax.persistence.Transient;
 import java.text.ParseException;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 
 @Service
@@ -44,6 +45,8 @@ public class FuncionarioService implements FuncionarioServiceImp {
     private AuxilioAlimentacaoRepository auxilioAlimentacaoRepository;
     @Autowired
     private AuxilioTransporteRepository auxilioTransporteRepository;
+    @Autowired
+    private GeradorClients geradorClients;
 
 
     @Override
@@ -81,21 +84,6 @@ public class FuncionarioService implements FuncionarioServiceImp {
                 enderecosCltEscrita.forEach(adicionaEndereco -> adicionaEndereco.setFuncionarioClt(funcionarioClt));
         }
 
-        if (Objects.nonNull(salarioCltEscrita)) {
-            Salario salarioClt = salarioRepository.save(salarioCltEscrita);
-            if (Objects.nonNull(auxilioAlimentacaoCltEscrita)) auxilioAlimentacaoCltEscrita.setSalario(salarioClt);
-            if (Objects.nonNull(auxilioTransporteCltEscrita)) auxilioTransporteCltEscrita.setSalario(salarioClt);
-        }
-
-        if (Objects.nonNull(dependenteCnpjEscrita)) dependenteRepositry.saveAll(dependenteCnpjEscrita);
-        if (Objects.nonNull(enderecosCnpjEscrita)) enderecoRepository.saveAll(enderecosCnpjEscrita);
-
-        if (Objects.nonNull(auxilioAlimentacaoCltEscrita))
-            auxilioAlimentacaoRepository.save(auxilioAlimentacaoCltEscrita);
-        if (Objects.nonNull(auxilioTransporteCltEscrita)) auxilioTransporteRepository.save(auxilioTransporteCltEscrita);
-        if (Objects.nonNull(dependenteCltEscrita)) dependenteRepositry.saveAll(dependenteCltEscrita);
-        if (Objects.nonNull(enderecosCltEscrita)) enderecoRepository.saveAll(enderecosCltEscrita);
-
         if (Objects.nonNull(funcionarioCnpjEscrita)) {
             FuncionarioCnpj funcionarioCnpj = funcionarioCnpjRepository.save(funcionarioCnpjEscrita);
             if (Objects.nonNull(salarioCnpjEscrita)) salarioCnpjEscrita.setFuncionarioCnpj(funcionarioCnpj);
@@ -110,6 +98,23 @@ public class FuncionarioService implements FuncionarioServiceImp {
             if (Objects.nonNull(auxilioAlimentacaoCnpjEscrita)) auxilioAlimentacaoCnpjEscrita.setSalario(salario);
             if (Objects.nonNull(auxilioTransporteCnpjEscrita)) auxilioTransporteCnpjEscrita.setSalario(salario);
         }
+
+        if (Objects.nonNull(salarioCltEscrita)) {
+            Salario salarioClt = salarioRepository.save(salarioCltEscrita);
+            if (Objects.nonNull(auxilioAlimentacaoCltEscrita)) auxilioAlimentacaoCltEscrita.setSalario(salarioClt);
+            if (Objects.nonNull(auxilioTransporteCltEscrita)) auxilioTransporteCltEscrita.setSalario(salarioClt);
+        }
+
+        if (Objects.nonNull(dependenteCltEscrita)) dependenteRepositry.saveAll(dependenteCltEscrita);
+
+        if (Objects.nonNull(dependenteCnpjEscrita)) dependenteRepositry.saveAll(dependenteCnpjEscrita);
+        if (Objects.nonNull(enderecosCnpjEscrita)) enderecoRepository.saveAll(enderecosCnpjEscrita);
+
+        if (Objects.nonNull(auxilioAlimentacaoCltEscrita))
+            auxilioAlimentacaoRepository.save(auxilioAlimentacaoCltEscrita);
+        if (Objects.nonNull(auxilioTransporteCltEscrita)) auxilioTransporteRepository.save(auxilioTransporteCltEscrita);
+        if (Objects.nonNull(dependenteCltEscrita)) dependenteRepositry.saveAll(dependenteCltEscrita);
+        if (Objects.nonNull(enderecosCltEscrita)) enderecoRepository.saveAll(enderecosCltEscrita);
 
         if (Objects.nonNull(auxilioAlimentacaoCnpjEscrita))
             auxilioAlimentacaoRepository.save(auxilioAlimentacaoCnpjEscrita);
@@ -155,11 +160,17 @@ public class FuncionarioService implements FuncionarioServiceImp {
     private Funcionario mapearFuncionario(FuncionarioDto funcionarioDto) {
         Funcionario funcionario = new Funcionario();
 
-        funcionario.setNumeroFuncionario(funcionarioDto.getNumeroFuncionario() != null ? funcionarioDto.getNumeroFuncionario() : NUMERO_DEFALT);
+        funcionario.setNumeroFuncionario(this.gerarNumero());
         funcionario.setIdentificadorFuncionario(String.valueOf(geradorUUID.getIdentificador()));
         funcionario.setEstadoFuncionarioEnum(EstadoFuncionarioEnum.ATIVO);
 
         return funcionario;
+    }
+
+    private Integer gerarNumero() {
+        NumeroDto numero = geradorClients.geraFuncionario();
+
+        return numero.getNumero();
     }
 
 }
