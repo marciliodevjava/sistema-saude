@@ -30,7 +30,7 @@ public class Endereco implements Serializable {
     private String bairro;
     private String cidade;
     private String uf;
-    private Boolean ative = true;
+    private Boolean ativo = true;
     @ManyToOne(optional = false)
     @JoinColumn(name = "id_funcionarioClt")
     private FuncionarioClt funcionarioClt;
