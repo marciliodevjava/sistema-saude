@@ -60,7 +60,7 @@ public class FuncionarioService implements FuncionarioServiceImp {
         List<Endereco> enderecosCltEscrita = escritaMapper.montarEntradaEndereco(funcionarioDto.getFuncionarioClt().getEndereco());
 
         FuncionarioCnpj funcionarioCnpjEscrita = escritaMapper.mapearEntradaFuncionaCnpj(funcionarioDto.getFuncionarioCnpj());
-        Salario salarioCnpjEscrita = escritaMapper.montarEntradaSalario(funcionarioDto.getFuncionarioClt().getSalario());
+        Salario salarioCnpjEscrita = escritaMapper.montarEntradaSalario(funcionarioDto.getFuncionarioCnpj().getSalario());
         AuxilioAlimentacao auxilioAlimentacaoCnpjEscrita = escritaMapper.montarEntradaAuxilioAlimentacao(funcionarioDto.getFuncionarioCnpj().getSalario().getAuxilioAlimentacao());
         AuxilioTransporte auxilioTransporteCnpjEscrita = escritaMapper.montarEntradaAuxilioTransporte(funcionarioDto.getFuncionarioCnpj().getSalario().getAuxilioTransporte());
         List<Dependente> dependenteCnpjEscrita = escritaMapper.montarEntradaListaDependente(funcionarioDto.getFuncionarioCnpj().getDependentesList());
@@ -75,8 +75,10 @@ public class FuncionarioService implements FuncionarioServiceImp {
         if (Objects.nonNull(funcionarioCltEscrita)) {
             FuncionarioClt funcionarioClt = funcionarioCltRepository.save(funcionarioCltEscrita);
             if (Objects.nonNull(salarioCltEscrita)) salarioCltEscrita.setFuncionarioClt(funcionarioClt);
-            if (Objects.nonNull(dependenteCltEscrita)) dependenteCltEscrita.forEach(adicionaFuncionario -> adicionaFuncionario.setFuncionarioClt(funcionarioClt));
-            if (Objects.nonNull(enderecosCltEscrita)) enderecosCltEscrita.forEach(adicionaEndereco -> adicionaEndereco.setFuncionarioClt(funcionarioClt));
+            if (Objects.nonNull(dependenteCltEscrita))
+                dependenteCltEscrita.forEach(adicionaFuncionario -> adicionaFuncionario.setFuncionarioClt(funcionarioClt));
+            if (Objects.nonNull(enderecosCltEscrita))
+                enderecosCltEscrita.forEach(adicionaEndereco -> adicionaEndereco.setFuncionarioClt(funcionarioClt));
         }
 
         if (Objects.nonNull(salarioCltEscrita)) {
@@ -88,7 +90,8 @@ public class FuncionarioService implements FuncionarioServiceImp {
         if (Objects.nonNull(dependenteCnpjEscrita)) dependenteRepositry.saveAll(dependenteCnpjEscrita);
         if (Objects.nonNull(enderecosCnpjEscrita)) enderecoRepository.saveAll(enderecosCnpjEscrita);
 
-        if (Objects.nonNull(auxilioAlimentacaoCltEscrita)) auxilioAlimentacaoRepository.save(auxilioAlimentacaoCltEscrita);
+        if (Objects.nonNull(auxilioAlimentacaoCltEscrita))
+            auxilioAlimentacaoRepository.save(auxilioAlimentacaoCltEscrita);
         if (Objects.nonNull(auxilioTransporteCltEscrita)) auxilioTransporteRepository.save(auxilioTransporteCltEscrita);
         if (Objects.nonNull(dependenteCltEscrita)) dependenteRepositry.saveAll(dependenteCltEscrita);
         if (Objects.nonNull(enderecosCltEscrita)) enderecoRepository.saveAll(enderecosCltEscrita);
@@ -96,8 +99,10 @@ public class FuncionarioService implements FuncionarioServiceImp {
         if (Objects.nonNull(funcionarioCnpjEscrita)) {
             FuncionarioCnpj funcionarioCnpj = funcionarioCnpjRepository.save(funcionarioCnpjEscrita);
             if (Objects.nonNull(salarioCnpjEscrita)) salarioCnpjEscrita.setFuncionarioCnpj(funcionarioCnpj);
-            if (Objects.nonNull(dependenteCnpjEscrita)) dependenteCnpjEscrita.forEach(adicionaFuncionario -> adicionaFuncionario.setFuncionarioCnpj(funcionarioCnpj));
-            if (Objects.nonNull(enderecosCnpjEscrita)) enderecosCnpjEscrita.forEach(adicionaEndereco -> adicionaEndereco.setFuncionarioCnpj(funcionarioCnpj));
+            if (Objects.nonNull(dependenteCnpjEscrita))
+                dependenteCnpjEscrita.forEach(adicionaFuncionario -> adicionaFuncionario.setFuncionarioCnpj(funcionarioCnpj));
+            if (Objects.nonNull(enderecosCnpjEscrita))
+                enderecosCnpjEscrita.forEach(adicionaEndereco -> adicionaEndereco.setFuncionarioCnpj(funcionarioCnpj));
         }
 
         if (Objects.nonNull(salarioCnpjEscrita)) {
@@ -106,8 +111,10 @@ public class FuncionarioService implements FuncionarioServiceImp {
             if (Objects.nonNull(auxilioTransporteCnpjEscrita)) auxilioTransporteCnpjEscrita.setSalario(salario);
         }
 
-        if (Objects.nonNull(auxilioAlimentacaoCnpjEscrita)) auxilioAlimentacaoRepository.save(auxilioAlimentacaoCnpjEscrita);
-        if (Objects.nonNull(auxilioTransporteCnpjEscrita)) auxilioTransporteRepository.save(auxilioTransporteCnpjEscrita);
+        if (Objects.nonNull(auxilioAlimentacaoCnpjEscrita))
+            auxilioAlimentacaoRepository.save(auxilioAlimentacaoCnpjEscrita);
+        if (Objects.nonNull(auxilioTransporteCnpjEscrita))
+            auxilioTransporteRepository.save(auxilioTransporteCnpjEscrita);
 
         FuncionarioRetornoDto funcionarioRetornoDto = escritaMapper.mapearFuncionarioDto(funcionarioEscrita);
 
