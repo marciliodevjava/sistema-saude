@@ -3,6 +3,7 @@ package br.com.funcionario.domain;
 import br.com.funcionario.domain.enuns.EstadoCivilEnum;
 import br.com.funcionario.domain.enuns.FuncaoFuncionarioEnum;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -37,6 +38,7 @@ public class FuncionarioClt implements Serializable {
     @Column(name = "estado_civil", length = 10)
     @Enumerated(EnumType.STRING)
     private EstadoCivilEnum estadoCivil;
+    @Setter(onMethod = @__({@JsonProperty}))
     @Getter(onMethod = @__({@JsonIgnore}))
     @OneToOne(mappedBy = "funcionarioClt", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     private Salario salario;
@@ -56,12 +58,13 @@ public class FuncionarioClt implements Serializable {
     @Column(name = "hora_final")
     private LocalTime horaFinal;
     private Boolean ativo = true;
+    @Setter(onMethod = @__({@JsonProperty}))
     @Getter(onMethod = @__({@JsonIgnore}))
-    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "funcionarioClt", fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "funcionarioClt", fetch = FetchType.LAZY)
     private List<Dependente> dependentesList = new ArrayList<>();
-
+    @Setter(onMethod = @__({@JsonProperty}))
     @Getter(onMethod = @__({@JsonIgnore}))
-    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "funcionarioClt", fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "funcionarioClt", fetch = FetchType.LAZY)
     private List<Endereco> endereco = new ArrayList<>();
 
     @OneToOne
