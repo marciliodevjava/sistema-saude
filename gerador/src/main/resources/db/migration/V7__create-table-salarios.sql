@@ -5,10 +5,10 @@ CREATE TABLE salarios
     salario              DECIMAL(10, 2) not null,
     valor_alimentacao DECIMAL(10, 2) not null,
     transporte           DECIMAL(10, 2) not null,
-    id_funcionarioClt BIGINT(10),
-    id_funcionarioCnpj BIGINT(10),
+    id_funcionarioClt bigint(10),
+    id_funcionarioCnpj bigint(10),
 
     PRIMARY KEY (id),
-    FOREIGN KEY (id_funcionarioClt) references funcionarios_clt (id),
-    FOREIGN KEY (id_funcionarioCnpj) references funcionarios_cnpj (id)
+    FOREIGN KEY (id_funcionarioClt) references funcionarios_clt(id),
+    FOREIGN KEY (id_funcionarioCnpj) references funcionarios_cnpj(id)
 );
