@@ -37,7 +37,7 @@ public class FuncionarioServiceTest {
     private final String HORARIO_FINAL_FUNCIONARIO = "18:00:00";
     private final String CPF_FUNCIONARIO = "525.759.180-49";
     private final String CNPJ = "44.155.548/0001-86";
-    private final BigDecimal SALARIO_FUNCIONARIO = BigDecimal.valueOf(2800);
+    private final BigDecimal SALARIO_FUNCIONARIO = BigDecimal.valueOf(2800.00);
     private final BigDecimal VALOR_ALIMENTACAO_FUNCIONARIO = BigDecimal.valueOf(573.73);
     private final BigDecimal VALOR_TRANSPORTE_FUNCIONARIO = BigDecimal.valueOf(850.00);
     private final int DIAS_AUXILIO_ALIMENTACAO_FUNCIONARIO = 22;
