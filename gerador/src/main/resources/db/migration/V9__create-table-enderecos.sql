@@ -8,7 +8,7 @@ CREATE TABLE enderecos
     bairro varchar(50)    not null,
     cidade varchar(50)    not null,
     uf varchar(32)    not null,
-    ativa bit(1)    not null,
+    ativo bit(1)    not null,
     id_funcionarioClt BIGINT(10),
     id_funcionarioCnpj BIGINT(10),
 
