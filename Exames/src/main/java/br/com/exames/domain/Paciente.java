@@ -29,8 +29,6 @@ public class Paciente {
     private String cpf;
     @Column(name = "email", length = 150)
     private String email;
-    @Column(name = "crn", length = 15)
-    private String crn;
     @Column(name = "data_nascimento")
     private Date dataNascimento;
     private Byte ativo;
