@@ -1,14 +1,17 @@
 package br.com.exames.mapper;
 
+import br.com.exames.domain.Endereco;
 import br.com.exames.domain.Formulario;
 import br.com.exames.domain.Medico;
 import br.com.exames.domain.Paciente;
+import br.com.exames.dto.request.EnderecoRequestDto;
 import br.com.exames.dto.request.FormularioRequestDto;
 import br.com.exames.dto.request.MedicoRequestDto;
 import br.com.exames.dto.request.PacienteRequestDto;
 import br.com.exames.dto.response.FomularioResponseDto;
 import br.com.exames.utils.FormatadorDate;
 import br.com.exames.utils.FormatadorHora;
+import br.com.exames.utils.FormatarPessoa;
 import br.com.exames.utils.GeradorUuid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -25,6 +28,8 @@ public class MapperEscrita {
     private FormatadorDate formatadorDate;
     @Autowired
     private FormatadorHora formatadorHora;
+    @Autowired
+    private FormatarPessoa form;
     public Formulario mapeiaFormularioEntrada(FormularioRequestDto formularioRequestDto) throws ParseException {
 
         Formulario formulario = new Formulario();
@@ -94,6 +99,28 @@ public class MapperEscrita {
             paciente.setAtivo((byte) 1);
 
             return paciente;
+        }
+
+        return null;
+    }
+
+    public Endereco mapeiaEnderecoEntrada(EnderecoRequestDto enderecoDto) {
+
+        if(Objects.nonNull(enderecoDto)){
+
+            Endereco endereco = new Endereco();
+
+            endereco.setIdEndereco(geradorUuid.getIdentificador());
+            endereco.setCep(endereco.getCep());
+            endereco.setEndereco(enderecoDto.getEndereco());
+            endereco.setNumero(enderecoDto.getNumero());
+            endereco.setBairro(enderecoDto.getBairro());
+            endereco.setCidade(endereco.getCidade());
+            endereco.setUf(endereco.getUf());
+            endereco.setComplemento(enderecoDto.getComplemento());
+            endereco.setAtivo((byte) 1);
+
+            return endereco;
         }
 
         return null;
