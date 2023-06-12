@@ -10,6 +10,7 @@ public class EnderecoRequestDto {
     private String endereco;
     private String numero;
     private String bairro;
+    private String cidade;
     private String uf;
     private String complemento;
     private Byte ativo;
