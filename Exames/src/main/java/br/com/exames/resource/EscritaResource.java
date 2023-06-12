@@ -17,7 +17,7 @@ public class EscritaResource {
     private EscritaService escritaResource;
 
     @PostMapping()
-    public ResponseEntity<FomularioResponseDto> salvaExame(@RequestBody FormularioRequestDto formularioRequestDto) throws ParseException {
+    public ResponseEntity<FomularioResponseDto> salvaFormularioCompleto(@RequestBody FormularioRequestDto formularioRequestDto) throws ParseException {
 
         FomularioResponseDto response = escritaResource.salvaFormulario(formularioRequestDto);
 
