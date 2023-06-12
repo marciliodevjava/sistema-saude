@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "enderecos")
+@Table(name = "enderecos_exames")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -26,6 +26,8 @@ public class Endereco {
     private String numero;
     @Column(name = "bairro", length = 50)
     private String bairro;
+    @Column(name = "cidade", length = 50)
+    private String cidade;
     @Column(name = "uf", length = 50)
     private String uf;
     @Column(name = "complemento", length = 50)
