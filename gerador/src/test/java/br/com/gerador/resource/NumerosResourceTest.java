@@ -9,6 +9,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Pageable;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -28,15 +29,6 @@ public class NumerosResourceTest {
         Numero numero = new Numero(null, 005, LocalDateTime.now(), 2L);
         numero = numeroRepository.save(numero);
         Assertions.assertEquals(005, numero.getNumero());
-    }
-
-    @Test
-    @DisplayName("Teste Buscar todos os registros")
-    void buscarTodosOsRegistros(){
-        List<NumeroDto> numero = numeroService.buscarNumeros();
-        Integer resultado = numero.size();
-
-        Assertions.assertEquals(resultado, numero.size());
     }
 
     @Test
