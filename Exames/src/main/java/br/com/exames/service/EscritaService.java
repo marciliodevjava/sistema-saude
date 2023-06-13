@@ -51,7 +51,7 @@ public class EscritaService {
 
         if (Objects.nonNull(paciente)) {
             paciente = pacienteRepository.save(paciente);
-            if (Objects.nonNull(enderecoPaciente)) enderecoMedico.setPaciente(paciente);
+            if (Objects.nonNull(enderecoPaciente)) enderecoPaciente.setPaciente(paciente);
         }
 
         if (Objects.nonNull(enderecoMedico)) enderecoRepository.save(enderecoMedico);
