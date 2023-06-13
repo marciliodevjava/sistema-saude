@@ -20,6 +20,7 @@ import javax.persistence.Transient;
 import java.text.ParseException;
 import java.util.List;
 import java.util.Objects;
+import java.util.Random;
 
 @Service
 @ComponentScan
@@ -168,6 +169,13 @@ public class FuncionarioService implements FuncionarioServiceImp {
     }
 
     private Integer gerarNumero() {
+        Random random = new Random();
+        NumeroDto numero = new NumeroDto();
+        numero.setNumero(random.nextInt(101));
+
+        return numero.getNumero();
+    }
+    private Integer gerarNumeroIntegracao() {
         NumeroDto numero = geradorClients.geraFuncionario();
 
         return numero.getNumero();
