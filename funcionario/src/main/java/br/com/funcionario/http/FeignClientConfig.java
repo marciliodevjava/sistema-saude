@@ -20,7 +20,7 @@ public class FeignClientConfig {
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
             String token = tokenService.getSubject(authentication.getName());
 
-            requestTemplate.header("Authorization", "Bearer " + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBUEkgR292ZXJuYW5jaWEiLCJzdWIiOiJaYW5hdHRhIiwiZXhwIjoxNjg2MTcxMTE4fQ.VZuIBcDzWLWykEdYSmIVcbWFGWSiOMQpRDmxiZ3gVxE");
+            requestTemplate.header("Authorization", "Bearer " + token);
         };
     }
 
