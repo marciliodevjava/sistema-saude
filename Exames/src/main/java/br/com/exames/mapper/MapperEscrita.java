@@ -9,10 +9,7 @@ import br.com.exames.dto.request.FormularioRequestDto;
 import br.com.exames.dto.request.MedicoRequestDto;
 import br.com.exames.dto.request.PacienteRequestDto;
 import br.com.exames.dto.response.FomularioResponseDto;
-import br.com.exames.utils.FormatadorDate;
-import br.com.exames.utils.FormatadorHora;
-import br.com.exames.utils.FormatarPessoa;
-import br.com.exames.utils.GeradorUuid;
+import br.com.exames.utils.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -28,6 +25,8 @@ public class MapperEscrita {
     private FormatadorDate formatadorDate;
     @Autowired
     private FormatadorHora formatadorHora;
+    @Autowired
+    private FormatadorEndereco formatadorEndereco;
     @Autowired
     private FormatarPessoa form;
     public Formulario mapeiaFormularioEntrada(FormularioRequestDto formularioRequestDto) throws ParseException {
@@ -111,12 +110,12 @@ public class MapperEscrita {
             Endereco endereco = new Endereco();
 
             endereco.setIdEndereco(geradorUuid.getIdentificador());
-            endereco.setCep(endereco.getCep());
+            endereco.setCep(formatadorEndereco.formataCep(enderecoDto.getCep()));
             endereco.setEndereco(enderecoDto.getEndereco());
             endereco.setNumero(enderecoDto.getNumero());
             endereco.setBairro(enderecoDto.getBairro());
-            endereco.setCidade(endereco.getCidade());
-            endereco.setUf(endereco.getUf());
+            endereco.setCidade(enderecoDto.getCidade());
+            endereco.setUf(enderecoDto.getUf());
             endereco.setComplemento(enderecoDto.getComplemento());
             endereco.setAtivo((byte) 1);
 
