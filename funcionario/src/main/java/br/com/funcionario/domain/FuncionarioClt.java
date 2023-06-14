@@ -38,6 +38,7 @@ public class FuncionarioClt implements Serializable {
     @Column(name = "estado_civil", length = 10)
     @Enumerated(EnumType.STRING)
     private EstadoCivilEnum estadoCivil;
+    @Setter(onMethod = @__({@JsonProperty}))
     @Getter(onMethod = @__({@JsonIgnore}))
     @OneToOne(mappedBy = "funcionarioClt", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     private Salario salario;
@@ -57,9 +58,11 @@ public class FuncionarioClt implements Serializable {
     @Column(name = "hora_final")
     private LocalTime horaFinal;
     private Boolean ativo = true;
+    @Setter(onMethod = @__({@JsonProperty}))
     @Getter(onMethod = @__({@JsonIgnore}))
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "funcionarioClt", fetch = FetchType.LAZY)
     private List<Dependente> dependentesList = new ArrayList<>();
+    @Setter(onMethod = @__({@JsonProperty}))
     @Getter(onMethod = @__({@JsonIgnore}))
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "funcionarioClt", fetch = FetchType.LAZY)
     private List<Endereco> endereco = new ArrayList<>();
