@@ -20,7 +20,7 @@ public class Numero {
     private Long id;
     @Column(name = "id_funcionario")
     private Long idFuncionario;
-    @Column(name = "identificador_numero")
+    @Column(name = "identificador_numero", length = 36)
     private String identificadorNumero;
     @Column(name = "matricula")
     private Integer matricula;
