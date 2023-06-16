@@ -14,7 +14,6 @@ import java.util.UUID;
 public class GeradorUUID {
     @Autowired
     private UuidRepository uuidRepository;
-    private LocalTime hora;
 
     public String getIdentificador() {
         UUID identificador = UUID.randomUUID();
@@ -28,9 +27,9 @@ public class GeradorUUID {
         Uuid uuidGravar = new Uuid();
         uuidGravar.setProjeto(Projeto.GERADOR);
         uuidGravar.setData(new Date());
-        uuidGravar.setHora(hora);
+        uuidGravar.setHora(LocalTime.now());
         uuidGravar.setUuidGerado(uuidGerado);
-        uuidRepository.save(uuidGravar);
-        return uuidGerado;
+        String uuidString = String.valueOf(uuidRepository.save(uuidGravar).getUuidGerado());
+        return uuidString;
     }
 }
