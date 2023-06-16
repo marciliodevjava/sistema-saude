@@ -14,6 +14,7 @@ import java.time.LocalDateTime;
 public class NumeroDto {
 
     private Integer numero;
+    private String identificadorNumero;
     private LocalDateTime localDateTime;
     private Long idFuncionario;
 }
