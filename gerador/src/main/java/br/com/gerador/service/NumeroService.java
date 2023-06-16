@@ -3,13 +3,16 @@ package br.com.gerador.service;
 import br.com.gerador.domain.Numero;
 import br.com.gerador.dto.NumeroDto;
 import br.com.gerador.repository.NumeroRepository;
+import br.com.gerador.utils.FormatadorData;
 import br.com.gerador.utils.GeradorUUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -20,6 +23,8 @@ public class NumeroService {
     private NumeroRepository numeroRepository;
     @Autowired
     private GeradorUUID geradorUUID;
+    @Autowired
+    private FormatadorData formatadorData;
 
     public NumeroDto geraNumero(Long id) {
         Numero consulta = numeroRepository.findTopByOrderByIdDesc();
@@ -32,7 +37,7 @@ public class NumeroService {
         return new NumeroDto(inserir.getMatricula(), inserir.getIdentificadorNumero(), inserir.getData(), inserir.getIdFuncionario());
     }
 
-    public NumeroDto geraNumero() {
+    public NumeroDto geraNumero() throws ParseException {
         Numero consulta = numeroRepository.findTopByOrderByIdDesc();
 
         Integer numero = consulta.getMatricula();
@@ -64,7 +69,7 @@ public class NumeroService {
         return numeroInserir;
     }
 
-    private Numero montarDadosSemId(Integer numero) {
+    private Numero montarDadosSemId(Integer numero) throws ParseException {
         Numero numeroInserir = new Numero();
         LocalDateTime dateTime = LocalDateTime.now();
         Integer valor = 1;
@@ -72,7 +77,7 @@ public class NumeroService {
 
         numeroInserir.setIdentificadorNumero(geradorUUID.getIdentificador());
         numeroInserir.setMatricula(soma);
-        numeroInserir.setData(dateTime);
+        numeroInserir.setData(formatadorData.converterStringParaData(new Date()));
         numeroInserir.setAtivo((byte) 1);
 
         return numeroInserir;
