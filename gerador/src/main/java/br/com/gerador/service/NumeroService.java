@@ -29,7 +29,7 @@ public class NumeroService {
 
         this.numeroRepository.save(inserir);
 
-        return new NumeroDto(inserir.getMatricula(), inserir.getData(), inserir.getIdFuncionario());
+        return new NumeroDto(inserir.getMatricula(), inserir.getIdentificadorNumero(), inserir.getData(), inserir.getIdFuncionario());
     }
 
     public NumeroDto geraNumero() {
@@ -40,12 +40,12 @@ public class NumeroService {
 
         numeroRepository.save(inserir);
 
-        return new NumeroDto(inserir.getMatricula(), inserir.getData(), inserir.getIdFuncionario());
+        return new NumeroDto(inserir.getMatricula(), inserir.getIdentificadorNumero(), inserir.getData(), inserir.getIdFuncionario());
     }
 
     public Page<NumeroDto> buscarNumeros(Pageable pageable) {
         Page<Numero> resultado = numeroRepository.findAll(pageable);
-        Page<NumeroDto> retorno = resultado.map(e -> new NumeroDto(e.getMatricula(), e.getData(), e.getIdFuncionario()));
+        Page<NumeroDto> retorno = resultado.map(e -> new NumeroDto(e.getMatricula(), e.getIdentificadorNumero(), e.getData(), e.getIdFuncionario()));
         return retorno;
     }
 
@@ -59,6 +59,7 @@ public class NumeroService {
         numeroInserir.setMatricula(soma);
         numeroInserir.setData(dateTime);
         numeroInserir.setIdFuncionario(id);
+        numeroInserir.setAtivo((byte) 1);
 
         return numeroInserir;
     }
@@ -72,6 +73,7 @@ public class NumeroService {
         numeroInserir.setIdentificadorNumero(geradorUUID.getIdentificador());
         numeroInserir.setMatricula(soma);
         numeroInserir.setData(dateTime);
+        numeroInserir.setAtivo((byte) 1);
 
         return numeroInserir;
     }
