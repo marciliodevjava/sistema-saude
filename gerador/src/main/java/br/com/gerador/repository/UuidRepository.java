@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface UuidRepository extends JpaRepository<Uuid, Long> {
+    Uuid findByuuidGerado(String uuidGerado);
 }
