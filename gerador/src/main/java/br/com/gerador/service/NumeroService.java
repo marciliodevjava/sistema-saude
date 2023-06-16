@@ -38,7 +38,7 @@ public class NumeroService {
         Integer numero = consulta.getMatricula();
         Numero inserir = this.montarDadosSemId(numero);
 
-        this.numeroRepository.save(inserir);
+        numeroRepository.save(inserir);
 
         return new NumeroDto(inserir.getMatricula(), inserir.getData(), inserir.getIdFuncionario());
     }
