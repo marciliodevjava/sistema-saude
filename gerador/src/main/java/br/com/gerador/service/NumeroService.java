@@ -55,7 +55,7 @@ public class NumeroService {
         Integer valor = 1;
         Integer soma = numero + valor;
 
-        numeroInserir.setIdentificadorNumero(String.valueOf(geradorUUID.getIdentificador()));
+        numeroInserir.setIdentificadorNumero(geradorUUID.getIdentificador());
         numeroInserir.setMatricula(soma);
         numeroInserir.setData(dateTime);
         numeroInserir.setIdFuncionario(id);
