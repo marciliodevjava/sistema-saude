@@ -18,8 +18,12 @@ public class Numero {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Integer numero;
-    private LocalDateTime data;
     @Column(name = "id_funcionario")
     private Long idFuncionario;
+    @Column(name = "identificador_numero")
+    private String identificadorNumero;
+    @Column(name = "matricula")
+    private Integer matricula;
+    @Column(name = "data")
+    private LocalDateTime data;
 }
