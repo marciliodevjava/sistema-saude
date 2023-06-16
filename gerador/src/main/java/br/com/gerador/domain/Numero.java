@@ -26,4 +26,5 @@ public class Numero {
     private Integer matricula;
     @Column(name = "data")
     private LocalDateTime data;
+    private Byte ativo;
 }
