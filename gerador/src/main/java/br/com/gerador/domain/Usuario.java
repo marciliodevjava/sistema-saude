@@ -9,7 +9,9 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.time.LocalTime;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 
@@ -25,6 +27,8 @@ public class Usuario implements UserDetails {
     private Long id;
     private String login;
     private String senha;
+    private Date data;
+    private LocalTime hora;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
