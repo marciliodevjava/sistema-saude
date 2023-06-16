@@ -3,47 +3,49 @@ package br.com.gerador.service;
 import br.com.gerador.domain.Numero;
 import br.com.gerador.dto.NumeroDto;
 import br.com.gerador.repository.NumeroRepository;
+import br.com.gerador.utils.GeradorUUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
+import java.util.UUID;
 
 @Service
 public class NumeroService {
 
     @Autowired
     private NumeroRepository numeroRepository;
+    @Autowired
+    private GeradorUUID geradorUUID;
 
     public NumeroDto geraNumero(Long id) {
         Numero consulta = numeroRepository.findTopByOrderByIdDesc();
 
-        Integer numero = consulta.getNumero();
+        Integer numero = consulta.getMatricula();
         Numero inserir = this.montarDados(numero, id);
 
         this.numeroRepository.save(inserir);
 
-        return new NumeroDto(inserir.getNumero(), inserir.getData(), inserir.getIdFuncionario());
+        return new NumeroDto(inserir.getMatricula(), inserir.getData(), inserir.getIdFuncionario());
     }
 
     public NumeroDto geraNumero() {
         Numero consulta = numeroRepository.findTopByOrderByIdDesc();
 
-        Integer numero = consulta.getNumero();
+        Integer numero = consulta.getMatricula();
         Numero inserir = this.montarDadosSemId(numero);
 
         this.numeroRepository.save(inserir);
 
-        return new NumeroDto(inserir.getNumero(), inserir.getData(), inserir.getIdFuncionario());
+        return new NumeroDto(inserir.getMatricula(), inserir.getData(), inserir.getIdFuncionario());
     }
 
     public Page<NumeroDto> buscarNumeros(Pageable pageable) {
         Page<Numero> resultado = numeroRepository.findAll(pageable);
-        Page<NumeroDto> retorno = resultado.map(e -> new NumeroDto(e.getNumero(), e.getData(), e.getIdFuncionario()));
+        Page<NumeroDto> retorno = resultado.map(e -> new NumeroDto(e.getMatricula(), e.getData(), e.getIdFuncionario()));
         return retorno;
     }
 
@@ -53,7 +55,8 @@ public class NumeroService {
         Integer valor = 1;
         Integer soma = numero + valor;
 
-        numeroInserir.setNumero(soma);
+        numeroInserir.setIdentificadorNumero(String.valueOf(geradorUUID.getIdentificador()));
+        numeroInserir.setMatricula(soma);
         numeroInserir.setData(dateTime);
         numeroInserir.setIdFuncionario(id);
 
@@ -66,7 +69,7 @@ public class NumeroService {
         Integer valor = 1;
         Integer soma = numero + valor;
 
-        numeroInserir.setNumero(soma);
+        numeroInserir.setMatricula(soma);
         numeroInserir.setData(dateTime);
 
         return numeroInserir;
@@ -82,7 +85,7 @@ public class NumeroService {
 
     private NumeroDto montarDadosRetorno(Optional<Numero> numero) {
         NumeroDto numeroDto = new NumeroDto();
-        numeroDto.setNumero(numero.get().getNumero());
+        numeroDto.setNumero(numero.get().getMatricula());
         numeroDto.setIdFuncionario(numeroDto.getIdFuncionario());
         numeroDto.setLocalDateTime(numero.get().getData());
         return numeroDto;
