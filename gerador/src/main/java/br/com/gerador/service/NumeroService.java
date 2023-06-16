@@ -69,6 +69,7 @@ public class NumeroService {
         Integer valor = 1;
         Integer soma = numero + valor;
 
+        numeroInserir.setIdentificadorNumero(geradorUUID.getIdentificador());
         numeroInserir.setMatricula(soma);
         numeroInserir.setData(dateTime);
 
