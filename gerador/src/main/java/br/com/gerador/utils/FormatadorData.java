@@ -11,8 +11,9 @@ import java.util.Date;
 public class FormatadorData {
     private final String FORMATAR_DATA = "yyyy/mm/dd";
     public Date converterStringParaData(Date dataNascimento) throws ParseException {
+        SimpleDateFormat formatoSimpleDateFormat = new SimpleDateFormat(FORMATAR_DATA);
+        String dataModificada = formatoSimpleDateFormat.format(dataNascimento);
         DateFormat formato = new SimpleDateFormat(FORMATAR_DATA);
-        Date data = formato.parse(String.valueOf(dataNascimento));
-        return data;
+        return formato.parse(dataModificada);
     }
 }
