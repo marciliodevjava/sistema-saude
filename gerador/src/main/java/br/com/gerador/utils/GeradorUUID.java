@@ -16,20 +16,21 @@ public class GeradorUUID {
     private UuidRepository uuidRepository;
 
     public String getIdentificador() {
-        UUID identificador = UUID.randomUUID();
+        UUID identificador;
         Uuid uuid;
         String uuidGerado;
         do {
+            identificador = UUID.randomUUID();
             uuidGerado = String.valueOf(identificador);
             uuid = uuidRepository.findByuuidGerado(uuidGerado);
         } while (uuid != null);
 
-        Uuid uuidGravar = new Uuid();
-        uuidGravar.setProjeto(Projeto.GERADOR);
-        uuidGravar.setData(new Date());
-        uuidGravar.setHora(LocalTime.now());
-        uuidGravar.setUuidGerado(uuidGerado);
-        String uuidString = String.valueOf(uuidRepository.save(uuidGravar).getUuidGerado());
-        return uuidString;
+        Uuid gravar = new Uuid();
+        gravar.setProjeto(Projeto.GERADOR);
+        gravar.setData(new Date());
+        gravar.setHora(LocalTime.now());
+        gravar.setUuidGerado(uuidGerado);
+        uuidRepository.save(gravar);
+        return uuidGerado;
     }
 }
