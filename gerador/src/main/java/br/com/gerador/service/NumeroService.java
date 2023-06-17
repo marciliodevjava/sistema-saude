@@ -26,7 +26,7 @@ public class NumeroService {
     @Autowired
     private FormatadorData formatadorData;
 
-    public NumeroDto geraNumero(Long id) {
+    public NumeroDto geraNumero(Long id) throws ParseException {
         Numero consulta = numeroRepository.findTopByOrderByIdDesc();
 
         Integer numero = consulta.getMatricula();
@@ -54,7 +54,7 @@ public class NumeroService {
         return retorno;
     }
 
-    private Numero montarDados(Integer numero, Long id) {
+    private Numero montarDados(Integer numero, Long id) throws ParseException {
         Numero numeroInserir = new Numero();
         LocalDateTime dateTime = LocalDateTime.now();
         Integer valor = 1;
@@ -62,7 +62,7 @@ public class NumeroService {
 
         numeroInserir.setIdentificadorNumero(geradorUUID.getIdentificador());
         numeroInserir.setMatricula(soma);
-        numeroInserir.setData(dateTime);
+        numeroInserir.setData(formatadorData.converterStringParaData(new Date()));
         numeroInserir.setIdFuncionario(id);
         numeroInserir.setAtivo((byte) 1);
 
@@ -95,7 +95,7 @@ public class NumeroService {
         NumeroDto numeroDto = new NumeroDto();
         numeroDto.setNumero(numero.get().getMatricula());
         numeroDto.setIdFuncionario(numeroDto.getIdFuncionario());
-        numeroDto.setLocalDateTime(numero.get().getData());
+        numeroDto.setData(numero.get().getData());
         return numeroDto;
     }
 }
