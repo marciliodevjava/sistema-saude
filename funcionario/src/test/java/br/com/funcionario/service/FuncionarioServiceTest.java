@@ -61,7 +61,7 @@ public class FuncionarioServiceTest {
 
         FuncionarioRetornoDto funcionarioRetornoDto = funcionarioService.salvarFuncionario(funcionario);
 
-        Assertions.assertEquals("ATIVO", funcionarioRetornoDto.getEstadoFuncionarioEnum());
+        Assertions.assertEquals("ATIVO", funcionarioRetornoDto.getEstadoFuncionarioEnum().toString());
     }
 
     @Test
