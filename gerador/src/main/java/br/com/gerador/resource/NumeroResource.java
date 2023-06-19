@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
+import java.text.ParseException;
 
 @RestController
 @RequestMapping("/gerador-numero")
@@ -32,7 +33,7 @@ public class NumeroResource {
     }
 
     @GetMapping("/gerar/{id}")
-    public ResponseEntity<NumeroDto> gerarNumero(@PathVariable Long id, UriComponentsBuilder uriBuild) {
+    public ResponseEntity<NumeroDto> gerarNumero(@PathVariable Long id, UriComponentsBuilder uriBuild) throws ParseException {
         NumeroDto numeroRetorno = numeroService.geraNumero(id);
         this.uri = uriBuild.path("/gerador-numero/{id}").buildAndExpand(numeroRetorno.getNumero()).toUri();
 
@@ -40,7 +41,7 @@ public class NumeroResource {
     }
 
     @GetMapping("/gerar-sem-id")
-    public ResponseEntity<NumeroDto> gerarNumero() {
+    public ResponseEntity<NumeroDto> gerarNumero() throws ParseException {
         NumeroDto numeroRetorno = numeroService.geraNumero();
 
         return ResponseEntity.ok(numeroRetorno);
