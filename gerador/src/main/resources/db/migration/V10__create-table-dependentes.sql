@@ -7,10 +7,10 @@ CREATE TABLE depedentes
     rg varchar(10)    not null,
     data_nascimento DATE    not null,
     grau_parentesco varchar(10)    not null,
-    id_funcionarioClt BIGINT(10),
-    id_funcionarioCnpj BIGINT(10),
+    id_funcionario_clt BIGINT(10),
+    id_funcionario_cnpj BIGINT(10),
 
     PRIMARY KEY (id),
-    FOREIGN KEY (id_funcionarioClt) references funcionarios_clt(id),
-    FOREIGN KEY (id_funcionarioCnpj) references funcionarios_cnpj(id)
+    FOREIGN KEY (id_funcionario_clt) references funcionarios_clt(id),
+    FOREIGN KEY (id_funcionario_cnpj) references funcionarios_cnpj(id)
 );
