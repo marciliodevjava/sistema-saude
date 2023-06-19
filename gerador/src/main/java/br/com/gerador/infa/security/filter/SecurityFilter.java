@@ -1,11 +1,13 @@
 package br.com.gerador.infa.security.filter;
 
+import br.com.gerador.infa.exception.enuns.MessagemEnum;
 import br.com.gerador.infa.security.TokenService;
 import br.com.gerador.repository.UsuarioRepository;
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -44,6 +46,6 @@ public class SecurityFilter extends OncePerRequestFilter {
         if(authorizationHeader != null){
             return authorizationHeader.replace("Bearer ", "");
         }
-        return null;
+        throw new BadCredentialsException("Acesso negado.");
     }
 }
