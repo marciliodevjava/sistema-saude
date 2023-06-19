@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @Entity
 @Table(name = "numeros")
@@ -25,6 +26,9 @@ public class Numero {
     @Column(name = "matricula")
     private Integer matricula;
     @Column(name = "data")
-    private LocalDateTime data;
+    private Date data;
     private Byte ativo;
+
+    public Numero(Object o, String ejflkewjfewifjeiojfiojfio, int i, Date date, long l) {
+    }
 }
