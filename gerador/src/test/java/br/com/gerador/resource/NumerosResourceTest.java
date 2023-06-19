@@ -11,7 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Pageable;
 
+import java.text.ParseException;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 @SpringBootTest
@@ -26,15 +28,15 @@ public class NumerosResourceTest {
     @Test
     @DisplayName("Teste Gerador o Funcionario")
     void geradorPrimeiroFuncionario(){
-        Numero numero = new Numero(null, 005, LocalDateTime.now(), 2L);
+        Numero numero = new Numero(null, "ejflkewjfewifjeiojfiojfio", 005, new Date(), 2L);
         numero = numeroRepository.save(numero);
-        Assertions.assertEquals(005, numero.getNumero());
+        Assertions.assertEquals("ejflkewjfewifjeiojfiojfio", numero.getIdentificadorNumero());
     }
 
     @Test
     @DisplayName("Teste Gerador numero Funcionario")
-    void geradorNumeroFuncionario(){
+    void geradorNumeroFuncionario() throws ParseException {
         NumeroDto resposta = numeroService.geraNumero(6L);
-        Assertions.assertEquals(6, resposta.getNumero());
+        Assertions.assertEquals(6L, resposta.getIdFuncionario());
     }
 }
