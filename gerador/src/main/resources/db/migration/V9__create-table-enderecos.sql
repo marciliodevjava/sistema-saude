@@ -9,10 +9,10 @@ CREATE TABLE enderecos
     cidade varchar(50)    not null,
     uf varchar(32)    not null,
     ativo bit(1)    not null,
-    id_funcionarioClt BIGINT(10),
-    id_funcionarioCnpj BIGINT(10),
+    id_funcionario_clt BIGINT(10),
+    id_funcionario_cnpj BIGINT(10),
 
     PRIMARY KEY (id),
-    FOREIGN KEY (id_funcionarioClt) references funcionarios_clt(id),
-    FOREIGN KEY (id_funcionarioCnpj) references funcionarios_cnpj(id)
+    FOREIGN KEY (id_funcionario_clt) references funcionarios_clt(id),
+    FOREIGN KEY (id_funcionario_cnpj) references funcionarios_cnpj(id)
 );
