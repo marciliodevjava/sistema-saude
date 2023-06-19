@@ -42,11 +42,12 @@ public class Salario implements Serializable {
     @OneToOne(cascade = CascadeType.PERSIST, mappedBy = "salario", fetch = FetchType.LAZY)
     private AuxilioTransporte auxilioTransporte;
     @OneToOne
-    @JoinColumn(name = "id_funcionarioClt")
-    private FuncionarioClt funcionarioClt;
-    @OneToOne
     @JoinColumn(name = "id_funcionarioCnpj")
     private FuncionarioCnpj funcionarioCnpj;
+    @OneToOne
+    @JoinColumn(name = "id_funcionarioClt")
+    private FuncionarioClt funcionarioClt;
+
 
     @Override
     public int hashCode() {
