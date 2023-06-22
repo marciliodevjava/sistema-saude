@@ -7,9 +7,7 @@ import br.com.funcionario.utils.ConverteDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class LeituraService {
@@ -83,6 +81,18 @@ public class LeituraService {
     }
 
     private AuxilioAlimentacao mapearAuxilioAlimentacao(Optional<AuxilioAlimentacao> auxilioAlimentacaoClt) {
+
+        AuxilioAlimentacao auxilioAlimentacao = new AuxilioAlimentacao();
+
+        if (Objects.nonNull( auxilioAlimentacao)){
+
+            auxilioAlimentacao.setId(auxilioAlimentacaoClt.get().getId());
+            auxilioAlimentacao.setIdentificadorAuxilioAlimentacao(auxilioAlimentacaoClt.get().getIdentificadorAuxilioAlimentacao());
+
+            return  auxilioAlimentacao;
+        }
+
+        return null;
     }
 
     private FuncionarioCnpjRetornoDto mapearFuncionarioCnpj(Optional<FuncionarioCnpj> funcionarioCnpj) {
@@ -102,31 +112,131 @@ public class LeituraService {
             funcionarioCltRetornoDto.setIdentificadorFuncionarioClt(funcionarioClt.get().getIdentificadorFuncionarioClt());
             funcionarioCltRetornoDto.setFuncaoFuncionarioEnum(funcionarioClt.get().getFuncaoFuncionarioEnum());
             funcionarioCltRetornoDto.setEstadoCivil(funcionarioClt.get().getEstadoCivil());
+            funcionarioCltRetornoDto.setSalario(this.montarSalario(funcionarioClt.get().getSalario()));
             funcionarioCltRetornoDto.setNome(funcionarioClt.get().getNome());
             funcionarioCltRetornoDto.setDataNascimento(converteDate.converterDateParaString(funcionarioClt.get().getDataNascimento()));
             funcionarioCltRetornoDto.setCpf(funcionarioClt.get().getCpf());
             funcionarioCltRetornoDto.setRg(funcionarioClt.get().getRg());
             funcionarioCltRetornoDto.setDdd(funcionarioClt.get().getDdd());
             funcionarioCltRetornoDto.setTelefone(funcionarioClt.get().getTelefone());
+            funcionarioCltRetornoDto.setEmail(funcionarioClt.get().getEmail());
+            funcionarioCltRetornoDto.setDataAdmissao(funcionarioClt.get().getDataAdmissao());
+            funcionarioCltRetornoDto.setHoraInicial(funcionarioClt.get().getHoraInicial());
+            funcionarioCltRetornoDto.setHoraFinal(funcionarioClt.get().getHoraFinal());
+            funcionarioCltRetornoDto.setAtivo(funcionarioClt.get().getAtivo());
             funcionarioCltRetornoDto.setEndereco(this.mapearEnderecoClt(funcionarioClt.get().getEndereco()));
             funcionarioCltRetornoDto.setDependentesList(this.mapearDependenteClt(funcionarioClt.get().getDependentesList()));
 
+            return funcionarioCltRetornoDto;
         }
 
-        return funcionarioCltRetornoDto;
+        return null;
+    }
+
+    private SalarioRetornoDto montarSalario(Salario salario) {
+
+        SalarioRetornoDto salarioRetornoDto = new SalarioRetornoDto();
+
+        if (Objects.nonNull(salario)) {
+
+            salarioRetornoDto.setIdentificadorSalario(salario.getIdentificadorSalario());
+            salarioRetornoDto.setSalario(salario.getSalario());
+            salarioRetornoDto.setValorAlimentacao(salario.getValorAlimentacao());
+            salarioRetornoDto.setTransporte(salario.getTransporte());
+            salarioRetornoDto.setAuxilioAlimentacao(this.mapearAuxilioAlimentacaoDto(salario.getAuxilioAlimentacao()));
+            salarioRetornoDto.setAuxilioTransporte(this.mapeiaAuxilioTransporteDto(salario.getAuxilioTransporte()));
+        }
+
+        return null;
+    }
+
+    private AuxilioTransporteRetornoDto mapeiaAuxilioTransporteDto(AuxilioTransporte auxilioTransporte) {
+
+        AuxilioTransporteRetornoDto auxilioTransporteRetornoDto = new AuxilioTransporteRetornoDto();
+
+        if (Objects.nonNull(auxilioTransporte)){
+
+            auxilioTransporteRetornoDto.setIdentificadorAuxilioTransporte(auxilioTransporte.getIdentificadorAuxilioTransporte());
+            auxilioTransporteRetornoDto.setDias(auxilioTransporte.getDias());
+            auxilioTransporte.setValorPassagem(auxilioTransporte.getValorPassagem());
+
+            return auxilioTransporteRetornoDto;
+        }
+
+        return null;
+    }
+
+    private AuxilioAlimentacaoRetornoDto mapearAuxilioAlimentacaoDto(AuxilioAlimentacao auxilioAlimentacao) {
+
+        AuxilioAlimentacaoRetornoDto auxilioAlimentacaoRetornoDto = new AuxilioAlimentacaoRetornoDto();
+
+        if (Objects.nonNull(auxilioAlimentacao)) {
+
+            auxilioAlimentacaoRetornoDto.setIdentificadorAuxilioTransporte(auxilioAlimentacao.getIdentificadorAuxilioAlimentacao());
+            auxilioAlimentacaoRetornoDto.setDias(auxilioAlimentacao.getDias());
+            auxilioAlimentacaoRetornoDto.setValor(auxilioAlimentacao.getValor());
+
+            return auxilioAlimentacaoRetornoDto;
+        }
+
+        return null;
     }
 
     private List<DependenteRetornoDto> mapearDependenteClt(List<Dependente> dependentesList) {
+
+        List<DependenteRetornoDto> dependenteRetorno = new ArrayList<>();
+
+        if (Objects.nonNull(dependentesList)) {
+            dependentesList.forEach(e -> {
+
+                DependenteRetornoDto dependenteRetornoDto = new DependenteRetornoDto();
+
+                dependenteRetornoDto.setIdentificadorEndereco(e.getIdentificadorDependente());
+                dependenteRetornoDto.setNome(e.getNome());
+                dependenteRetornoDto.setCpf(e.getCpf());
+                dependenteRetornoDto.setRg(e.getRg());
+                dependenteRetornoDto.setDataNascimento(e.getDataNascimento());
+                dependenteRetornoDto.setGrauParentescoEnum(e.getGrauParentescoEnum());
+
+                dependenteRetorno.add(dependenteRetornoDto);
+            });
+
+            return dependenteRetorno;
+        }
+
+        return Collections.emptyList();
     }
 
     private List<EnderecoRetornoDto> mapearEnderecoClt(List<Endereco> endereco) {
+
+        List<EnderecoRetornoDto> enderecoRetorno = new ArrayList<>();
+
+        if (Objects.nonNull(endereco)) {
+            endereco.forEach(e -> {
+
+                EnderecoRetornoDto enderecoRetornoDto = new EnderecoRetornoDto();
+
+                enderecoRetornoDto.setIdentificadorEndereco(e.getIdentificadorEndereco());
+                enderecoRetornoDto.setCep(e.getCep());
+                enderecoRetornoDto.setLogradouro(e.getLogradouro());
+                enderecoRetornoDto.setNumero(e.getNumero());
+                enderecoRetornoDto.setBairro(e.getBairro());
+                enderecoRetornoDto.setCidade(e.getCidade());
+                enderecoRetornoDto.setUf(e.getUf());
+
+                enderecoRetorno.add(enderecoRetornoDto);
+            });
+
+            return enderecoRetorno;
+        }
+
+        return Collections.emptyList();
     }
 
     private FuncionarioCompleRetornoDto mapearFuncionario(Optional<Funcionario> funcionario) {
         FuncionarioCompleRetornoDto funcionarioCompleRetornoDto = new FuncionarioCompleRetornoDto();
         if (Objects.nonNull(funcionario)) {
 
-            funcionarioCompleRetornoDto.setId(funcionario.get().getId());
             funcionarioCompleRetornoDto.setIdentificadorFunciona(funcionario.get().getIdentificadorFuncionario());
             funcionarioCompleRetornoDto.setMatricula(funcionario.get().getNumeroFuncionario());
         }
