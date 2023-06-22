@@ -78,6 +78,20 @@ public class LeituraService {
     }
 
     private AuxilioTransporte mapeiaAuxilioTransporte(Optional<AuxilioTransporte> auxilioTransporteClt) {
+
+        AuxilioTransporte auxilioTransporte = new AuxilioTransporte();
+
+        if(Objects.nonNull(auxilioTransporteClt)){
+
+            auxilioTransporte.setId(auxilioTransporteClt.get().getId());
+            auxilioTransporte.setIdentificadorAuxilioTransporte(auxilioTransporteClt.get().getIdentificadorAuxilioTransporte());
+            auxilioTransporte.setDias(auxilioTransporteClt.get().getDias());
+            auxilioTransporte.setValorPassagem(auxilioTransporteClt.get().getValorPassagem());
+
+            return auxilioTransporte;
+        }
+
+        return null;
     }
 
     private AuxilioAlimentacao mapearAuxilioAlimentacao(Optional<AuxilioAlimentacao> auxilioAlimentacaoClt) {
@@ -88,6 +102,8 @@ public class LeituraService {
 
             auxilioAlimentacao.setId(auxilioAlimentacaoClt.get().getId());
             auxilioAlimentacao.setIdentificadorAuxilioAlimentacao(auxilioAlimentacaoClt.get().getIdentificadorAuxilioAlimentacao());
+            auxilioAlimentacao.setDias(auxilioAlimentacaoClt.get().getDias());
+            auxilioAlimentacao.setValor(auxilioAlimentacaoClt.get().getValor());
 
             return  auxilioAlimentacao;
         }
