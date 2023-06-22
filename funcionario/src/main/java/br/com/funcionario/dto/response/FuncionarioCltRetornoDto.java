@@ -13,6 +13,7 @@ import java.util.List;
 @Getter
 @Setter
 public class FuncionarioCltRetornoDto {
+    private Long id;
     private String identificadorFuncionarioClt;
     private FuncaoFuncionarioEnum funcaoFuncionarioEnum;
     private EstadoCivilEnum estadoCivil;
