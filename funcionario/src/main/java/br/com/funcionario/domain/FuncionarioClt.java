@@ -16,7 +16,7 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.UUID;
+import java.util.Optional;
 
 @Entity
 @Table(name = "funcionarios_clt")
@@ -80,4 +80,5 @@ public class FuncionarioClt implements Serializable {
     public boolean equals(Object obj) {
         return super.equals(obj);
     }
+
 }
