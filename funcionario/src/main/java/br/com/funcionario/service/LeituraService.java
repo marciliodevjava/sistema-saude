@@ -53,10 +53,15 @@ public class LeituraService {
 
         if (Objects.nonNull(funcionarioCnpj)) {
             List<Endereco> enderecosCnpj = enderecoRepository.findByFuncionarioCnpj((Long) funcionarioClt.get().getId());
+            funcionarioCnpj.get().setEndereco(enderecosCnpj);
             List<Dependente> dependentesCnpj = dependenteRepositry.findByFuncinarioCnpj((Long) funcionarioClt.get().getId());
+            funcionarioCnpj.get().setDependentesList(dependentesCnpj);
             Optional<Salario> salarioCnpj = salarioRepository.findByFuncionarioCnpj((Long) funcionarioCnpj.get().getId());
             Optional<AuxilioAlimentacao> auxilioAlimentacaoCnpj = auxilioAlimentacaoRepository.findBySalario((Long) salarioCnpj.get().getId());
+            salarioCnpj.get().setAuxilioAlimentacao(this.mapearAuxilioAlimentacao(auxilioAlimentacaoCnpj));
             Optional<AuxilioTransporte> auxilioTransporteCnpj = auxilioTransporteRepository.findBySalario((Long) salarioCnpj.get().getId());
+            salarioCnpj.get().setAuxilioTransporte(this.mapeiaAuxilioTransporte(auxilioTransporteCnpj));
+            funcionarioCnpj.get().setSalario(salarioCnpj.get());
         }
 
 
@@ -115,7 +120,14 @@ public class LeituraService {
 
         FuncionarioCnpjRetornoDto funcionarioCnpjRetornoDto = new FuncionarioCnpjRetornoDto();
 
-        return funcionarioCnpjRetornoDto;
+        if(Objects.nonNull(funcionarioCnpj)){
+
+            funcionarioCnpjRetornoDto.setIdentificadorFuncionarioCnpj(funcionarioCnpj.get().getIdentificadorFuncionarioCnpj());
+
+            return funcionarioCnpjRetornoDto;
+        }
+
+        return null;
     }
 
     private FuncionarioCltRetornoDto mapearFuncionarioClt(Optional<FuncionarioClt> funcionarioClt) {
