@@ -123,6 +123,11 @@ public class LeituraService {
         if(Objects.nonNull(funcionarioCnpj)){
 
             funcionarioCnpjRetornoDto.setIdentificadorFuncionarioCnpj(funcionarioCnpj.get().getIdentificadorFuncionarioCnpj());
+            funcionarioCnpjRetornoDto.setFuncaoFuncionarioEnum(funcionarioCnpj.get().getFuncaoFuncionarioEnum());
+            funcionarioCnpjRetornoDto.setEstadoCivil(funcionarioCnpj.get().getEstadoCivil());
+            funcionarioCnpjRetornoDto.setSalario(this.montarSalario(funcionarioCnpj.get().getSalario()));
+            funcionarioCnpjRetornoDto.setNome(funcionarioCnpj.get().getNome());
+
 
             return funcionarioCnpjRetornoDto;
         }
@@ -136,7 +141,6 @@ public class LeituraService {
 
         if (Objects.nonNull(funcionarioClt)) {
 
-            funcionarioCltRetornoDto.setId(funcionarioClt.get().getId());
             funcionarioCltRetornoDto.setIdentificadorFuncionarioClt(funcionarioClt.get().getIdentificadorFuncionarioClt());
             funcionarioCltRetornoDto.setFuncaoFuncionarioEnum(funcionarioClt.get().getFuncaoFuncionarioEnum());
             funcionarioCltRetornoDto.setEstadoCivil(funcionarioClt.get().getEstadoCivil());
