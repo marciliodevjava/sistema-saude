@@ -63,14 +63,14 @@ public class LeituraService {
         funcionarioCompleRetornoDto = this.mapearFuncionario(funcionario);
 
         if (Objects.nonNull(funcionarioClt)) {
-            FuncionarioCltRetornoDto funcionarioCltRetornoDto = new FuncionarioCltRetornoDto();
+            FuncionarioCltRetornoDto funcionarioCltRetornoDto;
             funcionarioCltRetornoDto = this.mapearFuncionarioClt(funcionarioClt);
             funcionarioCompleRetornoDto.setFuncionarioClt(funcionarioCltRetornoDto);
         }
 
         if (Objects.nonNull(funcionarioCnpj)) {
-            FuncionarioCnpjRetornoDto funcionarioCnpjRetornoDto = new FuncionarioCnpjRetornoDto();
-            funcionarioCompleRetornoDto.setFuncionarioCnpj(this.mapearFuncionarioCnpj(funcionarioCnpj));
+            FuncionarioCnpjRetornoDto funcionarioCnpjRetornoDto;
+            funcionarioCnpjRetornoDto = this.mapearFuncionarioCnpj(funcionarioCnpj);
             funcionarioCompleRetornoDto.setFuncionarioCnpj(funcionarioCnpjRetornoDto);
         }
 
