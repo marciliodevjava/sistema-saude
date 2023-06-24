@@ -22,7 +22,7 @@ public class FuncionarioResource implements FuncionarioImp {
     private FuncionarioService funcionarioService;
 
     @PostMapping("/salvar")
-    public ResponseEntity<FuncionarioRetornoDto> salvarSomenteFuncionario(FuncionarioDto funcionarioDto, UriComponentsBuilder uriBuilder){
+    public ResponseEntity<FuncionarioRetornoDto> salvarSomenteFuncionario(FuncionarioDto funcionarioDto, UriComponentsBuilder uriBuilder) {
         FuncionarioRetornoDto funcionario = funcionarioService.salvarSomenteFuncionario(funcionarioDto);
         this.uri = uriBuilder.path("/{id}").buildAndExpand(funcionario.getIdentificadorFuncionario()).toUri();
         return ResponseEntity.created(uri).body(funcionario);
