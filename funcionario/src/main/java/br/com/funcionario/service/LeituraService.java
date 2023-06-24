@@ -39,9 +39,9 @@ public class LeituraService {
         Optional<FuncionarioCnpj> funcionarioCnpj = funcionarioCnpjRepository.findByFuncionario((Long) funcionario.get().getId());
 
         if (Objects.nonNull(funcionarioClt)) {
-            List<Endereco> enderecosClt = enderecoRepository.findByFuncionarioClt((Long) funcionarioClt.get().getId());
+            List<Endereco> enderecosClt = enderecoRepository.findByFuncionarioClt(funcionarioClt.get().getId());
             funcionarioClt.get().setEndereco(enderecosClt);
-            List<Dependente> dependentesClt = dependenteRepositry.findByFuncinarioClt((Long) funcionarioClt.get().getId());
+            List<Dependente> dependentesClt = dependenteRepositry.findByFuncionarioClt(funcionarioClt.get().getId());
             funcionarioClt.get().setDependentesList(dependentesClt);
             Optional<Salario> salarioClt = salarioRepository.findByFuncionarioClt((Long) funcionarioClt.get().getId());
             Optional<AuxilioAlimentacao> auxilioAlimentacaoClt = auxilioAlimentacaoRepository.findBySalario((Long) salarioClt.get().getId());
@@ -52,9 +52,9 @@ public class LeituraService {
         }
 
         if (Objects.nonNull(funcionarioCnpj)) {
-            List<Endereco> enderecosCnpj = enderecoRepository.findByFuncionarioCnpj((Long) funcionarioClt.get().getId());
+            List<Endereco> enderecosCnpj = enderecoRepository.findByFuncionarioCnpj(funcionarioClt.get().getId());
             funcionarioCnpj.get().setEndereco(enderecosCnpj);
-            List<Dependente> dependentesCnpj = dependenteRepositry.findByFuncinarioCnpj((Long) funcionarioClt.get().getId());
+            List<Dependente> dependentesCnpj = dependenteRepositry.findByFuncionarioCnpj(funcionarioCnpj.get().getId());
             funcionarioCnpj.get().setDependentesList(dependentesCnpj);
             Optional<Salario> salarioCnpj = salarioRepository.findByFuncionarioCnpj((Long) funcionarioCnpj.get().getId());
             Optional<AuxilioAlimentacao> auxilioAlimentacaoCnpj = auxilioAlimentacaoRepository.findBySalario((Long) salarioCnpj.get().getId());
@@ -86,7 +86,7 @@ public class LeituraService {
 
         FuncionarioCnpjRetornoDto funcionarioCnpjRetornoDto = new FuncionarioCnpjRetornoDto();
 
-        if(Objects.nonNull(funcionarioCnpj1)){
+        if (Objects.nonNull(funcionarioCnpj1)) {
 
             FuncionarioCnpj funcionarioCnpj = funcionarioCnpj1.get();
 
@@ -170,7 +170,7 @@ public class LeituraService {
 
         AuxilioTransporteRetornoDto auxilioTransporteRetornoDto = new AuxilioTransporteRetornoDto();
 
-        if (Objects.nonNull(auxilioTransporte)){
+        if (Objects.nonNull(auxilioTransporte)) {
 
             auxilioTransporteRetornoDto.setIdentificadorAuxilioTransporte(auxilioTransporte.getIdentificadorAuxilioTransporte());
             auxilioTransporteRetornoDto.setDias(auxilioTransporte.getDias());
@@ -267,7 +267,7 @@ public class LeituraService {
 
         AuxilioTransporte auxilioTransporte = new AuxilioTransporte();
 
-        if(Objects.nonNull(auxilioTransporteClt)){
+        if (Objects.nonNull(auxilioTransporteClt)) {
 
             auxilioTransporte.setId(auxilioTransporteClt.get().getId());
             auxilioTransporte.setIdentificadorAuxilioTransporte(auxilioTransporteClt.get().getIdentificadorAuxilioTransporte());
@@ -284,14 +284,14 @@ public class LeituraService {
 
         AuxilioAlimentacao auxilioAlimentacao = new AuxilioAlimentacao();
 
-        if (Objects.nonNull( auxilioAlimentacao)){
+        if (Objects.nonNull(auxilioAlimentacao)) {
 
             auxilioAlimentacao.setId(auxilioAlimentacaoClt.get().getId());
             auxilioAlimentacao.setIdentificadorAuxilioAlimentacao(auxilioAlimentacaoClt.get().getIdentificadorAuxilioAlimentacao());
             auxilioAlimentacao.setDias(auxilioAlimentacaoClt.get().getDias());
             auxilioAlimentacao.setValor(auxilioAlimentacaoClt.get().getValor());
 
-            return  auxilioAlimentacao;
+            return auxilioAlimentacao;
         }
 
         return null;
