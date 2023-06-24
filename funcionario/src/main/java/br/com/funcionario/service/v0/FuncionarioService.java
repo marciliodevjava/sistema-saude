@@ -175,6 +175,7 @@ public class FuncionarioService implements FuncionarioServiceImp {
 
         return numero.getNumero();
     }
+
     private Integer gerarNumeroIntegracao() {
         NumeroDto numero = geradorClients.geraFuncionario();
 
