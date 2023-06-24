@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
-@RequestMapping("/funcionario")
+@RequestMapping("/leitura")
 public class LeituraResource {
 
     @Autowired
