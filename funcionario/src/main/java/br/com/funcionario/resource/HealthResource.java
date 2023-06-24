@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 public class HealthResource {
 
     @GetMapping
-    public ResponseEntity<Health> health(){
+    public ResponseEntity<Health> health() {
         Health dados = this.gerarHealt();
         return ResponseEntity.ok(dados);
     }
