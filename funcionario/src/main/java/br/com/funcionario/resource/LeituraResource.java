@@ -19,7 +19,7 @@ public class LeituraResource {
     private LeituraService leituraService;
 
     @GetMapping("/{id}")
-    public ResponseEntity<FuncionarioCompleRetornoDto> funcionarioLeitura(@PathVariable Long id){
+    public ResponseEntity<FuncionarioCompleRetornoDto> funcionarioLeitura(@PathVariable Long id) {
 
         FuncionarioCompleRetornoDto funcionario = leituraService.funcionarioCompleto(id);
 
