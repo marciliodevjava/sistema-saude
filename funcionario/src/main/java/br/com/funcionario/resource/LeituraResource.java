@@ -1,7 +1,6 @@
 package br.com.funcionario.resource;
 
 import br.com.funcionario.dto.response.FuncionarioCompleRetornoDto;
-import br.com.funcionario.dto.response.FuncionarioRetornoDto;
 import br.com.funcionario.service.LeituraService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
