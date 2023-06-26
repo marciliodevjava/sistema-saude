@@ -10,7 +10,7 @@ import java.util.List;
 
 @Repository
 public interface DependenteRepositry extends JpaRepository<Dependente, Long> {
-   List<Dependente> findByFuncionarioClt(FuncionarioClt funcionarioClt);
+    List<Dependente> findByFuncionarioClt(FuncionarioClt funcionarioClt);
 
     List<Dependente> findByFuncionarioCnpj(FuncionarioCnpj funcionarioCnpj);
 }
