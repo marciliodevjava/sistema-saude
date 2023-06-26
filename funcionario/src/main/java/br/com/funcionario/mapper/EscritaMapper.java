@@ -73,9 +73,10 @@ public class EscritaMapper {
             funcionario.setHoraFinal(converteHora.converterStringParaHora(funcionarioClt.getHorarioFinal()));
             funcionario.setAtivo(true);
 
+            return funcionario;
         }
 
-        return funcionario;
+        return null;
     }
 
     private FuncionarioCltRetornoDto mapearRetornoFuncionarioClt(FuncionarioClt funcionarioClt) {
@@ -225,9 +226,11 @@ public class EscritaMapper {
                 dependenteRetornoDto.setGrauParentescoEnum(d.getGrauParentescoEnum());
                 dependete.add(dependenteRetornoDto);
             });
+
+            return dependete;
         }
 
-        return dependete;
+        return null;
     }
 
     private List<DependenteRetornoDto> montarRetornoListaDependente(List<Dependente> dependente) {
@@ -262,9 +265,10 @@ public class EscritaMapper {
             salarioRetornoDto.setValorAlimentacao(salario.getValorAlimentacao());
             salarioRetornoDto.setTransporte(salario.getTransporte());
 
+            return salarioRetornoDto;
         }
 
-        return salarioRetornoDto;
+        return null;
     }
 
     private SalarioRetornoDto montarRetornoSalario(Salario salario) {
@@ -321,9 +325,10 @@ public class EscritaMapper {
             auxilioAlimentacao.setDias(auxilioAlimentacaoDto.getDias());
             auxilioAlimentacao.setValor(auxilioAlimentacaoDto.getValor());
 
+            return auxilioAlimentacao;
         }
 
-        return auxilioAlimentacao;
+        return null;
     }
 
     private AuxilioAlimentacaoRetornoDto montarRetornoAuxilioAlimentacao(AuxilioAlimentacao auxilioAlimentacao) {
