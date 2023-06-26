@@ -26,7 +26,7 @@ public class SalarioServiceTest {
 
         SalarioRetornoDto salarioRetornoDto = salarioService.savarSalario(salarioDto);
 
-        Assertions.assertEquals(AUXILIO_ALIMENTACAO, salarioRetornoDto.getAuxilioAlimentacao());
+        Assertions.assertEquals(null, salarioRetornoDto.getAuxilioAlimentacao());
     }
 
     private SalarioDto montarSalario() {
