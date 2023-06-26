@@ -35,31 +35,31 @@ public class LeituraService {
         FuncionarioCompleRetornoDto funcionarioCompleRetornoDto = new FuncionarioCompleRetornoDto();
 
         Optional<Funcionario> funcionario = funcionarioRepository.findById(id);
-        Optional<FuncionarioClt> funcionarioClt = funcionarioCltRepository.findByFuncionario((Long) funcionario.get().getId());
-        Optional<FuncionarioCnpj> funcionarioCnpj = funcionarioCnpjRepository.findByFuncionario((Long) funcionario.get().getId());
+        Optional<FuncionarioClt> funcionarioClt = funcionarioCltRepository.findByFuncionario(funcionario.get());
+        Optional<FuncionarioCnpj> funcionarioCnpj = funcionarioCnpjRepository.findByFuncionario(funcionario.get());
 
         if (Objects.nonNull(funcionarioClt)) {
-            List<Endereco> enderecosClt = enderecoRepository.findByFuncionarioClt(funcionarioClt.get().getId());
+            List<Endereco> enderecosClt = enderecoRepository.findByFuncionarioClt(funcionarioClt.get());
             funcionarioClt.get().setEndereco(enderecosClt);
-            List<Dependente> dependentesClt = dependenteRepositry.findByFuncionarioClt(funcionarioClt.get().getId());
+            List<Dependente> dependentesClt = dependenteRepositry.findByFuncionarioClt(funcionarioClt.get());
             funcionarioClt.get().setDependentesList(dependentesClt);
-            Optional<Salario> salarioClt = salarioRepository.findByFuncionarioClt(funcionarioClt.get().getId());
-            Optional<AuxilioAlimentacao> auxilioAlimentacaoClt = auxilioAlimentacaoRepository.findBySalario(salarioClt.get().getId());
+            Optional<Salario> salarioClt = salarioRepository.findByFuncionarioClt(funcionarioClt.get());
+            Optional<AuxilioAlimentacao> auxilioAlimentacaoClt = auxilioAlimentacaoRepository.findBySalario(salarioClt.get());
             salarioClt.get().setAuxilioAlimentacao(this.mapearAuxilioAlimentacao(auxilioAlimentacaoClt));
-            Optional<AuxilioTransporte> auxilioTransporteClt = auxilioTransporteRepository.findBySalario(salarioClt.get().getId());
+            Optional<AuxilioTransporte> auxilioTransporteClt = auxilioTransporteRepository.findBySalario(salarioClt.get());
             salarioClt.get().setAuxilioTransporte(this.mapeiaAuxilioTransporte(auxilioTransporteClt));
             funcionarioClt.get().setSalario(salarioClt.get());
         }
 
         if (Objects.nonNull(funcionarioCnpj)) {
-            List<Endereco> enderecosCnpj = enderecoRepository.findByFuncionarioCnpj(funcionarioClt.get().getId());
+            List<Endereco> enderecosCnpj = enderecoRepository.findByFuncionarioCnpj(funcionarioCnpj.get());
             funcionarioCnpj.get().setEndereco(enderecosCnpj);
-            List<Dependente> dependentesCnpj = dependenteRepositry.findByFuncionarioCnpj(funcionarioCnpj.get().getId());
+            List<Dependente> dependentesCnpj = dependenteRepositry.findByFuncionarioCnpj(funcionarioCnpj.get());
             funcionarioCnpj.get().setDependentesList(dependentesCnpj);
-            Optional<Salario> salarioCnpj = salarioRepository.findByFuncionarioCnpj(funcionarioCnpj.get().getId());
-            Optional<AuxilioAlimentacao> auxilioAlimentacaoCnpj = auxilioAlimentacaoRepository.findBySalario(salarioCnpj.get().getId());
+            Optional<Salario> salarioCnpj = salarioRepository.findByFuncionarioCnpj(funcionarioCnpj.get());
+            Optional<AuxilioAlimentacao> auxilioAlimentacaoCnpj = auxilioAlimentacaoRepository.findBySalario(salarioCnpj.get());
             salarioCnpj.get().setAuxilioAlimentacao(this.mapearAuxilioAlimentacao(auxilioAlimentacaoCnpj));
-            Optional<AuxilioTransporte> auxilioTransporteCnpj = auxilioTransporteRepository.findBySalario(salarioCnpj.get().getId());
+            Optional<AuxilioTransporte> auxilioTransporteCnpj = auxilioTransporteRepository.findBySalario(salarioCnpj.get());
             salarioCnpj.get().setAuxilioTransporte(this.mapeiaAuxilioTransporte(auxilioTransporteCnpj));
             funcionarioCnpj.get().setSalario(salarioCnpj.get());
         }
