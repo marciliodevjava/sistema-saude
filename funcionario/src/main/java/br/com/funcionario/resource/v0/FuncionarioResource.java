@@ -30,7 +30,7 @@ public class FuncionarioResource implements FuncionarioImp {
 
     @PostMapping
     @Override
-    public ResponseEntity<FuncionarioRetornoDto> salvaFuncionario(FuncionarioDto funcionarioDto, UriComponentsBuilder uriBuilder) throws ParseException {
+    public ResponseEntity<FuncionarioRetornoDto> salvaFuncionario(@RequestBody FuncionarioDto funcionarioDto, UriComponentsBuilder uriBuilder) throws ParseException {
         FuncionarioRetornoDto funcionario = funcionarioService.salvarFuncionario(funcionarioDto);
         this.uri = uriBuilder.path("/{id}").buildAndExpand(funcionario.getIdentificadorFuncionario()).toUri();
         return ResponseEntity.created(uri).body(funcionario);
