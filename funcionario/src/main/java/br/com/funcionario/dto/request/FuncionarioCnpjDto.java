@@ -45,7 +45,7 @@ public class FuncionarioCnpjDto {
     private String horarioInicial;
     @NotNull(message = "Horário inícial ex: HH:mm:ss obrigatório.")
     private String horarioFinal;
-    private List<DependenteDto> dependentesList;
+    private List<DependenteDto> dependentes;
     @NotNull(message = "Éndereço do Funcionário obrigatório.")
     private List<EnderecoDto> endereco;
 }
