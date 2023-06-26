@@ -101,7 +101,7 @@ public class FuncionarioServiceTest {
         funcionarioCnpjDto.setEmail(EMAIL_FUNCIONARIO);
         funcionarioCnpjDto.setHorarioInicial(HORARIO_INICIAL_FUNCIONARIO);
         funcionarioCnpjDto.setHorarioFinal(HORARIO_FINAL_FUNCIONARIO);
-        funcionarioCnpjDto.setDependentesList(this.gerarDependenteFuncionario(new DependenteDto()));
+        funcionarioCnpjDto.setDependentes(this.gerarDependenteFuncionario(new DependenteDto()));
         funcionarioCnpjDto.setEndereco(this.gerarEnderecoFuncionario(new EnderecoDto()));
 
         return funcionarioCnpjDto;
@@ -140,8 +140,8 @@ public class FuncionarioServiceTest {
         funcionarioCltDto.setEmail(EMAIL_FUNCIONARIO);
         funcionarioCltDto.setHorarioInicial(HORARIO_INICIAL_FUNCIONARIO);
         funcionarioCltDto.setHorarioFinal(HORARIO_FINAL_FUNCIONARIO);
-        funcionarioCltDto.setDependentesList(this.gerarDependenteFuncionario(new DependenteDto()));
-        funcionarioCltDto.setEndereco(this.gerarEnderecoFuncionario(new EnderecoDto()));
+        funcionarioCltDto.setDependentes(this.gerarDependenteFuncionario((DependenteDto) funcionarioClt.getDependentesList()));
+        funcionarioCltDto.setEndereco(this.gerarEnderecoFuncionario((EnderecoDto) funcionarioClt.getEndereco()));
 
         return funcionarioCltDto;
     }
