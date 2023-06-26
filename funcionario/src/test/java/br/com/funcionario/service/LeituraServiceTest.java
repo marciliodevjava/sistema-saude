@@ -15,7 +15,7 @@ public class LeituraServiceTest {
 
     @Test
     @DisplayName("Teste de salvar um funcionario completo.")
-    void trazUmFuncionario(){
+    void trazUmFuncionario() {
         FuncionarioCompleRetornoDto funcionarioCompleRetornoDto = leituraService.funcionarioCompleto(2L);
 
         Assertions.assertEquals("8159c6da-6519-4a91-b71e-c401c531c139", funcionarioCompleRetornoDto.getIdentificadorFunciona());
