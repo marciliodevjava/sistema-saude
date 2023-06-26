@@ -60,14 +60,14 @@ public class FuncionarioService implements FuncionarioServiceImp {
         Salario salarioCltEscrita = escritaMapper.montarEntradaSalario(funcionarioDto.getFuncionarioClt().getSalario());
         AuxilioAlimentacao auxilioAlimentacaoCltEscrita = escritaMapper.montarEntradaAuxilioAlimentacao(funcionarioDto.getFuncionarioClt().getSalario().getAuxilioAlimentacao());
         AuxilioTransporte auxilioTransporteCltEscrita = escritaMapper.montarEntradaAuxilioTransporte(funcionarioDto.getFuncionarioClt().getSalario().getAuxilioTransporte());
-        List<Dependente> dependenteCltEscrita = escritaMapper.montarEntradaListaDependente(funcionarioDto.getFuncionarioClt().getDependentesList());
+        List<Dependente> dependenteCltEscrita = escritaMapper.montarEntradaListaDependente(funcionarioDto.getFuncionarioClt().getDependentes());
         List<Endereco> enderecosCltEscrita = escritaMapper.montarEntradaEndereco(funcionarioDto.getFuncionarioClt().getEndereco());
 
         FuncionarioCnpj funcionarioCnpjEscrita = escritaMapper.mapearEntradaFuncionaCnpj(funcionarioDto.getFuncionarioCnpj());
         Salario salarioCnpjEscrita = escritaMapper.montarEntradaSalario(funcionarioDto.getFuncionarioCnpj().getSalario());
         AuxilioAlimentacao auxilioAlimentacaoCnpjEscrita = escritaMapper.montarEntradaAuxilioAlimentacao(funcionarioDto.getFuncionarioCnpj().getSalario().getAuxilioAlimentacao());
         AuxilioTransporte auxilioTransporteCnpjEscrita = escritaMapper.montarEntradaAuxilioTransporte(funcionarioDto.getFuncionarioCnpj().getSalario().getAuxilioTransporte());
-        List<Dependente> dependenteCnpjEscrita = escritaMapper.montarEntradaListaDependente(funcionarioDto.getFuncionarioCnpj().getDependentesList());
+        List<Dependente> dependenteCnpjEscrita = escritaMapper.montarEntradaListaDependente(funcionarioDto.getFuncionarioCnpj().getDependentes());
         List<Endereco> enderecosCnpjEscrita = escritaMapper.montarEntradaEndereco(funcionarioDto.getFuncionarioCnpj().getEndereco());
 
         if (Objects.nonNull(funcionarioEscrita)) {
