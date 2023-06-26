@@ -255,6 +255,7 @@ public class LeituraService {
 
             funcionarioCompleRetornoDto.setIdentificadorFunciona(funcionario.get().getIdentificadorFuncionario());
             funcionarioCompleRetornoDto.setMatricula(funcionario.get().getNumeroFuncionario());
+            funcionarioCompleRetornoDto.setSituacao(funcionario.get().getEstadoFuncionarioEnum());
 
             return funcionarioCompleRetornoDto;
         }
