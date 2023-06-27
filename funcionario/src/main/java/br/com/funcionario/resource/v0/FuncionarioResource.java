@@ -42,7 +42,7 @@ public class FuncionarioResource implements FuncionarioImp {
         return null;
     }
 
-    @GetMapping
+    @GetMapping("/{id}")
     @Override
     public ResponseEntity<List<FuncionarioDto>> listarFuncionario() {
         return null;
