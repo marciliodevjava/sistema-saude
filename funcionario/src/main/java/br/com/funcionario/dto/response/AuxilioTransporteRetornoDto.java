@@ -11,5 +11,5 @@ import java.util.UUID;
 public class AuxilioTransporteRetornoDto {
     private String identificadorAuxilioTransporte;
     private int dias;
-    private BigDecimal valorPassagem;
+    private Double valorPassagem;
 }
