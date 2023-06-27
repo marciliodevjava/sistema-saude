@@ -18,7 +18,7 @@ public class FuncionarioCnpjRetornoDto {
     private EstadoCivilEnum estadoCivil;
     private SalarioRetornoDto salario;
     private String nome;
-    private String dataNascimento;
+    private Date dataNascimento;
     private String cpf;
     private String cnpj;
     private String rg;
