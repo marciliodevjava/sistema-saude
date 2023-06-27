@@ -47,9 +47,11 @@ public class EscritaMapper {
     public FuncionarioRetornoDto mapearFuncionarioDto(Funcionario funcionario) {
         FuncionarioRetornoDto funcionarioRetornoDto = new FuncionarioRetornoDto();
 
+        funcionarioRetornoDto.setId(funcionario.getId());
         funcionarioRetornoDto.setIdentificadorFuncionario(funcionario.getIdentificadorFuncionario());
-        funcionarioRetornoDto.setNumeroFuncionario(this.geraNumero());
+        funcionarioRetornoDto.setNumeroFuncionario(funcionario.getNumeroFuncionario());
         funcionarioRetornoDto.setEstadoFuncionarioEnum(funcionario.getEstadoFuncionarioEnum());
+        funcionarioRetornoDto.setFuncionarioClt(this.mapearRetornoFuncionarioClt(funcionario.getFuncionarioClt()));
         funcionarioRetornoDto.setFuncionarioCnpj(this.mapearRetornoFuncionarioCnpj(funcionario.getFuncionarioCnpj()));
 
         return funcionarioRetornoDto;
