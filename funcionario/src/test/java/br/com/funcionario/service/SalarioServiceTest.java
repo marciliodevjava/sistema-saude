@@ -13,9 +13,9 @@ import java.math.BigDecimal;
 @SpringBootTest
 public class SalarioServiceTest {
 
-    private final BigDecimal SALARIO = BigDecimal.valueOf(1319.00);
-    private final BigDecimal AUXILIO_ALIMENTACAO = BigDecimal.valueOf(319.00);
-    private final BigDecimal AUXILIO_TRANSPORTE = BigDecimal.valueOf(319.00);
+    private final Double SALARIO = 1319.00;
+    private final Double AUXILIO_ALIMENTACAO = 319.00;
+    private final Double AUXILIO_TRANSPORTE = 319.00;
     @Autowired
     private SalarioService salarioService;
 
