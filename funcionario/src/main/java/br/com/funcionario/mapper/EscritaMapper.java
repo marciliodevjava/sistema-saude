@@ -30,6 +30,8 @@ public class EscritaMapper {
     private FormataTelefone formataTelefone;
     @Autowired
     private FormataEndereco formataEndereco;
+    @Autowired
+    private ConverteValor converteValor;
 
     public Funcionario mapearFuncionario(FuncionarioDto funcionarioDto) throws ParseException {
         Funcionario funcionario = new Funcionario();
@@ -130,7 +132,7 @@ public class EscritaMapper {
             return funcionario;
         }
 
-        return funcionario;
+        return null;
     }
 
     private FuncionarioCnpjRetornoDto mapearRetornoFuncionarioCnpj(FuncionarioCnpj funcionarioCnpj) {
@@ -142,7 +144,7 @@ public class EscritaMapper {
             funcionarioCnpjDto.setEstadoCivil(funcionarioCnpj.getEstadoCivil());
             funcionarioCnpjDto.setSalario(this.montarRetornoSalario(funcionarioCnpj.getSalario()));
             funcionarioCnpjDto.setNome(funcionarioCnpj.getNome().trim());
-            funcionarioCnpjDto.setDataNascimento(converteData.converterDateParaString(funcionarioCnpj.getDataNascimento()));
+            funcionarioCnpjDto.setDataNascimento(funcionarioCnpj.getDataNascimento());
             funcionarioCnpjDto.setCpf(this.formataCpf.formataCpf(funcionarioCnpj.getCpf()));
             funcionarioCnpjDto.setCnpj(this.formataCnpj.formataCnpj(funcionarioCnpj.getCnpj()));
             funcionarioCnpjDto.setRg(this.formataRg.formataRg(funcionarioCnpj.getRg()));
@@ -177,6 +179,7 @@ public class EscritaMapper {
                 enderecoRetornoDto.setBairro(this.formataEndereco.formataBairro(e.getBairro()));
                 enderecoRetornoDto.setCidade(this.formataEndereco.formataCidade(e.getCidade()));
                 enderecoRetornoDto.setUf(this.formataEndereco.formataUf(e.getUf()));
+                enderecoRetornoDto.setAtivo(true);
                 endereco.add(enderecoRetornoDto);
             });
         }
@@ -226,11 +229,9 @@ public class EscritaMapper {
                 dependenteRetornoDto.setGrauParentescoEnum(d.getGrauParentescoEnum());
                 dependete.add(dependenteRetornoDto);
             });
-
-            return dependete;
         }
 
-        return null;
+        return dependete;
     }
 
     private List<DependenteRetornoDto> montarRetornoListaDependente(List<Dependente> dependente) {
@@ -261,9 +262,9 @@ public class EscritaMapper {
         if (Objects.nonNull(salario)) {
 
             salarioRetornoDto.setIdentificadorSalario(String.valueOf(geradorUUID.getIdentificador()));
-            salarioRetornoDto.setSalario(salario.getSalario());
-            salarioRetornoDto.setValorAlimentacao(salario.getValorAlimentacao());
-            salarioRetornoDto.setTransporte(salario.getTransporte());
+            salarioRetornoDto.setSalario(converteValor.converteDoubleParaDecimal(salario.getSalario()));
+            salarioRetornoDto.setValorAlimentacao(converteValor.converteDoubleParaDecimal(salario.getValorAlimentacao()));
+            salarioRetornoDto.setTransporte(converteValor.converteDoubleParaDecimal(salario.getTransporte()));
 
             return salarioRetornoDto;
         }
@@ -295,7 +296,7 @@ public class EscritaMapper {
 
             auxilioTransporte.setIdentificadorAuxilioTransporte(String.valueOf(geradorUUID.getIdentificador()));
             auxilioTransporte.setDias(auxilioTransporteDto.getDias());
-            auxilioTransporte.setValorPassagem(auxilioTransporteDto.getValorPassagem());
+            auxilioTransporte.setValorPassagem(converteValor.converteDoubleParaDecimal(auxilioTransporteDto.getValorPassagem()));
 
         }
 
@@ -323,7 +324,7 @@ public class EscritaMapper {
 
             auxilioAlimentacao.setIdentificadorAuxilioAlimentacao(String.valueOf(geradorUUID.getIdentificador()));
             auxilioAlimentacao.setDias(auxilioAlimentacaoDto.getDias());
-            auxilioAlimentacao.setValor(auxilioAlimentacaoDto.getValor());
+            auxilioAlimentacao.setValor(converteValor.converteDoubleParaDecimal(auxilioAlimentacaoDto.getValor()));
 
             return auxilioAlimentacao;
         }
