@@ -95,7 +95,7 @@ public class LeituraService {
             funcionarioCnpjRetornoDto.setEstadoCivil(funcionarioCnpj.getEstadoCivil());
             funcionarioCnpjRetornoDto.setSalario(this.montarSalario(funcionarioCnpj.getSalario()));
             funcionarioCnpjRetornoDto.setNome(funcionarioCnpj.getNome());
-            funcionarioCnpjRetornoDto.setDataAdmissao(funcionarioCnpj.getDataAdmissao());
+            funcionarioCnpjRetornoDto.setDataNascimento(funcionarioCnpj.getDataNascimento());
             funcionarioCnpjRetornoDto.setCpf(funcionarioCnpj.getCpf());
             funcionarioCnpjRetornoDto.setCnpj(funcionarioCnpj.getCnpj());
             funcionarioCnpjRetornoDto.setRg(funcionarioCnpj.getRg());
