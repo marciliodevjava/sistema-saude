@@ -9,11 +9,11 @@ import java.math.BigDecimal;
 @Setter
 public class SalarioDto {
     @NotNull(message = "Sálario do Funcionário obrigatório.")
-    private BigDecimal salario;
+    private Double salario;
     @NotNull(message = "Valor Alimentação do Funcionário obrigatório.")
-    private BigDecimal valorAlimentacao;
+    private Double valorAlimentacao;
     @NotNull(message = "Transporte do Funcionário obrigatório.")
-    private BigDecimal transporte;
+    private Double transporte;
     private AuxilioAlimentacaoDto auxilioAlimentacao;
     private AuxilioTransporteDto auxilioTransporte;
 }
