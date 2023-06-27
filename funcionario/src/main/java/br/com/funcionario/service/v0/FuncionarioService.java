@@ -116,19 +116,33 @@ public class FuncionarioService implements FuncionarioServiceImp {
 
         if (Objects.nonNull(salarioCnpjEscrita)) {
             Salario salario = salarioRepository.save(salarioCnpjEscrita);
-            if (Objects.nonNull(auxilioAlimentacaoCnpjEscrita)) auxilioAlimentacaoCnpjEscrita.setSalario(salario);
-            if (Objects.nonNull(auxilioTransporteCnpjEscrita)) auxilioTransporteCnpjEscrita.setSalario(salario);
+            funcionarioCnpjEscrita.setSalario(salarioCnpjEscrita);
+            if (Objects.nonNull(auxilioAlimentacaoCnpjEscrita)) {
+                auxilioAlimentacaoCnpjEscrita.setSalario(salario);
+                salarioCnpjEscrita.setAuxilioAlimentacao(auxilioAlimentacaoCnpjEscrita);
+            }
+            if (Objects.nonNull(auxilioTransporteCnpjEscrita)) {
+                auxilioTransporteCnpjEscrita.setSalario(salario);
+                salarioCnpjEscrita.setAuxilioTransporte(auxilioTransporteCnpjEscrita);
+            }
         }
 
         if (Objects.nonNull(salarioCltEscrita)) {
             Salario salarioClt = salarioRepository.save(salarioCltEscrita);
-            if (Objects.nonNull(auxilioAlimentacaoCltEscrita)) auxilioAlimentacaoCltEscrita.setSalario(salarioClt);
-            if (Objects.nonNull(auxilioTransporteCltEscrita)) auxilioTransporteCltEscrita.setSalario(salarioClt);
+            if (Objects.nonNull(auxilioAlimentacaoCltEscrita)) {
+                auxilioAlimentacaoCltEscrita.setSalario(salarioClt);
+                salarioCltEscrita.setAuxilioAlimentacao(auxilioAlimentacaoCltEscrita);
+            }
+            if (Objects.nonNull(auxilioTransporteCltEscrita)) {
+                auxilioTransporteCltEscrita.setSalario(salarioClt);
+                salarioCltEscrita.setAuxilioTransporte(auxilioTransporteCltEscrita);
+            }
         }
 
         if (Objects.nonNull(dependenteCltEscrita)) dependenteRepositry.saveAll(dependenteCltEscrita);
         if (Objects.nonNull(dependenteCnpjEscrita)) dependenteRepositry.saveAll(dependenteCnpjEscrita);
         if (Objects.nonNull(enderecosCnpjEscrita)) enderecoRepository.saveAll(enderecosCnpjEscrita);
+
         if (Objects.nonNull(auxilioAlimentacaoCltEscrita))
             auxilioAlimentacaoRepository.save(auxilioAlimentacaoCltEscrita);
 
@@ -148,13 +162,13 @@ public class FuncionarioService implements FuncionarioServiceImp {
 
     private Funcionario mapearFuncionarioTesT(Funcionario mapeamento) {
 
-        Funcionario test = new Funcionario();
+        Funcionario funcionario = new Funcionario();
 
-        test.setNumeroFuncionario(mapeamento.getNumeroFuncionario());
-        test.setIdentificadorFuncionario(mapeamento.getIdentificadorFuncionario());
-        test.setEstadoFuncionarioEnum(mapeamento.getEstadoFuncionarioEnum());
+        funcionario.setNumeroFuncionario(mapeamento.getNumeroFuncionario());
+        funcionario.setIdentificadorFuncionario(mapeamento.getIdentificadorFuncionario());
+        funcionario.setEstadoFuncionarioEnum(mapeamento.getEstadoFuncionarioEnum());
 
-        return test;
+        return funcionario;
     }
 
     public FuncionarioRetornoDto salvarSomenteFuncionario(FuncionarioDto funcionarioDto) {
