@@ -37,9 +37,9 @@ public class FuncionarioServiceTest {
     private final String HORARIO_FINAL_FUNCIONARIO = "18:00:00";
     private final String CPF_FUNCIONARIO = "525.759.180-49";
     private final String CNPJ = "44.155.548/0001-86";
-    private final BigDecimal SALARIO_FUNCIONARIO = BigDecimal.valueOf(2800.00);
-    private final BigDecimal VALOR_ALIMENTACAO_FUNCIONARIO = BigDecimal.valueOf(573.73);
-    private final BigDecimal VALOR_TRANSPORTE_FUNCIONARIO = BigDecimal.valueOf(850.00);
+    private final Double SALARIO_FUNCIONARIO = 2800.00;
+    private final Double VALOR_ALIMENTACAO_FUNCIONARIO = 573.73;
+    private final Double VALOR_TRANSPORTE_FUNCIONARIO = 850.00;
     private final int DIAS_AUXILIO_ALIMENTACAO_FUNCIONARIO = 22;
     private final int DIAS_AUXILIO_TRANSPORTE_FUNCIONARIO = 22;
     private final String NOME_DEPENDENTE = "Pedro paulo";
@@ -55,7 +55,7 @@ public class FuncionarioServiceTest {
     private final String UP_ENDERECO_FUNCIONARIO = "SP";
 
     @Test
-    @DisplayName("Teste de salvar um funcionario completo.")
+    @DisplayName("Teste de salvar Funcionario Completo.")
     void salvarFuncionarioTest() throws ParseException {
         FuncionarioDto funcionario = this.gerarFuncionario();
 
@@ -65,7 +65,7 @@ public class FuncionarioServiceTest {
     }
 
     @Test
-    @DisplayName("Teste de salvar somente um funcionario.")
+    @DisplayName("Teste de salvar somente um Funcionario.")
     void salvarSomenteFuncionario() {
         FuncionarioDto funcionario = new FuncionarioDto();
 
@@ -140,8 +140,8 @@ public class FuncionarioServiceTest {
         funcionarioCltDto.setEmail(EMAIL_FUNCIONARIO);
         funcionarioCltDto.setHorarioInicial(HORARIO_INICIAL_FUNCIONARIO);
         funcionarioCltDto.setHorarioFinal(HORARIO_FINAL_FUNCIONARIO);
-        funcionarioCltDto.setDependentes(this.gerarDependenteFuncionario((DependenteDto) funcionarioClt.getDependentesList()));
-        funcionarioCltDto.setEndereco(this.gerarEnderecoFuncionario((EnderecoDto) funcionarioClt.getEndereco()));
+        funcionarioCltDto.setDependentes(this.gerarDependenteFuncionario(new DependenteDto()));
+        funcionarioCltDto.setEndereco(this.gerarEnderecoFuncionario(new EnderecoDto()));
 
         return funcionarioCltDto;
     }
