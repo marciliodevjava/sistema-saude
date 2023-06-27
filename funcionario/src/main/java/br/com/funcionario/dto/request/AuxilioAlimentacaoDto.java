@@ -8,5 +8,5 @@ import java.math.BigDecimal;
 @Setter
 public class AuxilioAlimentacaoDto {
     private int dias;
-    private BigDecimal valor;
+    private Double valor;
 }
