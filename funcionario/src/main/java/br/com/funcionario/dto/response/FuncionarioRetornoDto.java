@@ -7,6 +7,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class FuncionarioRetornoDto {
+    private Long id;
     private String identificadorFuncionario;
     private Integer numeroFuncionario;
     private EstadoFuncionarioEnum estadoFuncionarioEnum;
