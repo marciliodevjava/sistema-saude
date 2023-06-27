@@ -72,26 +72,46 @@ public class FuncionarioService implements FuncionarioServiceImp {
 
         if (Objects.nonNull(funcionarioEscrita)) {
             Funcionario funcionario = funcionarioRepository.save(funcionarioEscrita);
-            if (Objects.nonNull(funcionarioCltEscrita)) funcionarioCltEscrita.setFuncionario(funcionario);
-            if (Objects.nonNull(funcionarioCnpjEscrita)) funcionarioCnpjEscrita.setFuncionario(funcionario);
+            if (Objects.nonNull(funcionarioCltEscrita)) {
+                funcionarioCltEscrita.setFuncionario(funcionario);
+                funcionario.setFuncionarioClt(funcionarioCltEscrita);
+            }
+            if (Objects.nonNull(funcionarioCnpjEscrita)) {
+                funcionarioCnpjEscrita.setFuncionario(funcionario);
+                funcionario.setFuncionarioCnpj(funcionarioCnpjEscrita);
+            }
         }
 
         if (Objects.nonNull(funcionarioCltEscrita)) {
             FuncionarioClt funcionarioClt = funcionarioCltRepository.save(funcionarioCltEscrita);
-            if (Objects.nonNull(salarioCltEscrita)) salarioCltEscrita.setFuncionarioClt(funcionarioClt);
-            if (Objects.nonNull(dependenteCltEscrita))
+            if (Objects.nonNull(salarioCltEscrita)) {
+                salarioCltEscrita.setFuncionarioClt(funcionarioClt);
+                funcionarioCltEscrita.setSalario(salarioCltEscrita);
+            }
+            if (Objects.nonNull(dependenteCltEscrita)) {
                 dependenteCltEscrita.forEach(adicionaFuncionario -> adicionaFuncionario.setFuncionarioClt(funcionarioClt));
-            if (Objects.nonNull(enderecosCltEscrita))
+                funcionarioCltEscrita.setDependentesList(dependenteCltEscrita);
+            }
+            if (Objects.nonNull(enderecosCltEscrita)) {
                 enderecosCltEscrita.forEach(adicionaEndereco -> adicionaEndereco.setFuncionarioClt(funcionarioClt));
+                funcionarioCltEscrita.setEndereco(enderecosCltEscrita);
+            }
         }
 
         if (Objects.nonNull(funcionarioCnpjEscrita)) {
             FuncionarioCnpj funcionarioCnpj = funcionarioCnpjRepository.save(funcionarioCnpjEscrita);
-            if (Objects.nonNull(salarioCnpjEscrita)) salarioCnpjEscrita.setFuncionarioCnpj(funcionarioCnpj);
-            if (Objects.nonNull(dependenteCnpjEscrita))
+            if (Objects.nonNull(salarioCnpjEscrita)) {
+                salarioCnpjEscrita.setFuncionarioCnpj(funcionarioCnpj);
+                funcionarioCnpjEscrita.setSalario(salarioCnpjEscrita);
+            }
+            if (Objects.nonNull(dependenteCnpjEscrita)){
                 dependenteCnpjEscrita.forEach(adicionaFuncionario -> adicionaFuncionario.setFuncionarioCnpj(funcionarioCnpj));
-            if (Objects.nonNull(enderecosCnpjEscrita))
+                funcionarioCnpjEscrita.setDependentesList(dependenteCnpjEscrita);
+            }
+            if (Objects.nonNull(enderecosCnpjEscrita)){
                 enderecosCnpjEscrita.forEach(adicionaEndereco -> adicionaEndereco.setFuncionarioCnpj(funcionarioCnpj));
+                funcionarioCnpjEscrita.setEndereco(enderecosCnpjEscrita);
+            }
         }
 
         if (Objects.nonNull(salarioCnpjEscrita)) {
