@@ -11,4 +11,8 @@ public class ConverteValor {
     public BigDecimal converteDoubleParaDecimal(Double valorPassagem) {
         return BigDecimal.valueOf(valorPassagem);
     }
+
+    public Double converteBigDecimalParaDouble(BigDecimal valorPassagem) {
+        return valorPassagem.doubleValue();
+    }
 }
