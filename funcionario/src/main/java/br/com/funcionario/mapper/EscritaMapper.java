@@ -312,7 +312,7 @@ public class EscritaMapper {
 
             auxilioTransporteRetornoDto.setIdentificadorAuxilioTransporte(auxilioTransporte.getIdentificadorAuxilioTransporte());
             auxilioTransporteRetornoDto.setDias(auxilioTransporte.getDias());
-            auxilioTransporteRetornoDto.setValorPassagem(auxilioTransporte.getValorPassagem());
+            auxilioTransporteRetornoDto.setValorPassagem(converteValor.converteBigDecimalParaDouble(auxilioTransporte.getValorPassagem()));
 
         }
 
