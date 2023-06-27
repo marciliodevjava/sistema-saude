@@ -4,6 +4,7 @@ import br.com.funcionario.domain.*;
 import br.com.funcionario.dto.response.*;
 import br.com.funcionario.repository.*;
 import br.com.funcionario.utils.ConverteDate;
+import br.com.funcionario.utils.ConverteValor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,6 +31,8 @@ public class LeituraService {
     private AuxilioTransporteRepository auxilioTransporteRepository;
     @Autowired
     private ConverteDate converteDate;
+    @Autowired
+    private ConverteValor converteValor;
 
     public FuncionarioCompleRetornoDto funcionarioCompleto(Long id) {
         FuncionarioCompleRetornoDto funcionarioCompleRetornoDto = new FuncionarioCompleRetornoDto();
@@ -174,7 +177,7 @@ public class LeituraService {
 
             auxilioTransporteRetornoDto.setIdentificadorAuxilioTransporte(auxilioTransporte.getIdentificadorAuxilioTransporte());
             auxilioTransporteRetornoDto.setDias(auxilioTransporte.getDias());
-            auxilioTransporte.setValorPassagem(auxilioTransporte.getValorPassagem());
+            auxilioTransporteRetornoDto.setValorPassagem(converteValor.converteBigDecimalParaDouble(auxilioTransporte.getValorPassagem()));
 
             return auxilioTransporteRetornoDto;
         }
