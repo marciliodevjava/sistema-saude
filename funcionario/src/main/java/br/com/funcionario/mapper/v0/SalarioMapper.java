@@ -3,6 +3,7 @@ package br.com.funcionario.mapper.v0;
 import br.com.funcionario.domain.Salario;
 import br.com.funcionario.dto.request.SalarioDto;
 import br.com.funcionario.dto.response.SalarioRetornoDto;
+import br.com.funcionario.utils.ConverteValor;
 import br.com.funcionario.utils.GeradorUUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -14,6 +15,8 @@ public class SalarioMapper {
 
     @Autowired
     private GeradorUUID geradorUUID;
+    @Autowired
+    private ConverteValor converteValor;
 
     public Salario MapearSalario(SalarioDto salarioDto) {
 
@@ -21,9 +24,9 @@ public class SalarioMapper {
             Salario salario = new Salario();
 
             salario.setIdentificadorSalario(String.valueOf(geradorUUID.getIdentificador()));
-            salario.setSalario(salarioDto.getSalario());
-            salario.setValorAlimentacao(salarioDto.getValorAlimentacao());
-            salario.setTransporte(salarioDto.getTransporte());
+            salario.setSalario(converteValor.converteDoubleParaDecimal(salarioDto.getSalario()));
+            salario.setValorAlimentacao(converteValor.converteDoubleParaDecimal(salarioDto.getValorAlimentacao()));
+            salario.setTransporte(converteValor.converteDoubleParaDecimal(salarioDto.getTransporte()));
 
             return salario;
         }
