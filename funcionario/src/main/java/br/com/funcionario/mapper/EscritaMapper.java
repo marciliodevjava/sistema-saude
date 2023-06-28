@@ -106,9 +106,10 @@ public class EscritaMapper {
             funcionarioCltDto.setDependentesList(this.montarRetornoListaDependente(funcionarioClt.getDependentesList()));
             funcionarioCltDto.setEndereco(this.montarRetornoEndereco(funcionarioClt.getEndereco()));
 
+            return funcionarioCltDto;
         }
 
-        return funcionarioCltDto;
+        return null;
     }
 
     public FuncionarioCnpj mapearEntradaFuncionaCnpj(FuncionarioCnpjDto funcionarioCnpj) throws ParseException {
@@ -163,7 +164,7 @@ public class EscritaMapper {
             return funcionarioCnpjDto;
         }
 
-        return funcionarioCnpjDto;
+        return null;
     }
 
     public List<Endereco> montarEntradaEndereco(List<EnderecoDto> enderecoDto) {
