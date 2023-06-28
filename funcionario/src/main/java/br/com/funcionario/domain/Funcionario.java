@@ -31,10 +31,12 @@ public class Funcionario implements Serializable {
     @Enumerated(EnumType.STRING)
     @Column(name = "estado_funcionario", length = 15)
     private EstadoFuncionarioEnum estadoFuncionarioEnum;
+    private Boolean inPrincipalFuncionarioClt;
     @Setter(onMethod = @__({@JsonProperty}))
     @Getter(onMethod = @__({@JsonIgnore}))
     @OneToOne(mappedBy = "funcionario", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     private FuncionarioClt funcionarioClt;
+    private Boolean inPrincipalFuncionarioCnpj;
     @Setter(onMethod = @__({@JsonProperty}))
     @Getter(onMethod = @__({@JsonIgnore}))
     @OneToOne(mappedBy = "funcionario", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
