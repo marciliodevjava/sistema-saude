@@ -10,6 +10,8 @@ public class FuncionarioCompleRetornoDto {
     private String identificadorFunciona;
     private Integer matricula;
     private EstadoFuncionarioEnum situacao;
+    private Boolean inPrincipalFuncionarioClt;
     private FuncionarioCltRetornoDto funcionarioClt;
+    private Boolean inPrincipalFuncionarioCnpj;
     private FuncionarioCnpjRetornoDto funcionarioCnpj;
 }
