@@ -67,7 +67,7 @@ public class FuncionarioServiceTest {
     @Test
     @DisplayName("Teste de salvar somente um Funcionario.")
     void salvarSomenteFuncionario() {
-        FuncionarioDto funcionario = new FuncionarioDto();
+        FuncionarioDto funcionario = this.gerarUmFuncionario();
 
         FuncionarioRetornoDto funcionarioRetornoDto = funcionarioService.salvarSomenteFuncionario(funcionario);
 
@@ -79,8 +79,21 @@ public class FuncionarioServiceTest {
 
         funcionario.setNumeroFuncionario(NUMERO_FUNCINARIO);
         funcionario.setEstadoFuncionarioEnum(EstadoFuncionarioEnum.ATIVO);
+        funcionario.setInPrincipalFuncionarioClt(true);
         funcionario.setFuncionarioClt(this.gerarFuncionarioClt(new FuncionarioClt()));
+        funcionario.setInPrincipalFuncionarioCnpj(true);
         funcionario.setFuncionarioCnpj(this.gerarFuncionarioCnpj(new FuncionarioCnpj()));
+
+        return funcionario;
+    }
+
+    private FuncionarioDto gerarUmFuncionario() {
+        FuncionarioDto funcionario = new FuncionarioDto();
+
+        funcionario.setNumeroFuncionario(NUMERO_FUNCINARIO);
+        funcionario.setEstadoFuncionarioEnum(EstadoFuncionarioEnum.ATIVO);
+        funcionario.setInPrincipalFuncionarioClt(false);
+        funcionario.setInPrincipalFuncionarioCnpj(false);
 
         return funcionario;
     }
