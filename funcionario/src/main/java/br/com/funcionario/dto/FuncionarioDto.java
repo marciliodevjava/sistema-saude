@@ -14,6 +14,8 @@ public class FuncionarioDto {
     private Integer numeroFuncionario;
 
     private EstadoFuncionarioEnum estadoFuncionarioEnum;
+    private Boolean inPrincipalFuncionarioClt;
     private FuncionarioCltDto funcionarioClt;
+    private Boolean inPrincipalFuncionarioCnpj;
     private FuncionarioCnpjDto funcionarioCnpj;
 }
