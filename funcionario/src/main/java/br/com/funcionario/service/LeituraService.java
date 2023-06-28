@@ -38,10 +38,11 @@ public class LeituraService {
         FuncionarioCompleRetornoDto funcionarioCompleRetornoDto = new FuncionarioCompleRetornoDto();
 
         Optional<Funcionario> funcionario = funcionarioRepository.findById(id);
-        Optional<FuncionarioClt> funcionarioClt = funcionarioCltRepository.findByFuncionario(funcionario.get());
-        Optional<FuncionarioCnpj> funcionarioCnpj = funcionarioCnpjRepository.findByFuncionario(funcionario.get());
 
-        if (Objects.nonNull(funcionarioClt)) {
+        funcionarioCompleRetornoDto = this.mapearFuncionario(funcionario);
+
+        if (funcionario.get().getInPrincipalFuncionarioClt().equals(true)) {
+            Optional<FuncionarioClt> funcionarioClt = funcionarioCltRepository.findByFuncionario(funcionario.get());
             List<Endereco> enderecosClt = enderecoRepository.findByFuncionarioClt(funcionarioClt.get());
             funcionarioClt.get().setEndereco(enderecosClt);
             List<Dependente> dependentesClt = dependenteRepositry.findByFuncionarioClt(funcionarioClt.get());
@@ -52,9 +53,16 @@ public class LeituraService {
             Optional<AuxilioTransporte> auxilioTransporteClt = auxilioTransporteRepository.findBySalario(salarioClt.get());
             salarioClt.get().setAuxilioTransporte(this.mapeiaAuxilioTransporte(auxilioTransporteClt));
             funcionarioClt.get().setSalario(salarioClt.get());
+
+            if (Objects.nonNull(funcionarioClt)) {
+                FuncionarioCltRetornoDto funcionarioCltRetornoDto;
+                funcionarioCltRetornoDto = this.mapearFuncionarioClt(funcionarioClt);
+                funcionarioCompleRetornoDto.setFuncionarioClt(funcionarioCltRetornoDto);
+            }
         }
 
-        if (Objects.nonNull(funcionarioCnpj)) {
+        if (funcionario.get().getInPrincipalFuncionarioCnpj().equals(true)) {
+            Optional<FuncionarioCnpj> funcionarioCnpj = funcionarioCnpjRepository.findByFuncionario(funcionario.get());
             List<Endereco> enderecosCnpj = enderecoRepository.findByFuncionarioCnpj(funcionarioCnpj.get());
             funcionarioCnpj.get().setEndereco(enderecosCnpj);
             List<Dependente> dependentesCnpj = dependenteRepositry.findByFuncionarioCnpj(funcionarioCnpj.get());
@@ -65,21 +73,12 @@ public class LeituraService {
             Optional<AuxilioTransporte> auxilioTransporteCnpj = auxilioTransporteRepository.findBySalario(salarioCnpj.get());
             salarioCnpj.get().setAuxilioTransporte(this.mapeiaAuxilioTransporte(auxilioTransporteCnpj));
             funcionarioCnpj.get().setSalario(salarioCnpj.get());
-        }
 
-
-        funcionarioCompleRetornoDto = this.mapearFuncionario(funcionario);
-
-        if (Objects.nonNull(funcionarioClt)) {
-            FuncionarioCltRetornoDto funcionarioCltRetornoDto;
-            funcionarioCltRetornoDto = this.mapearFuncionarioClt(funcionarioClt);
-            funcionarioCompleRetornoDto.setFuncionarioClt(funcionarioCltRetornoDto);
-        }
-
-        if (Objects.nonNull(funcionarioCnpj)) {
-            FuncionarioCnpjRetornoDto funcionarioCnpjRetornoDto;
-            funcionarioCnpjRetornoDto = this.mapearFuncionarioCnpj(funcionarioCnpj);
-            funcionarioCompleRetornoDto.setFuncionarioCnpj(funcionarioCnpjRetornoDto);
+            if (Objects.nonNull(funcionarioCnpj)) {
+                FuncionarioCnpjRetornoDto funcionarioCnpjRetornoDto;
+                funcionarioCnpjRetornoDto = this.mapearFuncionarioCnpj(funcionarioCnpj);
+                funcionarioCompleRetornoDto.setFuncionarioCnpj(funcionarioCnpjRetornoDto);
+            }
         }
 
         return funcionarioCompleRetornoDto;
@@ -259,6 +258,8 @@ public class LeituraService {
             funcionarioCompleRetornoDto.setIdentificadorFunciona(funcionario.get().getIdentificadorFuncionario());
             funcionarioCompleRetornoDto.setMatricula(funcionario.get().getNumeroFuncionario());
             funcionarioCompleRetornoDto.setSituacao(funcionario.get().getEstadoFuncionarioEnum());
+            funcionarioCompleRetornoDto.setInPrincipalFuncionarioClt(funcionario.get().getInPrincipalFuncionarioClt());
+            funcionarioCompleRetornoDto.setInPrincipalFuncionarioCnpj(funcionario.get().getInPrincipalFuncionarioCnpj());
 
             return funcionarioCompleRetornoDto;
         }
