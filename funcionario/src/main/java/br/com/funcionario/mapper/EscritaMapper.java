@@ -40,6 +40,8 @@ public class EscritaMapper {
         funcionario.setEstadoFuncionarioEnum(funcionarioDto.getEstadoFuncionarioEnum() == null ? EstadoFuncionarioEnum.ATIVO : funcionarioDto.getEstadoFuncionarioEnum());
         funcionario.setNumeroFuncionario(numeroFuncionario);
         funcionario.setEstadoFuncionarioEnum(EstadoFuncionarioEnum.ATIVO);
+        funcionario.setInPrincipalFuncionarioClt(funcionarioDto.getInPrincipalFuncionarioClt());
+        funcionario.setInPrincipalFuncionarioCnpj(funcionarioDto.getInPrincipalFuncionarioCnpj());
 
         return funcionario;
     }
