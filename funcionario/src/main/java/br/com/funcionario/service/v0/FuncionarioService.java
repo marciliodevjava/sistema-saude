@@ -58,7 +58,7 @@ public class FuncionarioService implements FuncionarioServiceImp {
 
         Funcionario funcionario = funcionarioRepository.save(funcionarioEscrita);
 
-        if (Objects.nonNull(funcionarioDto.getFuncionarioClt())) {
+        if (funcionarioDto.getInPrincipalFuncionarioClt().equals(true)) {
             FuncionarioClt funcionarioCltEscrita = escritaMapper.mapearEntradaFuncionaClt(funcionarioDto.getFuncionarioClt());
             Salario salarioCltEscrita = escritaMapper.montarEntradaSalario(funcionarioDto.getFuncionarioClt().getSalario());
             AuxilioAlimentacao auxilioAlimentacaoCltEscrita = escritaMapper.montarEntradaAuxilioAlimentacao(funcionarioDto.getFuncionarioClt().getSalario().getAuxilioAlimentacao());
@@ -111,7 +111,7 @@ public class FuncionarioService implements FuncionarioServiceImp {
             if (Objects.nonNull(enderecosCltEscrita)) enderecoRepository.saveAll(enderecosCltEscrita);
         }
 
-        if (Objects.nonNull(funcionarioDto.getFuncionarioCnpj())) {
+        if (funcionarioDto.getInPrincipalFuncionarioCnpj().equals(true)) {
             FuncionarioCnpj funcionarioCnpjEscrita = escritaMapper.mapearEntradaFuncionaCnpj(funcionarioDto.getFuncionarioCnpj());
             Salario salarioCnpjEscrita = escritaMapper.montarEntradaSalario(funcionarioDto.getFuncionarioCnpj().getSalario());
             AuxilioAlimentacao auxilioAlimentacaoCnpjEscrita = escritaMapper.montarEntradaAuxilioAlimentacao(funcionarioDto.getFuncionarioCnpj().getSalario().getAuxilioAlimentacao());
@@ -197,6 +197,8 @@ public class FuncionarioService implements FuncionarioServiceImp {
         funcionario.setNumeroFuncionario(this.gerarNumero());
         funcionario.setIdentificadorFuncionario(String.valueOf(geradorUUID.getIdentificador()));
         funcionario.setEstadoFuncionarioEnum(EstadoFuncionarioEnum.ATIVO);
+        funcionario.setInPrincipalFuncionarioClt(funcionarioDto.getInPrincipalFuncionarioClt());
+        funcionario.setInPrincipalFuncionarioCnpj(funcionarioDto.getInPrincipalFuncionarioCnpj());
 
         return funcionario;
     }
