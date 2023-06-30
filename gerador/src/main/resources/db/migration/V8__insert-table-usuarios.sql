@@ -8,4 +8,4 @@ INSERT INTO usuarios(login, senha)
     ("marciliodev", "$2a$10$B6CNpzXPz8sjDbSvxmxpcuLUXESfS/OVqxjaW/a0RqcnqzDQWa1wG"),
     ("marciliodev@teste.com.br", "$2a$10$H7mRygaf8.F2YmLNijTAXelWex5OFPbQ2PuQTMKbvRZLRGJot2mwG"),
     ("marciliodev@teste.com", "5c12ea46b8c0320e07d8442f1d7d3f1f7fce6078dcfafa8bbebb9dd5f89ba5d6")
-    ;
+;
