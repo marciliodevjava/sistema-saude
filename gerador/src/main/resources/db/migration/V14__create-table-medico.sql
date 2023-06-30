@@ -1,15 +1,15 @@
 CREATE TABLE medicos
 (
-    id bigint(20) not null AUTO_INCREMENT,
-    id_medico varchar(36) not null,
-    nome varchar(150) not null,
-    rg varchar(150) not null,
-    cpf varchar(150) not null,
-    email varchar(150) not null,
-    crn varchar(150) not null,
-    data_nascimento DATE not null,
-    ativo BIT not null,
-    id_formulario bigint(20),
+    id              bigint(20)   not null AUTO_INCREMENT,
+    id_medico       varchar(36)  not null,
+    nome            varchar(150) not null,
+    rg              varchar(150) not null,
+    cpf             varchar(150) not null,
+    email           varchar(150) not null,
+    crn             varchar(150) not null,
+    data_nascimento DATE         not null,
+    ativo           BIT          not null,
+    id_formulario   bigint(20),
     PRIMARY KEY (id),
-    FOREIGN KEY (id_formulario) references formulario_paciente(id)
+    FOREIGN KEY (id_formulario) references formulario_paciente (id)
 );
