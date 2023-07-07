@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
+import java.util.List;
 import java.util.Objects;
 
 @Service
@@ -60,5 +61,12 @@ public class EscritaService {
         FomularioResponseDto fomularioResponseDto = this.mapperEscrita.mapeiaFormularioSaida(formulario);
 
         return fomularioResponseDto;
+    }
+
+    public List<FomularioResponseDto> trazerFuncionario() {
+
+        List<Formulario> formulario = formularioRepository.findAll();
+
+        return null;
     }
 }
