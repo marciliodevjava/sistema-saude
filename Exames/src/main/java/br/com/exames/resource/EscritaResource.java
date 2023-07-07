@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
+import java.util.List;
 
 @RestController
 @RequestMapping("/exames")
@@ -20,6 +21,14 @@ public class EscritaResource {
     public ResponseEntity<FomularioResponseDto> salvaFormularioCompleto(@RequestBody FormularioRequestDto formularioRequestDto) throws ParseException {
 
         FomularioResponseDto response = escritaResource.salvaFormulario(formularioRequestDto);
+
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping()
+    public ResponseEntity<List<FomularioResponseDto>> getExanes(){
+
+        List<FomularioResponseDto> response = escritaResource.trazerFuncionario();
 
         return ResponseEntity.ok(response);
     }
