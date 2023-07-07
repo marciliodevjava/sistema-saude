@@ -25,10 +25,10 @@ public class EscritaResource {
         return ResponseEntity.ok(response);
     }
 
-    @GetMapping()
-    public ResponseEntity<List<FomularioResponseDto>> getExanes(){
+    @GetMapping("/{id}")
+    public ResponseEntity<FomularioResponseDto> getExanes(@PathVariable Long id){
 
-        List<FomularioResponseDto> response = escritaResource.trazerFuncionario();
+        FomularioResponseDto response = escritaResource.trazerFuncionario(id);
 
         return ResponseEntity.ok(response);
     }
