@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import java.text.ParseException;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @Service
 public class EscritaService {
@@ -63,10 +64,14 @@ public class EscritaService {
         return fomularioResponseDto;
     }
 
-    public List<FomularioResponseDto> trazerFuncionario() {
+    public FomularioResponseDto trazerFuncionario(Long id) {
 
-        List<Formulario> formulario = formularioRepository.findAll();
+        Optional<Formulario> formulario = formularioRepository.findById(id);
 
+        if (Objects.nonNull(formulario)){
+            Medico medico = medicoRepository.findByFormulario(formulario.get().getId());
+            Paciente paciente = pacienteRepository.findByFormulario(formulario.get().getId());
+        }
         return null;
     }
 }
