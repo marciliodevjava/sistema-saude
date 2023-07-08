@@ -6,6 +6,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class MedicoRequestDto {
+    private Long id;
     private String nome;
     private String rg;
     private String cpf;
