@@ -8,7 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
-import java.util.List;
 
 @RestController
 @RequestMapping("/exames")
@@ -26,7 +25,7 @@ public class EscritaResource {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<FomularioResponseDto> getExanes(@PathVariable Long id){
+    public ResponseEntity<FomularioResponseDto> getExanes(@PathVariable Long id) {
 
         FomularioResponseDto response = escritaResource.trazerFuncionario(id);
 
