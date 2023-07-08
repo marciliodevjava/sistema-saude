@@ -4,7 +4,10 @@ import br.com.exames.domain.Endereco;
 import br.com.exames.domain.Formulario;
 import br.com.exames.domain.Medico;
 import br.com.exames.domain.Paciente;
+import br.com.exames.dto.request.EnderecoRequestDto;
 import br.com.exames.dto.request.FormularioRequestDto;
+import br.com.exames.dto.request.MedicoRequestDto;
+import br.com.exames.dto.request.PacienteRequestDto;
 import br.com.exames.dto.response.FomularioResponseDto;
 import br.com.exames.mapper.MapperEscrita;
 import br.com.exames.repository.EnderecoRepository;
@@ -12,6 +15,7 @@ import br.com.exames.repository.FormularioRepository;
 import br.com.exames.repository.MedicoRepository;
 import br.com.exames.repository.PacienteRepository;
 import br.com.exames.utils.FormatadorDate;
+import br.com.exames.utils.FormatadorHora;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,6 +38,8 @@ public class EscritaService {
     private EnderecoRepository enderecoRepository;
     @Autowired
     private FormatadorDate formatadorDate;
+    @Autowired
+    private FormatadorHora formatadorHora;
 
     public FomularioResponseDto salvaFormulario(FormularioRequestDto formularioRequestDto) throws ParseException {
 
@@ -71,7 +77,7 @@ public class EscritaService {
 
         Optional<Formulario> formulario = formularioRepository.findById(id);
 
-        if (Objects.nonNull(formulario)){
+        if (Objects.nonNull(formulario)) {
             Medico medico = medicoRepository.findByFormulario(formulario.get().getId());
             Endereco enderecoMedico = enderecoRepository.findByMedico(medico.getId());
             medico.setEndereco(enderecoMedico);
@@ -91,17 +97,85 @@ public class EscritaService {
     private FomularioResponseDto mapeiaFormularioRetorno(Optional<Formulario> formularioRetorno) {
 
         FomularioResponseDto formularioRequestDto = new FomularioResponseDto();
-        if (Objects.nonNull(formularioRetorno)){
+        if (Objects.nonNull(formularioRetorno)) {
 
             Formulario formulario = formularioRetorno.get();
 
             formularioRequestDto.setId(formulario.getId());
             formularioRequestDto.setIdentificador(formulario.getIdFormulario());
             formularioRequestDto.setData(formatadorDate.converterDateParaString(formulario.getData()));
-
+            formularioRequestDto.setHora(formatadorHora.converterTimeParaString(formulario.getHora()));
+            formularioRequestDto.setMedico(this.mapeiaMedicoRetornoDto(formulario.getMedico()));
+            formularioRequestDto.setPaciente(this.mapeiaPacienteRetornoDto(formulario.getPaciente()));
 
             return formularioRequestDto;
         }
+        return null;
+    }
+
+    private PacienteRequestDto mapeiaPacienteRetornoDto(Paciente paciente) {
+
+        PacienteRequestDto pacienteRequestDto = new PacienteRequestDto();
+
+        if (Objects.nonNull(paciente)) {
+
+            pacienteRequestDto.setId(paciente.getId());
+            pacienteRequestDto.setNome(paciente.getNome());
+            pacienteRequestDto.setRg(paciente.getRg());
+            pacienteRequestDto.setCpf(paciente.getCpf());
+            pacienteRequestDto.setEmail(paciente.getEmail());
+            pacienteRequestDto.setDataNascimento(formatadorDate.converterDateParaString(paciente.getDataNascimento()));
+            pacienteRequestDto.setAtivo(paciente.getAtivo());
+            pacienteRequestDto.setEndereco(this.mapeiaEnderecoRetornoDto(paciente.getEndereco()));
+
+            return pacienteRequestDto;
+        }
+
+        return null;
+    }
+
+    private MedicoRequestDto mapeiaMedicoRetornoDto(Medico medico) {
+
+        MedicoRequestDto medicoRequestDto = new MedicoRequestDto();
+
+        if (Objects.nonNull(medico)) {
+
+            medicoRequestDto.setId(medico.getId());
+            medicoRequestDto.setNome(medico.getNome());
+            medicoRequestDto.setRg(medico.getRg());
+            medicoRequestDto.setCpf(medico.getCpf());
+            medicoRequestDto.setEmail(medico.getEmail());
+            medicoRequestDto.setCrn(medico.getCrn());
+            medicoRequestDto.setDataNascimento(formatadorDate.converterDateParaString(medico.getDataNascimento()));
+            medicoRequestDto.setAtivo(medico.getAtivo());
+            medicoRequestDto.setEndereco(this.mapeiaEnderecoRetornoDto(medico.getEndereco()));
+
+            return medicoRequestDto;
+        }
+
+        return null;
+    }
+
+
+    private EnderecoRequestDto mapeiaEnderecoRetornoDto(Endereco endereco) {
+
+        EnderecoRequestDto enderecoRequestDto = new EnderecoRequestDto();
+
+        if (Objects.nonNull(endereco)) {
+
+            enderecoRequestDto.setId(endereco.getId());
+            enderecoRequestDto.setCep(endereco.getCep());
+            enderecoRequestDto.setEndereco(endereco.getEndereco());
+            enderecoRequestDto.setNumero(endereco.getNumero());
+            enderecoRequestDto.setBairro(endereco.getBairro());
+            enderecoRequestDto.setCidade(endereco.getCidade());
+            enderecoRequestDto.setUf(endereco.getUf());
+            enderecoRequestDto.setComplemento(endereco.getComplemento());
+            enderecoRequestDto.setAtivo(endereco.getAtivo());
+
+            return enderecoRequestDto;
+        }
+
         return null;
     }
 }
