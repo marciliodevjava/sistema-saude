@@ -11,6 +11,7 @@ import br.com.exames.repository.EnderecoRepository;
 import br.com.exames.repository.FormularioRepository;
 import br.com.exames.repository.MedicoRepository;
 import br.com.exames.repository.PacienteRepository;
+import br.com.exames.utils.FormatadorDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,6 +32,8 @@ public class EscritaService {
     private PacienteRepository pacienteRepository;
     @Autowired
     private EnderecoRepository enderecoRepository;
+    @Autowired
+    private FormatadorDate formatadorDate;
 
     public FomularioResponseDto salvaFormulario(FormularioRequestDto formularioRequestDto) throws ParseException {
 
@@ -70,7 +73,34 @@ public class EscritaService {
 
         if (Objects.nonNull(formulario)){
             Medico medico = medicoRepository.findByFormulario(formulario.get().getId());
+            Endereco enderecoMedico = enderecoRepository.findByMedico(medico.getId());
+            medico.setEndereco(enderecoMedico);
             Paciente paciente = pacienteRepository.findByFormulario(formulario.get().getId());
+            Endereco enderecoPaciente = enderecoRepository.findByPaciente(paciente.getId());
+            paciente.setEndereco(enderecoPaciente);
+
+            formulario.get().setMedico(medico);
+            formulario.get().setPaciente(paciente);
+        }
+
+        FomularioResponseDto formularioResponseDto = this.mapeiaFormularioRetorno(formulario);
+
+        return formularioResponseDto;
+    }
+
+    private FomularioResponseDto mapeiaFormularioRetorno(Optional<Formulario> formularioRetorno) {
+
+        FomularioResponseDto formularioRequestDto = new FomularioResponseDto();
+        if (Objects.nonNull(formularioRetorno)){
+
+            Formulario formulario = formularioRetorno.get();
+
+            formularioRequestDto.setId(formulario.getId());
+            formularioRequestDto.setIdentificador(formulario.getIdFormulario());
+            formularioRequestDto.setData(formatadorDate.converterDateParaString(formulario.getData()));
+
+
+            return formularioRequestDto;
         }
         return null;
     }
