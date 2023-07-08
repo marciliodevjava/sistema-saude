@@ -13,9 +13,9 @@ import java.util.List;
 @Setter
 public class ErroResponse {
 
-    private int staus;
+    private int status;
     private List<String> mensagem;
-    private String timeStamp;
+    private String timestamp;
     private String endpoint;
     private String projeto;
 }
