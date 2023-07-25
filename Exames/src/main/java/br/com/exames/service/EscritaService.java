@@ -20,7 +20,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
-import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -78,15 +77,15 @@ public class EscritaService {
         Optional<Formulario> formulario = formularioRepository.findById(id);
 
         if (Objects.nonNull(formulario)) {
-            Medico medico = medicoRepository.findByFormulario(formulario.get().getId());
-            Endereco enderecoMedico = enderecoRepository.findByMedico(medico.getId());
-            medico.setEndereco(enderecoMedico);
-            Paciente paciente = pacienteRepository.findByFormulario(formulario.get().getId());
-            Endereco enderecoPaciente = enderecoRepository.findByPaciente(paciente.getId());
-            paciente.setEndereco(enderecoPaciente);
+            Optional<Medico> medico = medicoRepository.findByFormulario(formulario.get());
+            Optional<Endereco> enderecoMedico = enderecoRepository.findByMedico(medico.get());
+            medico.get().setEndereco(enderecoMedico.get());
+            Optional<Paciente> paciente = pacienteRepository.findByFormulario(formulario.get());
+            Optional<Endereco> enderecoPaciente = enderecoRepository.findByPaciente(paciente.get());
+            paciente.get().setEndereco(enderecoPaciente.get());
 
-            formulario.get().setMedico(medico);
-            formulario.get().setPaciente(paciente);
+            formulario.get().setMedico(medico.get());
+            formulario.get().setPaciente(paciente.get());
         }
 
         FomularioResponseDto formularioResponseDto = this.mapeiaFormularioRetorno(formulario);
