@@ -18,6 +18,6 @@ public class LeituraServiceTest {
     void trazUmFuncionario() {
         FuncionarioCompleRetornoDto funcionarioCompleRetornoDto = leituraService.funcionarioCompleto(2L);
 
-        Assertions.assertEquals("8159c6da-6519-4a91-b71e-c401c531c139", funcionarioCompleRetornoDto.getIdentificadorFunciona());
+        Assertions.assertEquals("1a30f7a8-6674-43d1-86f3-2693559e900a", funcionarioCompleRetornoDto.getIdentificadorFunciona());
     }
 }
